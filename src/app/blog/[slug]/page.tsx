@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 // ── Article data ──────────────────────────────────────────────────────────────
-const articles: Record<string, {
+export interface ArticleData {
   title: string;
   description: string;
   date: string;
@@ -12,7 +12,9 @@ const articles: Record<string, {
   author: string;
   authorRole: string;
   content: string;
-}> = {
+}
+
+export const articles: Record<string, ArticleData> = {
   "refinancing-guide": {
     title: "The Comprehensive Guide to Mortgage Refinancing: How It Works, Real Math, and Traps to Avoid",
     description: "A complete, practitioner's masterclass on mortgage refinancing: understanding loan mechanics, calculating true break-even speed, dissecting hidden fees, and choosing the right loan structure.",
@@ -552,6 +554,12 @@ const articles: Record<string, {
 <p><em>Credit scoring models vary, and individual results may differ from what is described in this article. This is for educational purposes only — not credit repair advice or financial advice.</em></p>
     `,
   },
+};
+
+// Also support exact URL slug 'refinancing-costs'
+articles["refinancing-costs"] = {
+  ...articles["refinance-costs"],
+  title: "Refinancing Costs Explained: Line-by-Line Breakdown of Every Fee",
 };
 
 type Props = {

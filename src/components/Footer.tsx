@@ -8,10 +8,10 @@ const toolLinks = [
 ];
 
 const resourceLinks = [
-  { href: "/blog/refinancing-guide", label: "Refinancing Guide" },
-  { href: "/blog/when-to-refinance", label: "When to Refinance" },
-  { href: "/blog/refinance-costs", label: "Refinancing Costs Explained" },
-  { href: "/blog/fixed-vs-arm", label: "Fixed vs. ARM Loans" },
+  { href: "/resources/refinancing-guide", label: "Refinancing Guide" },
+  { href: "/resources/when-to-refinance", label: "When to Refinance" },
+  { href: "/resources/refinancing-costs", label: "Refinancing Costs Explained" },
+  { href: "/resources/fixed-vs-arm", label: "Fixed vs. ARM Loans" },
 ];
 
 const companyLinks = [

@@ -251,6 +251,15 @@ export default function HomePage() {
                   Because interest is recalculated against a declining balance, principal repayment velocity accelerates non-linearly over the loan lifecycle.
                 </p>
 
+                <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "24px 28px", margin: "28px 0" }}>
+                  <h3 style={{ margin: "0 0 12px", color: "var(--dark)", fontSize: "18px", fontWeight: 700 }}>
+                    Architectural Execution Framework
+                  </h3>
+                  <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "15px" }}>
+                    The DevsPoint Financial Engine leverages client-side execution parameters to completely bypass traditional server-side network lag. By utilizing the local browser&apos;s V8 Javascript engine compilation pipeline, computations occur within sub-millisecond intervals. This approach guarantees complete consumer data sovereignty; because all numeric variables—such as loan principal figures, annual nominal yields, and amortization lifespan months—remain local to the client state machine, data leakage risks inherent to database backends are fully neutralized.
+                  </p>
+                </div>
+
                 <h3 style={{ marginTop: "32px" }}>4. Production TypeScript Implementation</h3>
                 <p>
                   Below is the exact pure functional TypeScript implementation running client-side inside this Web Application:

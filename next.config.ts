@@ -21,6 +21,26 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Redirects
+  async redirects() {
+    return [
+      {
+        source: "/amortization-schedule",
+        destination: "/calculator/amortization",
+        permanent: true,
+      },
+      {
+        source: "/break-even-calculator",
+        destination: "/calculator/break-even",
+        permanent: true,
+      },
+      {
+        source: "/cash-out-refinance",
+        destination: "/calculator/cash-out",
+        permanent: true,
+      },
+    ];
+  },
   // Compression
   compress: true,
   // Powered by header

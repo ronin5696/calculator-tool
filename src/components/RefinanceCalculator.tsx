@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -135,6 +135,26 @@ export default function RefinanceCalculator() {
     setCalculated(true);
     setActiveTab("results");
   }, [currentBalance, currentRate, currentTermLeft, newRate, newTerm, closingCosts]);
+
+  // Handle URL hash fragments
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const h = window.location.hash;
+      if (h === "#amortization") {
+        calculate();
+        setActiveTab("amortization");
+        setTimeout(() => {
+          document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      } else if (h === "#break-even") {
+        calculate();
+        setActiveTab("results");
+        setTimeout(() => {
+          document.getElementById("break-even-metric")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [calculate]);
 
   const PIE_COLORS = ["#1a56db", "#7c3aed", "#10b981"];
 
@@ -561,16 +581,23 @@ export default function RefinanceCalculator() {
               </div>
 
               {/* Break-even */}
-              <div className="info-box">
+              <div className="info-box" id="break-even-metric">
                 <span className="info-box-icon">⏱️</span>
-                <p>
-                  <strong>Break-Even Point: </strong>
-                  {result.breakEvenMonths === Infinity
-                    ? "Refinancing would not save money at these rates."
-                    : result.breakEvenMonths > 120
-                    ? `It would take ${result.breakEvenMonths} months (${(result.breakEvenMonths / 12).toFixed(1)} years) to recoup closing costs — consider whether you'll stay in the home that long.`
-                    : `You'll recoup your ${fmt(closingCosts)} closing costs in just ${result.breakEvenMonths} months (${(result.breakEvenMonths / 12).toFixed(1)} years). After that, it's pure savings!`}
-                </p>
+                <div>
+                  <p style={{ margin: 0 }}>
+                    <strong>Break-Even Point: </strong>
+                    {result.breakEvenMonths === Infinity
+                      ? "Refinancing would not save money at these rates."
+                      : result.breakEvenMonths > 120
+                      ? `It would take ${result.breakEvenMonths} months (${(result.breakEvenMonths / 12).toFixed(1)} years) to recoup closing costs — consider whether you'll stay in the home that long.`
+                      : `You'll recoup your ${fmt(closingCosts)} closing costs in just ${result.breakEvenMonths} months (${(result.breakEvenMonths / 12).toFixed(1)} years). After that, it's pure savings!`}
+                  </p>
+                  <div style={{ marginTop: 8 }}>
+                    <a href="/calculator/break-even" style={{ fontSize: 13, color: "var(--primary)", fontWeight: 700, textDecoration: "none" }}>
+                      Open Dedicated Break-Even &amp; Horizon Calculator →
+                    </a>
+                  </div>
+                </div>
               </div>
 
               {/* Breakdown bars */}
@@ -597,6 +624,12 @@ export default function RefinanceCalculator() {
           {/* Amortization Table */}
           {activeTab === "amortization" && (
             <div id="tabpanel-amortization" role="tabpanel" aria-labelledby="tab-amortization">
+              <div style={{ marginBottom: 16, padding: "10px 14px", background: "var(--primary-light)", borderRadius: 10, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                <span style={{ fontSize: 13, color: "var(--primary-dark)", fontWeight: 600 }}>Showing yearly refinance balance comparison.</span>
+                <a href="/calculator/amortization" style={{ color: "var(--primary)", fontWeight: 700, fontSize: 13, textDecoration: "underline" }}>
+                  Open Full Month-by-Month Amortization Schedule &amp; Extra Payments Tool →
+                </a>
+              </div>
               <div className="table-wrapper amort-wrapper">
                 <table className="data-table" aria-label="Amortization schedule comparing current and new loan balances">
                   <thead>

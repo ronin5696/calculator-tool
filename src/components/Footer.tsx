@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const toolLinks = [
   { href: "/calculator", label: "Refinance Calculator" },
-  { href: "/calculator#amortization", label: "Amortization Schedule" },
-  { href: "/calculator#break-even", label: "Break-Even Calculator" },
-  { href: "/calculator#cash-out", label: "Cash-Out Refinance" },
+  { href: "/calculator/amortization", label: "Amortization Schedule" },
+  { href: "/calculator/break-even", label: "Break-Even Calculator" },
+  { href: "/calculator/cash-out", label: "Cash-Out Refinance" },
 ];
 
 const resourceLinks = [

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import RefinanceCalculator from "@/components/RefinanceCalculator";
 import Link from "next/link";
+import RefinanceCalculator from "@/components/RefinanceCalculator";
+import CalculatorNav from "@/components/CalculatorNav";
 
 export const metadata: Metadata = {
   title: "DevsPoint Financial Engine: Open-Source Mortgage & Amortization Calculator",
@@ -76,6 +77,10 @@ export default function CalculatorPage() {
             ))}
           </div>
         </div>
+      </div>
+
+      <div style={{ maxWidth: 1200, margin: "24px auto 0", padding: "0 24px" }}>
+        <CalculatorNav active="refinance" />
       </div>
 
       <RefinanceCalculator />

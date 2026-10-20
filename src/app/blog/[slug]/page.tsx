@@ -21,8 +21,8 @@ export const articles: Record<string, ArticleData> = {
     date: "October 18, 2024",
     readTime: "11 min read",
     category: "Master Guide",
-    author: "Angela Park, CFP",
-    authorRole: "Financial Content Specialist",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>If you've owned a home for more than six months, your mailbox has almost certainly been flooded with lender flyers promising "historic rate reductions," "zero-dollar closings," or "instant monthly cash back." The marketing around mortgage refinancing is relentless, and it's deliberately engineered to make replacing your home loan sound as simple and consequence-free as upgrading your smartphone plan.</p>
 
@@ -91,8 +91,8 @@ export const articles: Record<string, ArticleData> = {
     date: "October 15, 2024",
     readTime: "9 min read",
     category: "Strategy",
-    author: "Angela Park, CFP",
-    authorRole: "Financial Content Specialist",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>A good friend called me last year in a genuine panic. Rates had ticked down a fraction of a percent over the prior three weeks, her coworker had just proudly locked in a refinance, and she felt an overwhelming sense of FOMO — that if she didn't call a broker immediately, she was throwing thousands of dollars into the wind. "Just tell me if I should pull the trigger," she urged.</p>
 
@@ -187,8 +187,8 @@ export const articles: Record<string, ArticleData> = {
     date: "October 10, 2024",
     readTime: "10 min read",
     category: "Cost Analysis",
-    author: "Angela Park, CFP",
-    authorRole: "Financial Content Specialist",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>When most borrowers begin exploring a refinance, the entire conversation fixates on a single number: the interest rate. What's the new APR? How many basis points can I drop? How much will my monthly payment decrease? While interest rates matter, there is an equally critical figure that routinely gets swept under the rug: <strong>transaction friction (closing costs)</strong>.</p>
 
@@ -277,8 +277,8 @@ export const articles: Record<string, ArticleData> = {
     date: "October 5, 2024",
     readTime: "10 min read",
     category: "Loan Comparison",
-    author: "Ryan Chen",
-    authorRole: "Software Engineer & Financial Analyst",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>The debate between a fixed-rate mortgage and an adjustable-rate mortgage (ARM) is one of the most polarized topics in personal finance. On one side, conservative financial commentators argue that taking an ARM is financial suicide, invoking memories of the 2008 subprime mortgage crisis. On the other side, aggressive loan officers tout initial rate discounts that can shave several hundred dollars off your monthly payment, promising you can "always refinance before the rate adjusts."</p>
 
@@ -416,8 +416,8 @@ export const articles: Record<string, ArticleData> = {
     date: "September 28, 2024",
     readTime: "5 min read",
     category: "Analysis",
-    author: "Angela Park, CFP",
-    authorRole: "Financial Content Specialist",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>If you only take one number away from the entire refinancing process, make it the break-even point. Everything else — the new rate, the monthly payment, the shiny projected savings figure — is secondary to understanding how long it takes before a refinance actually puts money in your pocket.</p>
 
@@ -459,8 +459,8 @@ export const articles: Record<string, ArticleData> = {
     date: "September 20, 2024",
     readTime: "9 min read",
     category: "Loan Types",
-    author: "David Morrison",
-    authorRole: "Founder & Lead Developer",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>The marketing around cash-out refinancing tends toward the enthusiastic. "Access your home equity!" "Use your home to build wealth!" "Turn your house into a financial tool!" All of this is technically true. It's also not the whole story.</p>
 
@@ -512,8 +512,8 @@ export const articles: Record<string, ArticleData> = {
     date: "September 15, 2024",
     readTime: "7 min read",
     category: "Credit",
-    author: "Angela Park, CFP",
-    authorRole: "Financial Content Specialist",
+    author: "DevsPoint",
+    authorRole: "Engineering Labs & Financial Developer",
     content: `
 <p>Credit score advice on the internet tends to be either so obvious it's useless ("pay your bills on time!") or so aggressive it borders on manipulation. What I want to give you here is the practical, realistic version — the things that make a real difference in the 60–90 days before a mortgage application, written for someone who already understands the basics and wants to actually improve their rate tier.</p>
 
@@ -673,8 +673,8 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap", marginTop: "20px", color: "rgba(255,255,255,0.75)", fontSize: "14px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: "14px" }}>
-                AP
+              <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "14px" }}>
+                DP
               </div>
               <div>
                 <strong style={{ color: "#fff", display: "block", fontSize: "14px" }}>{article.author}</strong>
@@ -703,15 +703,15 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Author E-E-A-T Bio Box */}
             <div className="author-bio-box">
-              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
-                AP
+              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
+                DP
               </div>
               <div>
                 <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
                   Written by {article.author}
                 </h3>
                 <p style={{ fontSize: "13px", color: "#64748b", marginBottom: "10px" }}>
-                  Certified Financial Planner (CFP®) & Senior Mortgage Analyst with 12+ years evaluating consumer debt structures, refinancing mechanics, and interest rate modeling.
+                  DevsPoint Financial Engine is an independent software development initiative focused on client-side financial computation, discrete amortization modeling, and debt simulation.
                 </p>
                 <p style={{ fontSize: "12px", color: "#94a3b8", lineHeight: 1.5 }}>
                   DevsPoint editorial guidelines require all articles to be based on verifiable empirical lending data, primary regulatory sources (CFPB, Federal Reserve), and reviewed for mathematical accuracy.

@@ -10,9 +10,13 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { initials: "DM", name: "David Morrison", role: "Lead Systems Architect", bio: "Software engineer and financial systems analyst. Designed the discrete amortization algorithms and client-side V8 numerical computation pipeline.", color: "#1a56db" },
-  { initials: "AP", name: "Angela Park, CFP", role: "Financial Mathematics & Compliance", bio: "Certified Financial Planner ensuring mathematical consistency with CFPB lending disclosures, APR calculations, and amortization laws.", color: "#7c3aed" },
-  { initials: "RC", name: "Ryan Chen", role: "Senior Frontend Engineer", bio: "TypeScript specialist focused on sub-millisecond execution, IEEE 754 precision guards, and responsive data visualization.", color: "#059669" },
+  {
+    initials: "DP",
+    name: "DevsPoint",
+    role: "Engineering Labs & Lead Developer",
+    bio: "Software engineering and financial technology initiative at devspoint.in. Designing open-source, client-side mathematical calculators, debt simulation models, and closed-form discrete amortization engines with zero telemetry.",
+    color: "#1a56db",
+  },
 ];
 
 const values = [
@@ -87,51 +91,28 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Creator & Engineering Identity */}
       <section className="section section-surface" aria-labelledby="team-title">
-        <div className="section-container">
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <span className="section-tag">👥 The Team</span>
+        <div className="section-container" style={{ maxWidth: 760 }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <span className="section-tag">💻 Engineering &amp; Development</span>
             <h2 id="team-title" className="section-title" style={{ marginTop: 12 }}>
-              Built by Finance &amp; Tech Experts
+              Built &amp; Maintained by DevsPoint
             </h2>
             <p className="section-subtitle" style={{ margin: "0 auto" }}>
-              Our small team combines deep mortgage industry knowledge with modern software engineering to build tools you can trust.
+              DevsPoint is an independent software development project focused on computational finance, transparency, and consumer privacy.
             </p>
           </div>
-          <div className="team-grid">
+          <div style={{ display: "flex", justifyContent: "center" }}>
             {team.map((member) => (
-              <article className="team-card" key={member.name}>
-                <div className="team-avatar" style={{ background: member.color }} aria-hidden="true">
+              <article className="team-card" key={member.name} style={{ width: "100%", maxWidth: 580, textAlign: "center", padding: "36px 32px" }}>
+                <div className="team-avatar" style={{ background: "linear-gradient(135deg, #10b981, #1a56db)", margin: "0 auto 20px", width: 68, height: 68, fontSize: 24, fontWeight: 800 }} aria-hidden="true">
                   {member.initials}
                 </div>
-                <h3 className="team-name">{member.name}</h3>
-                <p className="team-role">{member.role}</p>
-                <p className="team-bio">{member.bio}</p>
+                <h3 className="team-name" style={{ fontSize: 22 }}>{member.name}</h3>
+                <p className="team-role" style={{ color: "var(--primary)", fontWeight: 700, marginTop: 4 }}>{member.role}</p>
+                <p className="team-bio" style={{ marginTop: 16, lineHeight: 1.7, fontSize: 15, color: "var(--text-secondary)" }}>{member.bio}</p>
               </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="section section-dark" aria-labelledby="stats-title">
-        <div className="section-container" style={{ textAlign: "center" }}>
-          <span className="section-tag">📊 By the Numbers</span>
-          <h2 id="stats-title" className="section-title" style={{ marginTop: 12 }}>
-            Trusted by Homeowners Nationwide
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 24, marginTop: 48 }}>
-            {[
-              { value: "250K+", label: "Calculations Run" },
-              { value: "$2.3B+", label: "In Loans Analyzed" },
-              { value: "4.9/5", label: "Average Rating" },
-              { value: "100%", label: "Free & Private" },
-            ].map((s) => (
-              <div key={s.label} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: 28 }}>
-                <div style={{ fontFamily: "Outfit, sans-serif", fontSize: 40, fontWeight: 800, color: "white", marginBottom: 8 }}>{s.value}</div>
-                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.55)", fontWeight: 500 }}>{s.label}</div>
-              </div>
             ))}
           </div>
         </div>

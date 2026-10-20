@@ -139,8 +139,8 @@ export default async function ResourcePage({ params }: Props) {
 
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "24px", color: "rgba(255,255,255,0.7)", fontSize: "14px", flexWrap: "wrap" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: "13px" }}>
-                {article.author.split(" ").map((n) => n[0]).join("")}
+              <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "13px" }}>
+                DP
               </div>
               <div>
                 <strong style={{ color: "#fff", display: "block", fontSize: "14px" }}>{article.author}</strong>
@@ -169,15 +169,15 @@ export default async function ResourcePage({ params }: Props) {
 
             {/* Author E-E-A-T Bio Box */}
             <div className="author-bio-box">
-              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
-                {article.author.split(" ").map((n) => n[0]).join("")}
+              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
+                DP
               </div>
               <div>
                 <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
                   Written by {article.author}
                 </h3>
                 <p style={{ fontSize: "13px", color: "#64748b", marginBottom: "10px" }}>
-                  Financial Content Specialist &amp; Mortgage Analyst with over a decade of empirical research in consumer debt structures, discrete amortization modeling, and refinancing break-even velocity.
+                  DevsPoint Financial Engine is an independent software development initiative focused on client-side financial computation, discrete amortization modeling, and debt simulation.
                 </p>
                 <p style={{ fontSize: "12px", color: "#94a3b8", lineHeight: 1.5 }}>
                   DevsPoint editorial standards require rigorous fact-checking against CFPB guidelines, Federal Reserve consumer credit publications, and closed-form discrete compounding annuity math.

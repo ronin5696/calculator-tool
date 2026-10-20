@@ -151,83 +151,88 @@ export default function HomePage() {
         <RefinanceCalculator />
       </section>
 
-      {/* ─── Developer Perspective: Mechanics, Formula & Code Breakdown ─── */}
-      <section className="section" id="engine-mechanics" aria-labelledby="mechanics-title" style={{ background: "#ffffff", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+      {/* ─── Developer Perspective: Mechanics, Formula & Code Breakdown (Collapsible) ─── */}
+      <section className="section" id="engine-mechanics" aria-labelledby="mechanics-title" style={{ background: "#ffffff", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", paddingTop: "40px", paddingBottom: "40px" }}>
         <div className="section-container" style={{ maxWidth: 1000 }}>
-          <div style={{ textAlign: "center", marginBottom: 36 }}>
-            <span className="section-tag" style={{ background: "#e0f2fe", color: "#0369a1" }}>🛠️ Developer Perspective &amp; Software Architecture</span>
-            <h2 id="mechanics-title" className="section-title" style={{ marginTop: 12 }}>
-              The Mechanics &amp; Mathematics of the DevsPoint Financial Engine
-            </h2>
-            <p className="section-subtitle" style={{ maxWidth: 740, margin: "0 auto" }}>
-              How our open-source computational engine calculates monthly amortized payments, interest decay, and break-even timelines with zero server-side telemetry.
-            </p>
-          </div>
-
-          <div className="prose" style={{ maxWidth: "100%", margin: "0 auto", fontSize: "16px", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            <h3>1. The Core Mathematical Formula: Closed-Form Monthly Amortization</h3>
-            <p>
-              Under standard consumer credit underwriting, mortgage amortization schedules follow a fixed-payment annuity structure. Rather than computing continuous compounding, standard retail loans apply discrete monthly compounding where the periodic interest rate is defined as:
-            </p>
-            <div style={{ background: "#0f172a", color: "#f8fafc", padding: "20px 24px", borderRadius: "14px", fontFamily: "monospace", margin: "20px 0", border: "1px solid #334155" }}>
-              <div style={{ color: "#93c5fd", fontSize: "13px", marginBottom: "8px" }}>// Standard Amortization Formula:</div>
-              <div style={{ fontSize: "22px", fontWeight: "bold", color: "#38bdf8", textAlign: "center", padding: "12px 0" }}>
-                M = P · [ r(1 + r)ⁿ ] / [ (1 + r)ⁿ - 1 ]
+          <details className="dev-docs-accordion">
+            <summary className="dev-docs-summary">
+              <div className="dev-docs-summary-left">
+                <span className="dev-docs-badge">🛠️ Developer Documentation</span>
+                <h2 id="mechanics-title" className="dev-docs-title">
+                  Engine Architecture, Mathematical Derivation &amp; TypeScript Source Code
+                </h2>
+                <p className="dev-docs-desc">
+                  Click to inspect the discrete compounding formula, recurrence amort algorithm, and IEEE 754 precision safeguards.
+                </p>
               </div>
-              <div style={{ fontSize: "12px", color: "#94a3b8", textAlign: "center" }}>
-                (Where M = monthly payment, P = principal, r = periodic interest rate, n = number of periods)
-              </div>
-            </div>
+              <span className="dev-docs-chevron" aria-hidden="true">▼</span>
+            </summary>
 
-            <h4>Variable Semantics &amp; Unit Dimensions:</h4>
-            <ul>
-              <li><strong>P (Principal Loan Balance):</strong> The remaining debt balance outstanding at the execution timestamp.</li>
-              <li><strong>r (Periodic Monthly Rate):</strong> Calculated as <code>Annual Nominal Interest Rate / 12 / 100</code>. For a 6.25% loan, <code>r = 0.0625 / 12 ≈ 0.005208333...</code></li>
-              <li><strong>n (Compounding Intervals):</strong> The remaining loan lifespan in months (e.g., 30 years × 12 = 360 months).</li>
-              <li><strong>M (Periodic Payment):</strong> The constant monthly payment covering both accrued interest and principal reduction.</li>
-            </ul>
+            <div className="dev-docs-content">
+              <div className="prose" style={{ maxWidth: "100%", margin: "0 auto", fontSize: "15px", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                <h3>1. The Core Mathematical Formula: Closed-Form Monthly Amortization</h3>
+                <p>
+                  Under standard consumer credit underwriting, mortgage amortization schedules follow a fixed-payment annuity structure. Rather than computing continuous compounding, standard retail loans apply discrete monthly compounding where the periodic interest rate is defined as:
+                </p>
+                <div style={{ background: "#0f172a", color: "#f8fafc", padding: "18px 22px", borderRadius: "14px", fontFamily: "monospace", margin: "16px 0", border: "1px solid #334155" }}>
+                  <div style={{ color: "#93c5fd", fontSize: "12px", marginBottom: "6px" }}>// Standard Amortization Formula:</div>
+                  <div style={{ fontSize: "clamp(18px, 4vw, 22px)", fontWeight: "bold", color: "#38bdf8", textAlign: "center", padding: "10px 0" }}>
+                    M = P · [ r(1 + r)ⁿ ] / [ (1 + r)ⁿ - 1 ]
+                  </div>
+                  <div style={{ fontSize: "12px", color: "#94a3b8", textAlign: "center" }}>
+                    (Where M = monthly payment, P = principal, r = periodic interest rate, n = number of periods)
+                  </div>
+                </div>
 
-            <h3 style={{ marginTop: "36px" }}>2. Mathematical Derivation from Ordinary Annuity Present Value</h3>
-            <p>
-              The formula originates from the principle of discounted cash flows. A fixed-rate mortgage is mathematically equivalent to the present value of an ordinary annuity. The initial loan principal <em>P</em> must equal the discounted sum of all future monthly installments <em>M</em>:
-            </p>
-            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "18px 24px", margin: "16px 0", fontFamily: "monospace" }}>
-              P = ∑ [ M / (1 + r)ᵏ ] for k = 1 to n
-            </div>
-            <p>
-              Factoring out the constant monthly payment <em>M</em> yields a finite geometric series with common ratio <em>(1 + r)⁻¹</em>. Applying the sum formula for a geometric progression:
-            </p>
-            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "18px 24px", margin: "16px 0", fontFamily: "monospace" }}>
-              P = M · [ 1 - (1 + r)⁻ⁿ ] / r
-            </div>
-            <p>
-              Multiplying numerator and denominator by <em>(1 + r)ⁿ</em> and isolating <em>M</em> yields the closed-form equation implemented inside the <strong>DevsPoint Financial Engine</strong>.
-            </p>
+                <h4>Variable Semantics &amp; Unit Dimensions:</h4>
+                <ul>
+                  <li><strong>P (Principal Loan Balance):</strong> The remaining debt balance outstanding at the execution timestamp.</li>
+                  <li><strong>r (Periodic Monthly Rate):</strong> Calculated as <code>Annual Nominal Interest Rate / 12 / 100</code>. For a 6.25% loan, <code>r = 0.0625 / 12 ≈ 0.005208333...</code></li>
+                  <li><strong>n (Compounding Intervals):</strong> The remaining loan lifespan in months (e.g., 30 years × 12 = 360 months).</li>
+                  <li><strong>M (Periodic Payment):</strong> The constant monthly payment covering both accrued interest and principal reduction.</li>
+                </ul>
 
-            <h3 style={{ marginTop: "36px" }}>3. Recurrence Algorithm for Amortization Schedules</h3>
-            <p>
-              While total monthly payment <em>M</em> remains constant, the ratio allocated between interest and principal shifts dynamically each month. For month <em>k</em>:
-            </p>
-            <ol>
-              <li><strong>Accrued Periodic Interest:</strong> <code>I_k = Balance_(k-1) · r</code></li>
-              <li><strong>Principal Repayment:</strong> <code>P_k = M - I_k</code></li>
-              <li><strong>Updated Unpaid Principal Balance:</strong> <code>Balance_k = Balance_(k-1) - P_k</code></li>
-            </ol>
-            <p>
-              Because interest is recalculated against a declining balance, principal repayment velocity accelerates non-linearly over the loan lifecycle.
-            </p>
+                <h3 style={{ marginTop: "32px" }}>2. Mathematical Derivation from Ordinary Annuity Present Value</h3>
+                <p>
+                  The formula originates from the principle of discounted cash flows. A fixed-rate mortgage is mathematically equivalent to the present value of an ordinary annuity. The initial loan principal <em>P</em> must equal the discounted sum of all future monthly installments <em>M</em>:
+                </p>
+                <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "16px 20px", margin: "14px 0", fontFamily: "monospace" }}>
+                  P = ∑ [ M / (1 + r)ᵏ ] for k = 1 to n
+                </div>
+                <p>
+                  Factoring out the constant monthly payment <em>M</em> yields a finite geometric series with common ratio <em>(1 + r)⁻¹</em>. Applying the sum formula for a geometric progression:
+                </p>
+                <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "16px 20px", margin: "14px 0", fontFamily: "monospace" }}>
+                  P = M · [ 1 - (1 + r)⁻ⁿ ] / r
+                </div>
+                <p>
+                  Multiplying numerator and denominator by <em>(1 + r)ⁿ</em> and isolating <em>M</em> yields the closed-form equation implemented inside the <strong>DevsPoint Financial Engine</strong>.
+                </p>
 
-            <h3 style={{ marginTop: "36px" }}>4. Production TypeScript Implementation</h3>
-            <p>
-              Below is the exact pure functional TypeScript implementation running client-side inside this Web Application:
-            </p>
+                <h3 style={{ marginTop: "32px" }}>3. Recurrence Algorithm for Amortization Schedules</h3>
+                <p>
+                  While total monthly payment <em>M</em> remains constant, the ratio allocated between interest and principal shifts dynamically each month. For month <em>k</em>:
+                </p>
+                <ol>
+                  <li><strong>Accrued Periodic Interest:</strong> <code>I_k = Balance_(k-1) · r</code></li>
+                  <li><strong>Principal Repayment:</strong> <code>P_k = M - I_k</code></li>
+                  <li><strong>Updated Unpaid Principal Balance:</strong> <code>Balance_k = Balance_(k-1) - P_k</code></li>
+                </ol>
+                <p>
+                  Because interest is recalculated against a declining balance, principal repayment velocity accelerates non-linearly over the loan lifecycle.
+                </p>
 
-            <div style={{ background: "#0f172a", borderRadius: "14px", padding: "20px", color: "#f8fafc", border: "1px solid #334155", margin: "20px 0", overflowX: "auto" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#64748b", borderBottom: "1px solid #1e293b", paddingBottom: "8px", marginBottom: "12px" }}>
-                <span>dp-financial-engine.ts</span>
-                <span>TypeScript / Pure Function</span>
-              </div>
-              <pre style={{ margin: 0, fontFamily: "monospace", fontSize: "13px", lineHeight: "1.6", color: "#e2e8f0" }}>
+                <h3 style={{ marginTop: "32px" }}>4. Production TypeScript Implementation</h3>
+                <p>
+                  Below is the exact pure functional TypeScript implementation running client-side inside this Web Application:
+                </p>
+
+                <div style={{ background: "#0f172a", borderRadius: "14px", padding: "18px", color: "#f8fafc", border: "1px solid #334155", margin: "16px 0", overflowX: "auto" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#64748b", borderBottom: "1px solid #1e293b", paddingBottom: "8px", marginBottom: "12px" }}>
+                    <span>dp-financial-engine.ts</span>
+                    <span>TypeScript / Pure Function</span>
+                  </div>
+                  <pre style={{ margin: 0, fontFamily: "monospace", fontSize: "13px", lineHeight: "1.6", color: "#e2e8f0" }}>
 {`/**
  * DevsPoint Financial Engine - Discrete Amortization Calculation
  * @param principal - Outstanding loan balance ($ USD)
@@ -264,27 +269,29 @@ export function calculateBreakEvenMonths(
   if (monthlySavings <= 0) return null; // Non-amortizing or negative delta
   return Math.ceil(closingCosts / monthlySavings);
 }`}
-              </pre>
+                  </pre>
+                </div>
+
+                <h3 style={{ marginTop: "32px" }}>5. IEEE 754 Floating-Point Precision Considerations</h3>
+                <p>
+                  JavaScript uses the <code>IEEE 754 standard</code> for double-precision binary floating-point numbers (64-bit). In cumulative amortization loops involving 360 monthly iterations, floating-point rounding errors (e.g. <code>0.1 + 0.2 = 0.30000000000000004</code>) can accumulate and cause rounding discrepancies on terminal payments.
+                </p>
+                <p>
+                  To eliminate drift:
+                </p>
+                <ul>
+                  <li>The engine isolates interest decay using scaled integer cents during schedule accumulation.</li>
+                  <li>A boundary guard ensures the terminal month zeroes out any fractional penny balance rather than carrying negative or ghost liabilities.</li>
+                  <li>JSON payloads export with explicitly typed floating-point numerics for seamless integration with backend APIs in Python, Go, or Java.</li>
+                </ul>
+
+                <h3 style={{ marginTop: "32px" }}>6. Open API &amp; JSON Specification</h3>
+                <p>
+                  Developers can export calculations via the <strong>&quot;💻 API / JSON&quot;</strong> tab or click <strong>&quot;Export JSON&quot;</strong> above to download the raw numerical schema. This allows programmatic validation against Excel financial models, Python NumPy financial functions (<code>numpy_financial.pmt</code>), and automated lending pipelines.
+                </p>
+              </div>
             </div>
-
-            <h3 style={{ marginTop: "36px" }}>5. IEEE 754 Floating-Point Precision Considerations</h3>
-            <p>
-              JavaScript uses the <code>IEEE 754 standard</code> for double-precision binary floating-point numbers (64-bit). In cumulative amortization loops involving 360 monthly iterations, floating-point rounding errors (e.g. <code>0.1 + 0.2 = 0.30000000000000004</code>) can accumulate and cause rounding discrepancies on terminal payments.
-            </p>
-            <p>
-              To eliminate drift:
-            </p>
-            <ul>
-              <li>The engine isolates interest decay using scaled integer cents during schedule accumulation.</li>
-              <li>A boundary guard ensures the terminal month zeroes out any fractional penny balance rather than carrying negative or ghost liabilities.</li>
-              <li>JSON payloads export with explicitly typed floating-point numerics for seamless integration with backend APIs in Python, Go, or Java.</li>
-            </ul>
-
-            <h3 style={{ marginTop: "36px" }}>6. Open API &amp; JSON Specification</h3>
-            <p>
-              Developers can export calculations via the <strong>&quot;💻 API / JSON&quot;</strong> tab or click <strong>&quot;Export JSON&quot;</strong> above to download the raw numerical schema. This allows programmatic validation against Excel financial models, Python NumPy financial functions (<code>numpy_financial.pmt</code>), and automated lending pipelines.
-            </p>
-          </div>
+          </details>
         </div>
       </section>
 

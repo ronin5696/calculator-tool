@@ -11,11 +11,21 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: "refinancing-guide",
+    title: "The Complete Mortgage Refinance Master Guide: Mechanics, Process, & Pitfalls",
+    excerpt: "Everything you need to know about refinancing your home loan. From rate-and-term strategies and equity requirements to loan estimates and hidden fees.",
+    category: "Master Guide",
+    readTime: "12 min read",
+    date: "October 18, 2024",
+    emoji: "🧭",
+    featured: true,
+  },
+  {
     slug: "when-to-refinance",
     title: "When Does It Make Sense to Refinance Your Mortgage?",
     excerpt: "Timing is everything when it comes to refinancing. Learn the key indicators that tell you it's the right time — and red flags that say otherwise.",
     category: "Strategy",
-    readTime: "8 min read",
+    readTime: "10 min read",
     date: "October 15, 2024",
     emoji: "📅",
     featured: true,
@@ -23,9 +33,9 @@ const articles = [
   {
     slug: "refinance-costs",
     title: "Understanding Refinancing Costs: Every Fee Explained",
-    excerpt: "Closing costs can eat into your savings if you're not careful. Here's a complete breakdown of every fee you might pay when refinancing.",
+    excerpt: "Closing costs can eat into your savings if you're not careful. Here's a complete line-by-line breakdown of every fee you might pay when refinancing.",
     category: "Costs",
-    readTime: "7 min read",
+    readTime: "10 min read",
     date: "October 10, 2024",
     emoji: "💸",
     featured: true,
@@ -33,9 +43,9 @@ const articles = [
   {
     slug: "fixed-vs-arm",
     title: "Fixed-Rate vs. ARM Mortgage: Which Is Better for Refinancing?",
-    excerpt: "Should you refinance into a fixed-rate or adjustable-rate mortgage? We break down the pros and cons for different financial situations.",
+    excerpt: "Should you refinance into a fixed-rate or adjustable-rate mortgage? We break down the math, SOFR index, 2/2/5 caps, and worst-case stress tests.",
     category: "Loan Types",
-    readTime: "6 min read",
+    readTime: "10 min read",
     date: "October 5, 2024",
     emoji: "⚖️",
     featured: true,
@@ -72,7 +82,7 @@ const articles = [
   },
 ];
 
-const categories = ["All", "Strategy", "Costs", "Loan Types", "Analysis", "Credit"];
+const categories = ["All", "Master Guide", "Strategy", "Costs", "Loan Types", "Analysis", "Credit"];
 
 export default function BlogPage() {
   const featured = articles.filter((a) => a.featured);

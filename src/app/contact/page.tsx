@@ -50,9 +50,13 @@ export default function ContactPage() {
               <div className="contact-info-item">
                 <div className="contact-info-icon" aria-hidden="true">📧</div>
                 <div className="contact-info-text">
-                  <h4>Email Us</h4>
-                  <p><a href="mailto:contact@devspoint.in" style={{ color: "var(--primary)", textDecoration: "none" }}>contact@devspoint.in</a></p>
-                  <p style={{ fontSize: 13, marginTop: 2 }}>We respond within 24 business hours</p>
+                  <h4>Email Support &amp; Inquiries</h4>
+                  <p>
+                    <a href="mailto:support@devspoint.in" style={{ color: "var(--primary)", textDecoration: "none", fontWeight: 600 }}>support@devspoint.in</a>
+                    <span style={{ margin: "0 8px", color: "var(--border)" }}>•</span>
+                    <a href="mailto:contact@devspoint.in" style={{ color: "var(--primary)", textDecoration: "none" }}>contact@devspoint.in</a>
+                  </p>
+                  <p style={{ fontSize: 13, marginTop: 2 }}>Dedicated developer &amp; user support responding within 24 business hours</p>
                 </div>
               </div>
 

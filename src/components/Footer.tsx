@@ -8,7 +8,7 @@ const toolLinks = [
 ];
 
 const resourceLinks = [
-  { href: "/blog", label: "Refinancing Guide" },
+  { href: "/blog/refinancing-guide", label: "Refinancing Guide" },
   { href: "/blog/when-to-refinance", label: "When to Refinance" },
   { href: "/blog/refinance-costs", label: "Refinancing Costs Explained" },
   { href: "/blog/fixed-vs-arm", label: "Fixed vs. ARM Loans" },
@@ -90,6 +90,7 @@ export default function Footer() {
         <div style={{ display: "flex", gap: 20 }}>
           <Link href="/privacy-policy" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: 13 }}>Privacy</Link>
           <Link href="/terms-of-service" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: 13 }}>Terms</Link>
+          <Link href="/disclaimer" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: 13 }}>Disclaimer</Link>
           <Link href="/contact" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: 13 }}>Contact</Link>
         </div>
       </div>

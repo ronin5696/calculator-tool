@@ -31,32 +31,45 @@ export default function PrivacyPolicyPage() {
       <section className="section" aria-labelledby="privacy-content">
         <div className="section-container">
           <div className="prose">
+            <div className="info-box" style={{ background: "linear-gradient(135deg, #ecfdf5, #d1fae5)", borderColor: "#10b981", marginBottom: "32px", padding: "24px" }}>
+              <span className="info-box-icon" style={{ fontSize: "28px" }}>🔒</span>
+              <div>
+                <h3 style={{ margin: "0 0 6px", color: "#065f46", fontSize: "18px" }}>Core Privacy Architecture: 100% Client-Side &amp; Zero Tracking</h3>
+                <p style={{ margin: 0, color: "#047857", fontSize: "14px", lineHeight: 1.6 }}>
+                  <strong>DevsPoint Financial Engine runs 100% client-side in your web browser.</strong> We collect zero personal financial data, transmit zero loan numbers to external databases, and use <strong>no first-party tracking cookies or persistent user identifiers</strong>. Your financial calculations remain completely private to your device.
+                </p>
+              </div>
+            </div>
+
             <p>
               Welcome to DevsPoint Financial Engine (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We operate the website{" "}
               <a href="https://devspoint.in">https://devspoint.in</a> (the &quot;Site&quot;). This
-              Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our Site.
+              Privacy Policy explains our strict commitment to data confidentiality, client-side software architecture, and the absence of user surveillance.
               Please read this policy carefully. If you disagree with its terms, please discontinue use of the Site.
             </p>
 
-            <h2>1. Information We Collect</h2>
-
-            <h3>1.1 Information You Provide Voluntarily</h3>
-            <p>We may collect personal information you voluntarily provide when you:</p>
-            <ul>
-              <li>Submit a contact form (name, email address, message)</li>
-              <li>Subscribe to our developer newsletter (email address)</li>
-              <li>Report a bug or send feedback</li>
-            </ul>
-
-            <h3>1.2 Calculator Data</h3>
+            <h2>1. Our Zero-Telemetry Architecture</h2>
             <p>
-              <strong>Important:</strong> All mortgage calculations performed on DevsPoint Financial Engine happen entirely within your
-              browser. We do not collect, store, transmit, or record any financial data you enter into our calculator,
-              including loan balances, interest rates, or personal financial information.
+              Unlike traditional lending portals and mortgage broker websites, DevsPoint Financial Engine does not monetize user financial profiles.
             </p>
 
-            <h3>1.3 Automatically Collected Information</h3>
-            <p>When you visit our Site, we automatically collect certain information, including:</p>
+            <h3>1.1 Calculator Inputs &amp; Mathematical Execution (100% Client-Side)</h3>
+            <p>
+              Every equation, amortization loop, monthly delta calculation, and break-even projection runs strictly inside your local browser runtime via pure TypeScript/JavaScript.
+              <strong>We do not collect, store, transmit, log, or sell any financial data you enter into our calculator</strong> — including current loan balances, interest rates, terms, or estimated closing costs. Once you refresh or close your browser tab, all ephemeral in-memory state is immediately purged by your browser.
+            </p>
+
+            <h3>1.2 No First-Party Tracking Cookies</h3>
+            <p>
+              The DevsPoint application uses <strong>no first-party tracking cookies</strong>, no session trackers, and no user profiling tools. Any interactive toggles (such as calculator tabs or theme states) are maintained solely in local memory or standard HTML elements.
+            </p>
+
+            <h3>1.3 Voluntary Communications</h3>
+            <p>The only personal information we ever receive is information you choose to send directly to us, such as:</p>
+            <ul>
+              <li>Submitting our <Link href="/contact">Contact Form</Link> (your name, email address, and message)</li>
+              <li>Reporting an algorithmic bug or requesting technical API integration guidance via email</li>
+            </ul>
             <ul>
               <li>Browser type and version</li>
               <li>Operating system</li>

@@ -75,10 +75,39 @@ const faqs = [
   },
 ];
 
-const testimonials = [
-  { name: "Alex T.", title: "Full-Stack Engineer, Bengaluru", text: "Having the raw JSON view and math breakdown right below the calculator is awesome. Transparent and accurate.", color: "#1a56db", initials: "AT" },
-  { name: "Sarah M.", title: "Homeowner, Texas", text: "I ran our numbers through DevsPoint before talking to brokers. Saved $287/month and broke even in 19 months.", color: "#7c3aed", initials: "SM" },
-  { name: "David K.", title: "Fintech Product Lead, San Francisco", text: "The cleanest implementation of discrete amortization math on the web. Love the exportable JSON schema.", color: "#059669", initials: "DK" },
+const featuredGuides = [
+  {
+    slug: "refinancing-guide",
+    title: "The Comprehensive Guide to Mortgage Refinancing",
+    excerpt: "Everything you need to know about replacing your mortgage: how the math actually works, evaluating closing friction, and avoiding common lender traps.",
+    category: "Master Guide",
+    readTime: "11 min read",
+    emoji: "📘",
+  },
+  {
+    slug: "when-to-refinance",
+    title: "When Does It Actually Make Sense to Refinance?",
+    excerpt: "The nuanced reality of refinancing timing. Why the old 1% rule is broken, how to calculate break-even velocity, and when refinancing is a mistake.",
+    category: "Strategy",
+    readTime: "8 min read",
+    emoji: "⏱️",
+  },
+  {
+    slug: "refinance-costs",
+    title: "Refinancing Costs Explained: Line-by-Line Fee Breakdown",
+    excerpt: "Closing costs can quietly wipe out your interest savings. We break down origination fees, appraisal costs, title insurance, and 'no-cost' refi traps.",
+    category: "Cost Analysis",
+    readTime: "9 min read",
+    emoji: "💸",
+  },
+  {
+    slug: "fixed-vs-arm",
+    title: "Fixed-Rate vs. ARM Loans: Which Is Better for Refinancing?",
+    excerpt: "Should you lock in a predictable 30-year fixed rate or capture short-term savings with a 5/1 or 7/1 ARM? A clear-eyed mathematical comparison.",
+    category: "Loan Types",
+    readTime: "8 min read",
+    emoji: "⚖️",
+  },
 ];
 
 export default function HomePage() {
@@ -347,29 +376,46 @@ export function calculateBreakEvenMonths(
         </div>
       </section>
 
-      {/* ─── Testimonials ─── */}
-      <section className="section section-dark" aria-labelledby="testimonials-title">
+      {/* ─── Featured Educational Guides & Knowledge Base (Internal Linking) ─── */}
+      <section className="section" id="featured-guides" aria-labelledby="guides-title" style={{ background: "var(--surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div className="section-container">
-          <div>
-            <span className="section-tag">⭐ Reviews</span>
-            <h2 id="testimonials-title" className="section-title" style={{ marginTop: 12 }}>
-              Trusted by Homeowners Across the US
-            </h2>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px", marginBottom: "36px" }}>
+            <div>
+              <span className="section-tag" style={{ background: "#e0f2fe", color: "#0369a1" }}>📚 Knowledge Base &amp; Strategy</span>
+              <h2 id="guides-title" className="section-title" style={{ marginTop: 12 }}>
+                In-Depth Mortgage Refinancing Guides
+              </h2>
+              <p className="section-subtitle" style={{ maxWidth: 640 }}>
+                Written from a practitioner&apos;s perspective — practical math, real dollar figures, and honest trade-offs to help you navigate your loan decision.
+              </p>
+            </div>
+            <Link href="/blog" className="nav-cta" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px", borderRadius: "10px", padding: "10px 20px" }}>
+              Explore All Guides →
+            </Link>
           </div>
-          <div className="testimonials-grid">
-            {testimonials.map((t) => (
-              <article className="testimonial-card" key={t.name}>
-                <div className="stars" aria-label="5 out of 5 stars">
-                  {[...Array(5)].map((_, i) => <span key={i} className="star" aria-hidden="true">★</span>)}
-                </div>
-                <p className="testimonial-text">&quot;{t.text}&quot;</p>
-                <div className="testimonial-author">
-                  <div className="author-avatar" style={{ background: t.color }} aria-hidden="true">{t.initials}</div>
-                  <div>
-                    <div className="author-name">{t.name}</div>
-                    <div className="author-title">{t.title}</div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+            {featuredGuides.map((g) => (
+              <article key={g.slug} className="feature-card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "28px", background: "white" }}>
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--primary)", background: "var(--primary-light)", padding: "4px 10px", borderRadius: "100px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                      {g.category}
+                    </span>
+                    <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>{g.readTime}</span>
                   </div>
+                  <h3 style={{ fontSize: "18px", lineHeight: 1.4, marginBottom: "10px" }}>
+                    <Link href={`/blog/${g.slug}`} style={{ color: "var(--dark)", textDecoration: "none" }}>
+                      {g.title}
+                    </Link>
+                  </h3>
+                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "20px" }}>
+                    {g.excerpt}
+                  </p>
                 </div>
+                <Link href={`/blog/${g.slug}`} style={{ color: "var(--primary)", fontWeight: 600, fontSize: "14px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                  Read Guide <span aria-hidden="true">→</span>
+                </Link>
               </article>
             ))}
           </div>

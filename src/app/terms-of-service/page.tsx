@@ -88,16 +88,25 @@ export default function TermsOfServicePage() {
               advertiser&apos;s own terms and privacy policies.
             </p>
 
-            <h2>5. Intellectual Property</h2>
+            <h2>5. Open-Source Utility &amp; MIT License</h2>
             <p>
-              The Site, its design system, and its educational content are the property
-              of DevsPoint and its contributors. Open-source computational routines are released under the MIT License where explicitly marked.
-              Our trademarks and branding may not be used in connection with any commercial product or service without
-              our prior written consent.
+              The core computational modules of the DevsPoint Financial Engine (<code>dp-calc-engine</code>), including its discrete amortization algorithms and break-even functions, are published and distributed as open-source software under the permissive <strong>MIT License</strong>:
             </p>
+            <div style={{ background: "#0f172a", color: "#f8fafc", padding: "20px 24px", borderRadius: "12px", fontFamily: "monospace", fontSize: "13px", lineHeight: "1.6", border: "1px solid #334155", margin: "20px 0" }}>
+              <div style={{ color: "#93c5fd", fontWeight: "bold", marginBottom: "8px" }}>MIT License</div>
+              <div style={{ color: "#94a3b8", marginBottom: "12px" }}>Copyright (c) 2024–2026 DevsPoint (https://devspoint.in)</div>
+              <p style={{ margin: "0 0 12px 0", color: "#e2e8f0" }}>
+                Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+              </p>
+              <p style={{ margin: "0 0 12px 0", color: "#e2e8f0" }}>
+                The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+              </p>
+              <p style={{ margin: 0, color: "#94a3b8" }}>
+                THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+              </p>
+            </div>
             <p>
-              You may share links to the Site and may quote brief excerpts from our educational content and code samples,
-              provided you give appropriate credit and link back to the original page on devspoint.in.
+              The site design, educational editorial articles, and DevsPoint branding remain the intellectual property of DevsPoint.
             </p>
 
             <h2>6. Third-Party Links</h2>

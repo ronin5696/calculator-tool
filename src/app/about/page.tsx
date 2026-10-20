@@ -48,7 +48,7 @@ export default function AboutPage() {
       {/* Mission */}
       <section className="section" aria-labelledby="mission-title">
         <div className="section-container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+          <div className="about-mission-grid">
             <div>
               <span className="section-tag">🎯 Engineering Mission</span>
               <h2 id="mission-title" className="section-title" style={{ marginTop: 12 }}>
@@ -73,7 +73,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="about-values-grid">
                 {values.map((v) => (
                   <div key={v.title} className="feature-card" style={{ padding: 24 }}>
                     <div style={{ fontSize: 28, marginBottom: 12 }} aria-hidden="true">{v.icon}</div>

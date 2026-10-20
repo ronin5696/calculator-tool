@@ -431,8 +431,8 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
 
-      <section className="section" style={{ background: "#ffffff", padding: "60px 24px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0, 1fr) 340px", gap: "48px", alignItems: "start" }}>
+      <section className="section article-section" style={{ background: "#ffffff" }}>
+        <div className="article-layout-grid">
           {/* Main article content */}
           <main>
             <div
@@ -442,7 +442,7 @@ export default async function BlogPostPage({ params }: Props) {
             />
 
             {/* Author E-E-A-T Bio Box */}
-            <div style={{ marginTop: "48px", padding: "28px", background: "#f8fafc", borderRadius: "16px", border: "1px solid #e2e8f0", display: "flex", gap: "20px", alignItems: "flex-start" }}>
+            <div className="author-bio-box">
               <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
                 AP
               </div>
@@ -476,7 +476,7 @@ export default async function BlogPostPage({ params }: Props) {
           </main>
 
           {/* Sticky Sidebar */}
-          <aside style={{ position: "sticky", top: "100px", display: "flex", flexDirection: "column", gap: "24px" }}>
+          <aside className="article-sidebar">
             {/* Interactive Calculator CTA */}
             <div style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)", borderRadius: "20px", padding: "28px", color: "white", boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}>
               <div style={{ display: "inline-block", background: "rgba(59,130,246,0.2)", color: "#93c5fd", padding: "4px 12px", borderRadius: "100px", fontSize: "12px", fontWeight: 700, marginBottom: "12px" }}>

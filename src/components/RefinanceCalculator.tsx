@@ -139,19 +139,19 @@ export default function RefinanceCalculator() {
   const PIE_COLORS = ["#1a56db", "#7c3aed", "#10b981"];
 
   return (
-    <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 24px 80px" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
+    <section className="calc-section-wrapper">
+      <div style={{ textAlign: "center", marginBottom: 36 }}>
         <span className="section-tag">🧮 Free Tool</span>
-        <h1 style={{ fontSize: "clamp(28px, 4vw, 42px)", color: "var(--dark)", marginBottom: 14, marginTop: 12 }}>
+        <h1 style={{ fontSize: "clamp(24px, 4vw, 42px)", color: "var(--dark)", marginBottom: 12, marginTop: 12 }}>
           Mortgage Refinance Calculator
         </h1>
-        <p style={{ fontSize: 17, color: "var(--text-secondary)", maxWidth: 560, margin: "0 auto", lineHeight: 1.7 }}>
+        <p style={{ fontSize: "clamp(15px, 2vw, 17px)", color: "var(--text-secondary)", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>
           Enter your current loan details and the new loan terms you&apos;re considering.
           We&apos;ll instantly show your monthly savings, total interest saved, and break-even point.
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 28 }}>
+      <div className="calc-inputs-grid">
         {/* Current Loan */}
         <div className="calc-card">
           <div className="calc-title">
@@ -392,8 +392,8 @@ export default function RefinanceCalculator() {
           )}
 
           {/* Tabs & Developer Actions Toolbar */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", marginTop: 24, marginBottom: 16 }}>
-            <div className="tabs" style={{ margin: 0, flex: "1 1 280px" }} role="tablist" aria-label="Results tabs">
+          <div className="calc-toolbar">
+            <div className="tabs" role="tablist" aria-label="Results tabs">
               {(
                 [
                   { id: "results", label: "📊 Summary" },
@@ -417,7 +417,7 @@ export default function RefinanceCalculator() {
             </div>
 
             {/* Quick Export Actions */}
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+            <div className="calc-export-actions">
               <button
                 type="button"
                 onClick={() => {

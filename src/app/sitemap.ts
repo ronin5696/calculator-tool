@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { articlesList } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://devspoint.in";
+  const base = "https://www.devspoint.in";
 
   const staticPages = [
     { url: base, priority: 1.0, changeFrequency: "weekly" as const, lastModified: "2026-10-24T00:00:00.000Z" },

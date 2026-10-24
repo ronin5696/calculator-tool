@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   // Optimize images
   images: {
     formats: ["image/avif", "image/webp"],
@@ -13,7 +12,7 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-XSS-Protection", value: "1; mode=block" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
@@ -21,21 +20,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Permanent 301 Redirects: Normalize www to non-www and resolve duplicate resources URLs
+  // Permanent 301 Redirects: Resolve duplicate resources URLs & legacy paths
   async redirects() {
     return [
-      // www to non-www redirect
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.devspoint.in",
-          },
-        ],
-        destination: "https://devspoint.in/:path*",
-        permanent: true,
-      },
       // Duplicate URL resolution: /resources/:slug permanently redirects to canonical /blog/:slug
       {
         source: "/resources/:slug",

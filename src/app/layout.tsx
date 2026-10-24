@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devspoint.in"),
+  metadataBase: new URL("https://www.devspoint.in"),
   title: {
     default: "DevsPoint Home Loan Engine: Smart Balance Transfer & EMI Calculator (India)",
     template: "%s | DevsPoint Home Loan Engine",
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     "home loan tax benefits section 24b 80c",
   ],
   authors: [
-    { name: "Vikramaditya Sharma, CFP®", url: "https://devspoint.in/about" },
-    { name: "Priya Nair, CFA", url: "https://devspoint.in/about" },
+    { name: "Vikramaditya Sharma, CFP®", url: "https://www.devspoint.in/about" },
+    { name: "Priya Nair, CFA", url: "https://www.devspoint.in/about" },
   ],
   creator: "DevsPoint",
   publisher: "DevsPoint",

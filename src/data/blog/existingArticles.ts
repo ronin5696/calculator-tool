@@ -4,7 +4,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "refinancing-guide": {
     title: "The Comprehensive Guide to Mortgage Refinancing: How It Works, Real Math, and Traps to Avoid",
     description: "A complete, practitioner's masterclass on mortgage refinancing: understanding loan mechanics, calculating true break-even speed, dissecting hidden fees, and choosing the right loan structure.",
-    date: "October 18, 2024",
+    date: "October 12, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "11 min read",
     category: "Master Guide",
     author: "DevsPoint",
@@ -74,7 +75,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "when-to-refinance": {
     title: "When Does It Actually Make Sense to Refinance Your Mortgage?",
     description: "The honest, math-driven answer to refinancing timing. Why the old 1% rule is dangerously misleading, how to calculate break-even velocity, and when walking away is the smartest move.",
-    date: "October 15, 2024",
+    date: "October 14, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "9 min read",
     category: "Strategy",
     author: "DevsPoint",
@@ -170,7 +172,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "refinance-costs": {
     title: "The Real Cost of Refinancing Your Mortgage: Line-by-Line Breakdown of Fees",
     description: "Closing costs can quietly wipe out expected interest savings. Here is an exhaustive, practitioner's breakdown of origination fees, third-party charges, title insurance, and how to spot inflated lender markups.",
-    date: "October 10, 2024",
+    date: "October 15, 2026",
+    updatedDate: "October 23, 2026",
     readTime: "10 min read",
     category: "Cost Analysis",
     author: "DevsPoint",
@@ -260,7 +263,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "fixed-vs-arm": {
     title: "Fixed-Rate vs. Adjustable-Rate Mortgage (ARM): The Modern Homeowner's Guide",
     description: "Should you lock in a 30-year fixed loan or capture lower rates on a 5/1 or 7/1 ARM? We break down the math, SOFR index mechanics, 2/2/5 rate adjustment caps, and the worst-case reset stress test.",
-    date: "October 5, 2024",
+    date: "October 16, 2026",
+    updatedDate: "October 23, 2026",
     readTime: "10 min read",
     category: "Loan Comparison",
     author: "DevsPoint",
@@ -401,7 +405,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "break-even-analysis": {
     title: "How to Calculate Your Break-Even Point (And Why Most People Get It Wrong)",
     description: "The break-even point is the most important number in any refinancing decision. Here's why the simple calculation isn't always enough — and how to do it right.",
-    date: "September 28, 2024",
+    date: "October 11, 2026",
+    updatedDate: "October 22, 2026",
     readTime: "5 min read",
     category: "Analysis",
     author: "DevsPoint",
@@ -444,7 +449,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "cash-out-refinance-guide": {
     title: "Cash-Out Refinancing: When It's Smart and When It's a Trap",
     description: "Cash-out refis get marketed as 'free money.' They're not. Here's the clear-eyed breakdown of when tapping your home equity makes sense — and when it quietly backfires.",
-    date: "September 20, 2024",
+    date: "October 10, 2026",
+    updatedDate: "October 22, 2026",
     readTime: "9 min read",
     category: "Loan Types",
     author: "DevsPoint",
@@ -476,7 +482,7 @@ export const existingArticles: Record<string, ArticleData> = {
 
 <h2>The Tax Question</h2>
 
-<p>One thing worth knowing: mortgage interest on cash-out refis is only tax-deductible if the money is used to "substantially improve" the home you're borrowing against. Using the cash for anything else — debt consolidation, college tuition, a boat — means that interest is not deductible under current IRS rules. This has changed over the years (before 2018, home equity interest was deductible regardless of use), and it could change again, but as of 2024, the rule is tied to home improvement. Always run this by a tax advisor before assuming any deductibility.</p>
+<p>One thing worth knowing: mortgage interest on cash-out refis is only tax-deductible if the money is used to "substantially improve" the home you're borrowing against. Using the cash for anything else — debt consolidation, college tuition, a boat — means that interest is not deductible under current IRS rules. This has changed over the years (before 2018, home equity interest was deductible regardless of use), and under current federal tax guidelines, the deduction remains strictly tied to capital home improvements. Always run this by a tax advisor before assuming any deductibility.</p>
 
 <h2>The Questions to Ask Before You Sign</h2>
 
@@ -497,7 +503,8 @@ export const existingArticles: Record<string, ArticleData> = {
   "improve-credit-score": {
     title: "Improving Your Credit Score Before Refinancing: What Actually Works",
     description: "Not all credit improvement advice is worth following. Here's what genuinely moves the needle before a mortgage application — and what's a waste of time.",
-    date: "September 15, 2024",
+    date: "October 8, 2026",
+    updatedDate: "October 21, 2026",
     readTime: "7 min read",
     category: "Credit",
     author: "DevsPoint",

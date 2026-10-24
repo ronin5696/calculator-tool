@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.description,
       type: "article",
       publishedTime: article.date,
+      modifiedTime: article.updatedDate || article.date,
       authors: [article.author],
       url: `https://devspoint.in/blog/${slug}`,
     },
@@ -80,6 +81,7 @@ export default async function BlogPostPage({ params }: Props) {
       url: "https://devspoint.in",
     },
     datePublished: article.date,
+    dateModified: article.updatedDate || article.date,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `https://devspoint.in/blog/${slug}`,
@@ -135,7 +137,13 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
             <span>•</span>
-            <span>{article.date}</span>
+            <span>Published: {article.date}</span>
+            {article.updatedDate && (
+              <>
+                <span>•</span>
+                <span style={{ color: "#93c5fd", fontWeight: 600 }}>Updated: {article.updatedDate}</span>
+              </>
+            )}
             <span>•</span>
             <span>⏱️ {article.readTime}</span>
             <span>•</span>

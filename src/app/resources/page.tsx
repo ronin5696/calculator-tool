@@ -16,7 +16,7 @@ const resources = [
     excerpt: "Everything you need to know about refinancing your home loan. From rate-and-term strategies and equity requirements to loan estimates and hidden fees.",
     category: "Master Guide",
     readTime: "12 min read",
-    date: "October 18, 2024",
+    date: "October 12, 2026",
     emoji: "🧭",
   },
   {
@@ -25,7 +25,7 @@ const resources = [
     excerpt: "Timing is everything when it comes to refinancing. Learn the key indicators that tell you it's the right time — and red flags that say otherwise.",
     category: "Strategy",
     readTime: "10 min read",
-    date: "October 15, 2024",
+    date: "October 14, 2026",
     emoji: "📅",
   },
   {
@@ -34,7 +34,7 @@ const resources = [
     excerpt: "Closing costs can eat into your savings if you're not careful. Here's a complete line-by-line breakdown of every fee you might pay when refinancing.",
     category: "Costs",
     readTime: "10 min read",
-    date: "October 10, 2024",
+    date: "October 15, 2026",
     emoji: "💸",
   },
   {
@@ -43,7 +43,7 @@ const resources = [
     excerpt: "Should you refinance into a fixed-rate or adjustable-rate mortgage? We break down the math, SOFR index, 2/2/5 caps, and worst-case stress tests.",
     category: "Loan Types",
     readTime: "10 min read",
-    date: "October 5, 2024",
+    date: "October 16, 2026",
     emoji: "⚖️",
   },
 ];

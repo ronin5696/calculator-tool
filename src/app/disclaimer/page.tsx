@@ -21,7 +21,7 @@ export default function DisclaimerPage() {
             </ol>
           </nav>
           <h1 id="disclaimer-title" className="page-hero-title">Disclaimer</h1>
-          <p className="page-hero-sub">Last updated: October 20, 2024</p>
+          <p className="page-hero-sub">Last updated: October 24, 2026</p>
         </div>
       </div>
 

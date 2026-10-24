@@ -4,7 +4,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "refinance-with-bad-credit": {
     title: "How to Refinance a Mortgage with Bad or Fair Credit: Practical Strategies",
     description: "Can you refinance with a 580 to 640 credit score? Explore FHA rate-and-term options, compensating factors, rapid rescoring, non-occupant co-signers, and lender LLPAs.",
-    date: "September 22, 2024",
+    date: "October 9, 2026",
+    updatedDate: "October 21, 2026",
     readTime: "10 min read",
     category: "Credit & Eligibility",
     author: "DevsPoint",
@@ -110,7 +111,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "rate-and-term-vs-cash-out": {
     title: "Rate-and-Term vs. Cash-Out Refinance: Mechanics, Tax Rules, & Pricing Deltas",
     description: "Understand the fundamental differences between rate-and-term and cash-out refinancing. Max LTV limits, pricing adjustments, documentation requirements, and tax deductions.",
-    date: "September 18, 2024",
+    date: "October 7, 2026",
+    updatedDate: "October 20, 2026",
     readTime: "9 min read",
     category: "Loan Comparison",
     author: "DevsPoint",
@@ -224,7 +226,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "mortgage-recasting-vs-refinancing": {
     title: "Mortgage Recasting vs. Refinancing: The $250 Alternative Most Banks Hide",
     description: "Have a lump sum from an inheritance, bonus, or sale? Recasting lowers your monthly mortgage payment without applying for a new loan, paying closing costs, or losing your rate.",
-    date: "September 12, 2024",
+    date: "October 5, 2026",
+    updatedDate: "October 20, 2026",
     readTime: "8 min read",
     category: "Strategy & Alternatives",
     author: "DevsPoint",
@@ -350,7 +353,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "refinancing-investment-property": {
     title: "Refinancing an Investment Property or Rental: Rules, Rates, and Reserves",
     description: "Refinancing rental real estate involves stricter underwriting: higher interest rates, 6 months of PITI reserves, rental income seasoning, and DSCR alternatives.",
-    date: "September 7, 2024",
+    date: "October 4, 2026",
+    updatedDate: "October 19, 2026",
     readTime: "11 min read",
     category: "Real Estate Investing",
     author: "DevsPoint",
@@ -463,7 +467,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "how-many-times-can-you-refinance": {
     title: "How Often Can You Refinance Your Mortgage? Seasoning Rules & Pitfalls",
     description: "Is there a legal limit to how many times you can refinance? We explain lender seasoning rules, early payoff penalties, credit impact, and the serial refi amortization trap.",
-    date: "August 30, 2024",
+    date: "October 3, 2026",
+    updatedDate: "October 18, 2026",
     readTime: "8 min read",
     category: "Strategy & Rules",
     author: "DevsPoint",
@@ -573,7 +578,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   "what-is-loan-estimate-closing-disclosure": {
     title: "Decoding Your Loan Estimate and Closing Disclosure: The 3-Day Rule Guide",
     description: "Master the TRID disclosure documents that protect borrowers. Learn 0% vs 10% fee tolerance rules, red flags on Page 2, and how to exercise your 3-day right of rescission.",
-    date: "August 24, 2024",
+    date: "October 2, 2026",
+    updatedDate: "October 18, 2026",
     readTime: "10 min read",
     category: "Consumer Rights",
     author: "DevsPoint",

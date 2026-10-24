@@ -92,7 +92,7 @@ export default function BlogPage() {
                     <h3 style={{ fontSize: 18, color: "var(--dark)", marginBottom: 10, lineHeight: 1.35 }}>{article.title}</h3>
                     <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.65, flex: 1 }}>{article.excerpt}</p>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 20, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
-                      <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{article.date}</span>
+                      <span style={{ fontSize: 12, color: "var(--text-muted)" }}>Updated {article.updatedDate || article.date}</span>
                       <span style={{ fontSize: 14, color: "var(--primary)", fontWeight: 600 }}>Read Guide →</span>
                     </div>
                   </article>
@@ -154,7 +154,7 @@ export default function BlogPage() {
                       </p>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "var(--text-muted)", paddingTop: 12, borderTop: "1px solid var(--border)" }}>
-                      <span>{article.date}</span>
+                      <span>Updated {article.updatedDate || article.date}</span>
                       <span style={{ color: "var(--primary)", fontWeight: 600 }}>Explore →</span>
                     </div>
                   </article>

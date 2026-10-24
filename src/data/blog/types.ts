@@ -2,6 +2,7 @@ export interface ArticleData {
   title: string;
   description: string;
   date: string;
+  updatedDate?: string;
   readTime: string;
   category: string;
   author: string;
@@ -16,6 +17,7 @@ export interface ArticleCard {
   category: string;
   readTime: string;
   date: string;
+  updatedDate?: string;
   emoji: string;
   featured: boolean;
 }

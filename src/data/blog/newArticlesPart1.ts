@@ -4,7 +4,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "fha-streamline-refinance-guide": {
     title: "FHA Streamline Refinance Guide: Requirements, Net Tangible Benefit, and Closing Fees",
     description: "How the FHA Streamline program lets you refinance with no appraisal and minimal paperwork. Understand the 0.50% rate drop requirement, upfront MIP, and whether it beats conventional.",
-    date: "October 22, 2024",
+    date: "October 19, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "10 min read",
     category: "Government Loans",
     author: "DevsPoint",
@@ -159,7 +160,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "va-irrrl-streamline-refinance": {
     title: "VA IRRRL Guide: The Interest Rate Reduction Refinance Loan Explained",
     description: "The veteran's ultimate guide to the VA IRRRL streamline loan: mandatory 36-month recoupment rules, funding fees, disability fee waivers, and how to avoid predatory lender mailers.",
-    date: "October 20, 2024",
+    date: "October 20, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "9 min read",
     category: "Military & Veterans",
     author: "DevsPoint",
@@ -283,7 +285,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "heloc-vs-cash-out-refinance": {
     title: "HELOC vs. Cash-Out Refinance: Which Taps Home Equity Without Sacrificing Your Low Rate?",
     description: "Sitting on a 3% mortgage? Tapping equity with a cash-out refi at 6.8% could cost you thousands. Compare HELOCs, Home Equity Loans, and cash-out refis using blended rate math.",
-    date: "October 16, 2024",
+    date: "October 18, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "11 min read",
     category: "Equity & Strategy",
     author: "DevsPoint",
@@ -413,7 +416,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "how-to-remove-pmi": {
     title: "How to Remove Private Mortgage Insurance (PMI): 5 Proven Legal Ways",
     description: "Stop throwing away $100 to $300 every month. Discover your rights under the Homeowners Protection Act, 80% vs 78% LTV thresholds, appraisal appeals, and refi strategies.",
-    date: "October 12, 2024",
+    date: "October 21, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "9 min read",
     category: "Costs & Savings",
     author: "DevsPoint",
@@ -538,7 +542,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "debt-to-income-ratio-refinance": {
     title: "Debt-to-Income (DTI) Ratio for Refinancing: Front-End vs. Back-End Limits",
     description: "Lenders scrutinize your DTI during underwriting. Learn how to calculate front-end and back-end ratios, Fannie Mae 45%-50% limits, student loan traps, and fast fixes.",
-    date: "October 8, 2024",
+    date: "October 17, 2026",
+    updatedDate: "October 23, 2026",
     readTime: "8 min read",
     category: "Qualification",
     author: "DevsPoint",
@@ -651,7 +656,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "mortgage-points-worth-it": {
     title: "Are Mortgage Discount Points Worth Buying When Refinancing?",
     description: "Paying 1% of your loan to drop your rate by 0.25% sounds tempting, but what is the true break-even? The math behind discount points, lender credits, and IRS tax deductions.",
-    date: "October 3, 2024",
+    date: "October 16, 2026",
+    updatedDate: "October 23, 2026",
     readTime: "8 min read",
     category: "Analysis & Costs",
     author: "DevsPoint",
@@ -781,7 +787,8 @@ export const newArticlesPart1: Record<string, ArticleData> = {
   "no-closing-cost-refinance-explained": {
     title: "No-Closing-Cost Refinancing: The Mathematical Truth Behind 'Free' Loans",
     description: "Is a zero-closing-cost mortgage too good to be true? We dissect how lenders finance fees into your principal or mark up your interest rate, and when it actually makes sense.",
-    date: "September 25, 2024",
+    date: "October 13, 2026",
+    updatedDate: "October 22, 2026",
     readTime: "9 min read",
     category: "Costs & Pitfalls",
     author: "DevsPoint",

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const lastUpdated = "October 20, 2024";
+const lastUpdated = "October 24, 2026";
 
 export default function PrivacyPolicyPage() {
   return (

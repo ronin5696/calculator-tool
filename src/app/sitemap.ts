@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { articlesList } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://devspoint.in";
@@ -19,19 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/disclaimer`, priority: 0.4, changeFrequency: "yearly" as const },
   ];
 
-  const blogSlugs = [
-    "refinancing-guide",
-    "when-to-refinance",
-    "refinance-costs",
-    "fixed-vs-arm",
-    "break-even-analysis",
-    "cash-out-refinance-guide",
-    "improve-credit-score",
-  ];
-
-  const blogPages = blogSlugs.map((slug) => ({
-    url: `${base}/blog/${slug}`,
-    priority: 0.8,
+  // All 20+ blog articles
+  const blogPages = articlesList.map((article) => ({
+    url: `${base}/blog/${article.slug}`,
+    priority: article.featured ? 0.85 : 0.8,
     changeFrequency: "monthly" as const,
     lastModified: now,
   }));

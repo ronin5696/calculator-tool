@@ -1,92 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { articlesList, blogCategories } from "@/data/blog";
 
 export const metadata: Metadata = {
   title: "Mortgage Refinancing Guides & Docs – DevsPoint",
   description:
-    "Learn everything about mortgage refinancing — when to refinance, mechanics, refinancing costs, fixed vs ARM loans, and amortization analysis from DevsPoint.",
+    "Explore 20+ comprehensive mortgage refinancing guides: when to refinance, break-even velocity, FHA & VA streamline, HELOC vs cash-out, removing PMI, closing fees, and loan comparisons.",
   alternates: { canonical: "https://devspoint.in/blog" },
   openGraph: { title: "Mortgage Refinancing Guides – DevsPoint", url: "https://devspoint.in/blog" },
 };
 
-const articles = [
-  {
-    slug: "refinancing-guide",
-    title: "The Complete Mortgage Refinance Master Guide: Mechanics, Process, & Pitfalls",
-    excerpt: "Everything you need to know about refinancing your home loan. From rate-and-term strategies and equity requirements to loan estimates and hidden fees.",
-    category: "Master Guide",
-    readTime: "12 min read",
-    date: "October 18, 2024",
-    emoji: "🧭",
-    featured: true,
-  },
-  {
-    slug: "when-to-refinance",
-    title: "When Does It Make Sense to Refinance Your Mortgage?",
-    excerpt: "Timing is everything when it comes to refinancing. Learn the key indicators that tell you it's the right time — and red flags that say otherwise.",
-    category: "Strategy",
-    readTime: "10 min read",
-    date: "October 15, 2024",
-    emoji: "📅",
-    featured: true,
-  },
-  {
-    slug: "refinance-costs",
-    title: "Understanding Refinancing Costs: Every Fee Explained",
-    excerpt: "Closing costs can eat into your savings if you're not careful. Here's a complete line-by-line breakdown of every fee you might pay when refinancing.",
-    category: "Costs",
-    readTime: "10 min read",
-    date: "October 10, 2024",
-    emoji: "💸",
-    featured: true,
-  },
-  {
-    slug: "fixed-vs-arm",
-    title: "Fixed-Rate vs. ARM Mortgage: Which Is Better for Refinancing?",
-    excerpt: "Should you refinance into a fixed-rate or adjustable-rate mortgage? We break down the math, SOFR index, 2/2/5 caps, and worst-case stress tests.",
-    category: "Loan Types",
-    readTime: "10 min read",
-    date: "October 5, 2024",
-    emoji: "⚖️",
-    featured: true,
-  },
-  {
-    slug: "break-even-analysis",
-    title: "How to Calculate Your Refinance Break-Even Point",
-    excerpt: "The break-even point is the single most important number in your refinancing decision. Here's exactly how to calculate it and use it.",
-    category: "Analysis",
-    readTime: "5 min read",
-    date: "September 28, 2024",
-    emoji: "📊",
-    featured: false,
-  },
-  {
-    slug: "cash-out-refinance-guide",
-    title: "Cash-Out Refinance: Complete Guide for 2024",
-    excerpt: "Want to tap your home equity? A cash-out refinance might be the answer — but it comes with important risks you need to understand first.",
-    category: "Loan Types",
-    readTime: "9 min read",
-    date: "September 20, 2024",
-    emoji: "💰",
-    featured: false,
-  },
-  {
-    slug: "improve-credit-score",
-    title: "How to Improve Your Credit Score Before Refinancing",
-    excerpt: "Your credit score directly affects the interest rate you'll be offered. Learn proven strategies to boost your score in 30–90 days.",
-    category: "Credit",
-    readTime: "7 min read",
-    date: "September 15, 2024",
-    emoji: "📈",
-    featured: false,
-  },
-];
-
-const categories = ["All", "Master Guide", "Strategy", "Costs", "Loan Types", "Analysis", "Credit"];
-
 export default function BlogPage() {
-  const featured = articles.filter((a) => a.featured);
-  const rest = articles.filter((a) => !a.featured);
+  const featured = articlesList.filter((a) => a.featured);
+  const rest = articlesList.filter((a) => !a.featured);
 
   return (
     <>
@@ -97,24 +23,47 @@ export default function BlogPage() {
             <ol className="breadcrumb" style={{ listStyle: "none", padding: 0 }}>
               <li><Link href="/">Home</Link></li>
               <li><span className="breadcrumb-sep" aria-hidden="true">›</span></li>
-              <li aria-current="page">Learn</li>
+              <li aria-current="page">Guides &amp; Editorial</li>
             </ol>
           </nav>
-          <h1 id="blog-title" className="page-hero-title">Mortgage Refinancing Guides</h1>
+          <h1 id="blog-title" className="page-hero-title">Mortgage Refinancing Knowledge Base</h1>
           <p className="page-hero-sub">
-            Expert articles to help you understand refinancing, make smarter decisions, and save more money on your home loan.
+            Practitioner-grade financial analyses, discrete amortization math, regulatory disclosures, and actionable guidance to help you navigate your home loan.
           </p>
+          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "24px" }}>
+            {blogCategories.map((cat) => (
+              <span
+                key={cat}
+                style={{
+                  background: "rgba(255,255,255,0.12)",
+                  color: "#e2e8f0",
+                  padding: "5px 14px",
+                  borderRadius: "100px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  backdropFilter: "blur(6px)",
+                }}
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       <section className="section" aria-labelledby="featured-articles-title">
         <div className="section-container">
-          {/* Featured */}
+          {/* Featured Guides */}
           <div>
-            <h2 id="featured-articles-title" style={{ fontSize: 24, color: "var(--dark)", marginBottom: 24 }}>
-              📌 Featured Guides
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px,1fr))", gap: 24 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
+              <h2 id="featured-articles-title" style={{ fontSize: 24, color: "var(--dark)", margin: 0 }}>
+                📌 Featured Master Guides
+              </h2>
+              <span style={{ fontSize: 14, color: "var(--text-muted)" }}>
+                Core foundational guides for mortgage decision-making
+              </span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
               {featured.map((article) => (
                 <Link
                   key={article.slug}
@@ -124,7 +73,7 @@ export default function BlogPage() {
                 >
                   <article
                     className="feature-card"
-                    style={{ height: "100%", display: "flex", flexDirection: "column" }}
+                    style={{ height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                       <span style={{
@@ -142,9 +91,9 @@ export default function BlogPage() {
                     <div style={{ fontSize: 32, marginBottom: 12 }} aria-hidden="true">{article.emoji}</div>
                     <h3 style={{ fontSize: 18, color: "var(--dark)", marginBottom: 10, lineHeight: 1.35 }}>{article.title}</h3>
                     <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.65, flex: 1 }}>{article.excerpt}</p>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 20 }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 20, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
                       <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{article.date}</span>
-                      <span style={{ fontSize: 14, color: "var(--primary)", fontWeight: 600 }}>Read More →</span>
+                      <span style={{ fontSize: 14, color: "var(--primary)", fontWeight: 600 }}>Read Guide →</span>
                     </div>
                   </article>
                 </Link>
@@ -152,10 +101,18 @@ export default function BlogPage() {
             </div>
           </div>
 
-          {/* More articles */}
-          <div style={{ marginTop: 56 }}>
-            <h2 style={{ fontSize: 24, color: "var(--dark)", marginBottom: 24 }}>📚 More Articles</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {/* Complete Library of Articles */}
+          <div style={{ marginTop: 64 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
+              <h2 style={{ fontSize: 24, color: "var(--dark)", margin: 0 }}>
+                📚 Complete Guide Library ({articlesList.length} In-Depth Articles)
+              </h2>
+              <span style={{ fontSize: 14, color: "var(--text-muted)" }}>
+                Fact-checked &amp; reviewed by DevsPoint Engineering Labs
+              </span>
+            </div>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
               {rest.map((article) => (
                 <Link
                   key={article.slug}
@@ -163,36 +120,43 @@ export default function BlogPage() {
                   style={{ textDecoration: "none" }}
                   aria-label={`Read: ${article.title}`}
                 >
-                  <article style={{
-                    background: "white",
-                    border: "1px solid var(--border)",
-                    borderRadius: 16,
-                    padding: "24px 28px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 20,
-                    transition: "all 0.2s ease",
-                  }}
+                  <article
                     className="feature-card"
+                    style={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "24px 26px",
+                      background: "white",
+                      boxSizing: "border-box",
+                    }}
                   >
-                    <div style={{ fontSize: 36 }} aria-hidden="true">{article.emoji}</div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 6 }}>
+                    <div>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                         <span style={{
                           background: "var(--primary-light)",
                           color: "var(--primary)",
-                          padding: "2px 10px",
+                          padding: "3px 10px",
                           borderRadius: 100,
                           fontSize: 11,
                           fontWeight: 700,
                           textTransform: "uppercase",
                         }}>{article.category}</span>
-                        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{article.readTime} · {article.date}</span>
+                        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{article.readTime}</span>
                       </div>
-                      <h3 style={{ fontSize: 17, color: "var(--dark)", marginBottom: 6 }}>{article.title}</h3>
-                      <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6 }}>{article.excerpt}</p>
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 10 }}>
+                        <span style={{ fontSize: 24, flexShrink: 0, marginTop: 2 }} aria-hidden="true">{article.emoji}</span>
+                        <h3 style={{ fontSize: 17, color: "var(--dark)", margin: 0, lineHeight: 1.4 }}>{article.title}</h3>
+                      </div>
+                      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>
+                        {article.excerpt}
+                      </p>
                     </div>
-                    <span style={{ color: "var(--primary)", fontSize: 20, flexShrink: 0 }} aria-hidden="true">→</span>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "var(--text-muted)", paddingTop: 12, borderTop: "1px solid var(--border)" }}>
+                      <span>{article.date}</span>
+                      <span style={{ color: "var(--primary)", fontWeight: 600 }}>Explore →</span>
+                    </div>
                   </article>
                 </Link>
               ))}
@@ -201,12 +165,38 @@ export default function BlogPage() {
         </div>
       </section>
 
+      {/* Interactive Tool Banner */}
+      <section className="section section-surface" style={{ padding: "48px 24px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto", background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)", borderRadius: 24, padding: "40px", color: "white", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <span style={{ background: "rgba(59,130,246,0.25)", color: "#93c5fd", padding: "6px 16px", borderRadius: 100, fontSize: 13, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 16 }}>
+            Interactive Financial Engine
+          </span>
+          <h2 style={{ fontSize: 30, color: "white", marginBottom: 14 }}>
+            Stop Guessing. Calculate Your Exact Break-Even Velocity.
+          </h2>
+          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.75)", maxWidth: 640, lineHeight: 1.6, marginBottom: 28 }}>
+            Our client-side discrete amortization engine models your remaining term, closing friction, and net lifetime interest savings in real-time.
+          </p>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
+            <Link href="/calculator" className="calc-btn" style={{ textDecoration: "none", padding: "14px 28px", fontSize: 15 }}>
+              🧮 Refinance Calculator
+            </Link>
+            <Link href="/calculator/break-even" className="btn-outline-white" style={{ textDecoration: "none", padding: "14px 28px", fontSize: 15 }}>
+              ⏱️ Break-Even Calculator
+            </Link>
+            <Link href="/calculator/cash-out" className="btn-outline-white" style={{ textDecoration: "none", padding: "14px 28px", fontSize: 15 }}>
+              💰 Cash-Out Calculator
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="cta-section" aria-labelledby="blog-cta-title">
-        <h2 id="blog-cta-title" className="cta-title">Ready to Run the Numbers?</h2>
-        <p className="cta-sub">Use our free calculator to see your personalized refinance savings.</p>
+        <h2 id="blog-cta-title" className="cta-title">Ready to Optimize Your Mortgage?</h2>
+        <p className="cta-sub">Run simulations across multiple scenarios and find the exact path that saves you the most money.</p>
         <div className="cta-buttons">
-          <Link href="/calculator" id="blog-cta-btn" className="btn-white">🧮 Open Calculator</Link>
+          <Link href="/calculator" id="blog-cta-btn" className="btn-white">Launch Free Calculator</Link>
         </div>
       </section>
     </>

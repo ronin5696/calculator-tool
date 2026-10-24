@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "Indian Home Loan Balance Transfer & EMI Guides – DevsPoint",
   description:
     "Explore 20+ comprehensive Indian home loan guides: balance transfer procedures, RBI repo-linked rates (RLLR), MODT charges, prepayment math, tax benefits under Section 24(b), and bank comparisons.",
-  alternates: { canonical: "https://devspoint.in/blog" },
-  openGraph: { title: "Indian Home Loan Balance Transfer Guides – DevsPoint", url: "https://devspoint.in/blog" },
+  alternates: { canonical: "https://www.devspoint.in/blog" },
+  openGraph: { title: "Indian Home Loan Balance Transfer Guides – DevsPoint", url: "https://www.devspoint.in/blog" },
 };
 
 export default function BlogPage() {

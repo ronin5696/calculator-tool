@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     "home loan tax benefits section 24b 80c",
   ],
   authors: [
-    { name: "Vikramaditya Sharma, CFP®", url: "https://www.devspoint.in/about" },
-    { name: "Priya Nair, CFA", url: "https://www.devspoint.in/about" },
+    { name: "Anshul", url: "https://www.devspoint.in/about" },
+    { name: "DevsPoint Research Desk", url: "https://www.devspoint.in/about" },
   ],
   creator: "DevsPoint",
   publisher: "DevsPoint",
@@ -140,9 +140,9 @@ export default function RootLayout({
               ],
               author: {
                 "@type": "Person",
-                name: "Vikramaditya Sharma, CFP®",
-                jobTitle: "Lead Financial Analyst & Banking Specialist",
-                url: "https://devspoint.in/about",
+                name: "Anshul",
+                jobTitle: "Software Engineer & Creator",
+                url: "https://www.devspoint.in/about",
               },
             }),
           }}

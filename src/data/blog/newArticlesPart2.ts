@@ -8,10 +8,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "September 02, 2026",
     readTime: "8 min read",
     category: "Government Schemes",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>Hundreds of thousands of Indian families purchased their first home under the <strong>Pradhan Mantri Awas Yojana (PMAY) Credit Linked Subsidy Scheme (CLSS)</strong>, receiving an upfront interest subsidy of up to ₹2.67 Lakhs credited directly toward reducing their loan principal.</p>
 
@@ -42,10 +42,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "October 08, 2026",
     readTime: "9 min read",
     category: "Equity",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>When you own residential real estate in India and need substantial liquidity (e.g., ₹20 Lakhs to ₹1 Crore) for commercial business expansion, weddings, or debt consolidation, lenders typically offer two distinct instruments: a <strong>Home Loan Top-Up</strong> or a <strong>Loan Against Property (LAP)</strong>.</p>
 
@@ -99,10 +99,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "October 15, 2026",
     readTime: "10 min read",
     category: "Strategy",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>One of the most powerful retail banking products in India is the <strong>Home Loan Overdraft facility</strong>, pioneered by the State Bank of India as <strong>SBI Maxgain</strong> and matched by Bank of Baroda (BOB Advantage) and ICICI Bank (Money Saver).</p>
 
@@ -118,7 +118,8 @@ export const newArticlesPart2: Record<string, ArticleData> = {
   <li>Crucially, <strong>you can withdraw your parked money at any moment</strong> via ATM or UPI without asking the bank for permission!</li>
 </ul>
 
-<h2>Real-Life Example of Overdraft Power</h2>
+<h2>Worked Illustrative Example: Impact of an Overdraft Home Loan (Hypothetical Calculation)</h2>
+<p><em>(Note: The following is an illustrative hypothetical calculation based on standard Indian banking overdraft rules.)</em></p>
 
 <p>Suppose you have a ₹50 Lakh home loan at 8.60%. You have an emergency fund of ₹6 Lakhs and accumulate ₹1 Lakh in monthly operational surplus before paying credit card bills. By simply routing all your family savings and salary into your Maxgain overdraft account, your daily interest charge drops significantly. Over a 15-year horizon, this strategy can save between <strong>₹6 Lakhs and ₹12 Lakhs in interest</strong> while preserving 100% emergency liquidity!</p>
 `,
@@ -131,10 +132,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "October 16, 2026",
     readTime: "9 min read",
     category: "Analysis",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>While a home loan balance transfer is one of the most effective personal finance maneuvers to reduce interest costs, thousands of Indian borrowers make critical mistakes that erode their anticipated savings. Review these 7 traps before signing any transfer agreement:</p>
 
@@ -162,10 +163,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "October 20, 2026",
     readTime: "9 min read",
     category: "Loan Types",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>When you purchase an under-construction apartment in India from a builder, home loan disbursements occur in staggered tranches linked to construction milestones (plinth, slab casting, brickwork, finishing). During this phase, you are given the option of paying <strong>Pre-EMI</strong> or <strong>Full EMI</strong>.</p>
 
@@ -194,10 +195,10 @@ export const newArticlesPart2: Record<string, ArticleData> = {
     updatedDate: "October 22, 2026",
     readTime: "8 min read",
     category: "Qualification",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>When underwriting a home loan balance transfer, Indian credit managers rely on a critical financial ratio: <strong>FOIR (Fixed Obligation to Income Ratio)</strong>. FOIR determines the maximum percentage of your net monthly income that can be committed toward servicing all existing debt obligations.</p>
 

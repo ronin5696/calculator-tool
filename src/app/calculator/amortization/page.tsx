@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Home Loan EMI & Amortization Schedule Calculator (India) – DevsPoint",
   description:
     "Generate complete month-by-month and annual home loan EMI amortization schedules in Indian Rupees (₹). Model part-prepayments, calculate interest savings, and export CSV data.",
-  alternates: { canonical: "https://devspoint.in/calculator/amortization" },
+  alternates: { canonical: "https://www.devspoint.in/calculator/amortization" },
   openGraph: {
     title: "Home Loan EMI & Amortization Schedule Calculator – DevsPoint",
     description: "Interactive Indian home loan EMI schedule with RBI zero-penalty prepayment simulation.",

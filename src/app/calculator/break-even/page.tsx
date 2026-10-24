@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Home Loan Balance Transfer Break-Even Calculator (India) – DevsPoint",
   description:
     "Calculate exactly how many months it takes to recover MODT, stamp duty, and processing fees when transferring your home loan in India. Clear break-even analysis.",
-  alternates: { canonical: "https://devspoint.in/calculator/break-even" },
+  alternates: { canonical: "https://www.devspoint.in/calculator/break-even" },
   openGraph: {
     title: "Home Loan Balance Transfer Break-Even Calculator – DevsPoint",
     description: "Determine the exact break-even velocity when switching banks for a lower interest rate in India.",

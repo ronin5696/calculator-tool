@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy – DevsPoint Home Loan Engine",
   description:
     "DevsPoint Home Loan Engine Privacy Policy — learn how we protect your information: 100% client-side calculator execution with transparent Google AdSense & analytics cookie disclosures.",
-  alternates: { canonical: "https://devspoint.in/privacy-policy" },
+  alternates: { canonical: "https://www.devspoint.in/privacy-policy" },
   robots: { index: true, follow: true },
 };
 

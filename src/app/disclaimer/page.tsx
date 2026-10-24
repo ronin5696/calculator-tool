@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Disclaimer – DevsPoint Home Loan Engine",
   description:
     "Financial and regulatory disclaimer for DevsPoint Home Loan Engine (devspoint.in). Our computational tools and guides are for informational and educational purposes only.",
-  alternates: { canonical: "https://devspoint.in/disclaimer" },
+  alternates: { canonical: "https://www.devspoint.in/disclaimer" },
 };
 
 export default function DisclaimerPage() {

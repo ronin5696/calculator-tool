@@ -89,12 +89,12 @@ export default function Footer() {
           <div style={{ marginTop: 18, fontSize: 13, color: "#94a3b8" }}>
             <span>Verified Open-Source Math: </span>
             <a
-              href="https://github.com/devspoint/devspoint-financial-engine"
+              href="https://github.com/ronin5696/calculator-tool"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "#60a5fa", textDecoration: "underline" }}
             >
-              github.com/devspoint/devspoint-financial-engine
+              github.com/ronin5696/calculator-tool
             </a>
           </div>
         </div>

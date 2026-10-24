@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "DevsPoint: Smart Home Loan Balance Transfer & EMI Calculator (India)",
   description:
     "Save lakhs on your existing home loan in India. Calculate monthly EMI savings, total interest saved, and switching break-even periods across SBI, HDFC, ICICI, and Axis Bank.",
-  alternates: { canonical: "https://devspoint.in" },
+  alternates: { canonical: "https://www.devspoint.in" },
 };
 
 const features = [
@@ -219,7 +219,7 @@ export default function HomePage() {
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
             <a
-              href="https://github.com/devspoint/devspoint-financial-engine"
+              href="https://github.com/ronin5696/calculator-tool"
               target="_blank"
               rel="noopener noreferrer"
               className="calc-btn"

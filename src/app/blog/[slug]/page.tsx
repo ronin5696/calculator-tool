@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: article.description,
     authors: [{ name: article.author }],
     alternates: {
-      canonical: `https://devspoint.in/blog/${slug}`,
+      canonical: `https://www.devspoint.in/blog/${slug}`,
     },
     openGraph: {
       title: `${article.title} – DevsPoint Home Loans`,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: article.date,
       modifiedTime: article.updatedDate || article.date,
       authors: [article.author],
-      url: `https://devspoint.in/blog/${slug}`,
+      url: `https://www.devspoint.in/blog/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -78,21 +78,20 @@ export default async function BlogPostPage({ params }: Props) {
       url: "https://devspoint.in/about",
     },
     editor: {
-      "@type": "Person",
-      name: article.reviewer || "Priya Nair, CFA",
-      jobTitle: article.reviewerRole || "Quantitative Modeler & Software Engineer",
-      url: "https://devspoint.in/about",
+      "@type": "Organization",
+      name: article.reviewer || "DevsPoint Research Desk",
+      url: "https://www.devspoint.in/about",
     },
     publisher: {
       "@type": "Organization",
       name: "DevsPoint Home Loan Engine",
-      url: "https://devspoint.in",
+      url: "https://www.devspoint.in",
     },
     datePublished: article.date,
     dateModified: article.updatedDate || article.date,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://devspoint.in/blog/${slug}`,
+      "@id": `https://www.devspoint.in/blog/${slug}`,
     },
   };
 
@@ -170,20 +169,20 @@ export default async function BlogPostPage({ params }: Props) {
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
 
-            {/* Author E-E-A-T Bio Box */}
+            {/* Author Bio Box */}
             <div className="author-bio-box" style={{ marginTop: 40, background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 16, padding: 24, display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
               <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #1a56db, #10b981)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
-                VS
+                A
               </div>
               <div style={{ flex: 1, minWidth: 260 }}>
                 <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
                   Written by {article.author}
                 </h3>
                 <p style={{ fontSize: "13px", color: "#0284c7", fontWeight: 600, marginBottom: "8px" }}>
-                  {article.authorRole} · Reviewed by {article.reviewer || "Priya Nair, CFA"}
+                  {article.authorRole} · Reviewed by {article.reviewer || "DevsPoint Research Desk"}
                 </p>
                 <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6, marginBottom: 8 }}>
-                  Vikramaditya Sharma, CFP® has over 14 years of retail mortgage underwriting experience in Indian banking. DevsPoint editorial guidelines require all articles to be based on official Reserve Bank of India (RBI) notifications, bank tariff schedules, and verified mathematical models.
+                  Anshul is the creator and software engineer behind DevsPoint Home Loan Engine. All guides follow rigorous editorial standards, referencing statutory Reserve Bank of India (RBI) notifications, published bank tariffs (SBI, HDFC, ICICI, etc.), and verified mathematical algorithms.
                 </p>
                 <div style={{ fontSize: 13, color: "var(--primary)" }}>
                   <Link href="/about" style={{ textDecoration: "none", fontWeight: 600 }}>

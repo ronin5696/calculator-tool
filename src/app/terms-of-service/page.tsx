@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service – DevsPoint Home Loan Engine",
   description: "Terms of Service for DevsPoint Home Loan Engine (devspoint.in) — understand the terms governing your use of our financial calculation tools and guides.",
-  alternates: { canonical: "https://devspoint.in/terms-of-service" },
+  alternates: { canonical: "https://www.devspoint.in/terms-of-service" },
 };
 
 const lastUpdated = "October 24, 2026";
@@ -32,8 +32,8 @@ export default function TermsOfServicePage() {
           <div className="prose">
             <p>
               Please read these Terms of Service (&quot;Terms,&quot; &quot;Terms of Service&quot;) carefully before using the
-              DevsPoint Financial Engine website located at{" "}
-              <a href="https://devspoint.in">https://devspoint.in</a> (the &quot;Site&quot;)
+              DevsPoint Home Loan Engine website located at{" "}
+              <a href="https://www.devspoint.in">https://www.devspoint.in</a> (the &quot;Site&quot;)
               operated by DevsPoint (&quot;us,&quot; &quot;we,&quot; &quot;our&quot;).
             </p>
             <p>
@@ -58,18 +58,18 @@ export default function TermsOfServicePage() {
 
             <h2>2. Informational Purpose Only — Not Financial Advice</h2>
             <p>
-              <strong>The content and computational tools on DevsPoint Financial Engine are provided for informational, educational, and developer evaluation purposes only.</strong>
-              Nothing on this Site constitutes financial, investment, legal, or tax advice. The mortgage calculator
-              results are mathematical estimates based on the parameters you input and standard annuity formulas.
+              <strong>The content and computational tools on DevsPoint Home Loan Engine are provided for informational, educational, and simulation purposes only.</strong>
+              Nothing on this Site constitutes financial, investment, legal, or tax advice. The home loan and balance transfer calculator
+              results are mathematical estimates based on the parameters you input and standard compound annuity formulas.
             </p>
             <p>
-              Actual loan terms, interest rates, monthly payments, closing costs, and savings will vary based on your
-              individual circumstances, credit profile, lender policies, and prevailing market conditions. Always consult
-              with a licensed mortgage lender, financial advisor, or real estate attorney before making any financial decisions.
+              Actual loan terms, interest rates, monthly EMIs, switching costs, and savings will vary based on your
+              individual credit score (CIBIL), lender risk premiums, property valuation, and prevailing Reserve Bank of India (RBI) benchmark rates. Always consult
+              with a qualified banking professional, housing finance institution, or chartered accountant before making major financial commitments.
             </p>
             <p>
-              DevsPoint is not a mortgage lender, broker, bank, or financial institution. We do not originate or
-              broker loan transactions, and we do not offer specific interest rates or loan products.
+              DevsPoint is not a bank, Non-Banking Financial Company (NBFC), Housing Finance Company (HFC), or Direct Selling Agent (DSA). We do not originate or
+              broker loan transactions, and we do not issue sanction letters.
             </p>
 
             <h2>3. Accuracy of Information</h2>
@@ -90,11 +90,11 @@ export default function TermsOfServicePage() {
 
             <h2>5. Open-Source Utility &amp; MIT License</h2>
             <p>
-              The core computational modules of the DevsPoint Financial Engine (<code>dp-calc-engine</code>), including its discrete amortization algorithms and break-even functions, are published and distributed as open-source software under the permissive <strong>MIT License</strong>:
+              The core computational modules of the DevsPoint Home Loan Engine, including its discrete amortization algorithms and break-even functions, are published and distributed as open-source software under the permissive <strong>MIT License</strong>:
             </p>
             <div style={{ background: "#0f172a", color: "#f8fafc", padding: "20px 24px", borderRadius: "12px", fontFamily: "monospace", fontSize: "13px", lineHeight: "1.6", border: "1px solid #334155", margin: "20px 0" }}>
               <div style={{ color: "#93c5fd", fontWeight: "bold", marginBottom: "8px" }}>MIT License</div>
-              <div style={{ color: "#94a3b8", marginBottom: "12px" }}>Copyright (c) 2024–2026 DevsPoint (https://devspoint.in)</div>
+              <div style={{ color: "#94a3b8", marginBottom: "12px" }}>Copyright (c) 2026 DevsPoint / Anshul (https://github.com/ronin5696/calculator-tool)</div>
               <p style={{ margin: "0 0 12px 0", color: "#e2e8f0" }}>
                 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
               </p>

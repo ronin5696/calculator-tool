@@ -85,12 +85,12 @@ export default function ContactPage() {
                   <p>
                     Inspect and contribute to our calculations on GitHub:{" "}
                     <a
-                      href="https://github.com/devspoint/devspoint-financial-engine"
+                      href="https://github.com/ronin5696/calculator-tool"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: "var(--primary)", textDecoration: "underline" }}
                     >
-                      devspoint-financial-engine
+                      calculator-tool
                     </a>
                   </p>
                 </div>

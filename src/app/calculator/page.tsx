@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "rbi repo linked lending rate calculator",
     "reduce home loan interest rate",
   ],
-  alternates: { canonical: "https://devspoint.in/calculator" },
+  alternates: { canonical: "https://www.devspoint.in/calculator" },
   openGraph: {
     title: "Home Loan Balance Transfer Calculator – DevsPoint",
     description: "Compare your current home loan with new bank interest rates in Indian Rupees. Instant EMI savings and break-even math.",

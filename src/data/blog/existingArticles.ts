@@ -4,14 +4,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "home-loan-balance-transfer-guide": {
     title: "The Master Guide to Home Loan Balance Transfers in India: Process, Charges & RBI Norms",
     description: "A comprehensive, practitioner-grade masterclass on transferring your home loan in India: understanding lender spreads, calculating break-even recovery, MODT stamp duty, and executing document handover.",
-    date: "February 14, 2025",
-    updatedDate: "August 12, 2026",
+    date: "October 10, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "12 min read",
     category: "Master Guide",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>If you have been servicing a home loan in India for more than two or three years, there is a very high probability that you are paying a higher interest rate than newly onboarded borrowers at other banks. While Indian lending institutions advertise competitive repo-linked home loan rates starting at 8.35% to 8.50%, existing borrowers are frequently stuck paying 9.15% to 9.85% under older spreads or legacy MCLR benchmarks.</p>
 
@@ -81,20 +81,23 @@ export const existingArticles: Record<string, ArticleData> = {
 
 <p>On a ₹50 Lakh loan balance transfer in states like Karnataka or Maharashtra, total switching friction typically ranges between ₹15,000 and ₹30,000. Unless your monthly EMI savings recover this friction within 6 to 12 months, a balance transfer may not be mathematically justified.</p>
 
-<h2>Real Case Study: The Power of a 0.75% Rate Drop</h2>
+<h2>Worked Illustrative Example: The Mathematical Impact of an Interest Rate Reduction</h2>
 
-<p>Consider Rajesh, a software engineer in Pune who took a ₹60 Lakh home loan in 2021 at 8.75% for 20 years. By early 2025, his bank had quietly increased his interest rate to 9.40% under older benchmark adjustments, leaving him with an outstanding principal of ₹54 Lakhs and 16 years (192 months) remaining.</p>
+<p><em>(Note: The following is a hypothetical illustrative calculation based on standard Indian home loan terms.)</em></p>
+
+<p>Consider an illustrative homeowner with an outstanding home loan balance of ₹54 Lakhs and 16 years (192 months) remaining on their original loan tenure. Over the years, lender spread revisions increased the rate to 9.40% p.a. An external lender offers to take over the balance at a competitive RLLR-linked rate of 8.45% p.a.</p>
 
 <ul>
-  <li><strong>Existing Loan at Current Bank:</strong> ₹54,00,000 balance @ 9.40% p.a. → <strong>Monthly EMI: ₹54,032</strong></li>
-  <li><strong>New Bank Transfer Offer:</strong> ₹54,00,000 balance @ 8.45% p.a. (16 years) → <strong>New Monthly EMI: ₹50,711</strong></li>
-  <li><strong>Monthly EMI Reduction:</strong> ₹3,321 per month</li>
-  <li><strong>Total Switching Costs (MODT + Processing):</strong> ₹21,000</li>
-  <li><strong>Break-Even Horizon:</strong> ₹21,000 ÷ ₹3,321 = <strong>6.3 Months</strong></li>
-  <li><strong>Net Lifetime Interest Saved:</strong> Over ₹6.1 Lakhs in pure cash savings!</li>
+  <li><strong>Existing Loan (at 9.40% p.a. for 192 months):</strong> Monthly EMI = <strong>₹54,478</strong></li>
+  <li><strong>New Loan Offer (at 8.45% p.a. for 192 months):</strong> Monthly EMI = <strong>₹51,382</strong></li>
+  <li><strong>Monthly EMI Savings:</strong> ₹54,478 - ₹51,382 = <strong>₹3,096 per month</strong></li>
+  <li><strong>Total Gross Interest Saved (192 months):</strong> ₹3,096 × 192 = <strong>₹5,94,432</strong></li>
+  <li><strong>Estimated Switching Costs (MODT stamp duty + processing + legal):</strong> ~₹24,000</li>
+  <li><strong>Break-Even Horizon:</strong> ₹24,000 ÷ ₹3,096 = <strong>7.8 Months</strong></li>
+  <li><strong>Net Projected Financial Benefit:</strong> ₹5,94,432 - ₹24,000 = <strong>₹5,70,432</strong></li>
 </ul>
 
-<p>Because Rajesh recovered his entire switching expense in just over 6 months, the balance transfer delivered an extraordinary financial return.</p>
+<p>Because the upfront friction of ₹24,000 is fully recovered in under 8 months, transferring the balance delivers substantial net interest reduction over the remaining 16 years.</p>
 
 <h2>The Pro Strategy: Request an Internal Rate Switch First</h2>
 
@@ -107,14 +110,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "when-to-transfer-home-loan": {
     title: "When Does It Make Sense to Transfer Your Home Loan in India? The Exact Math",
     description: "Learn the quantitative criteria for home loan balance transfers: interest rate deltas, remaining tenure thresholds, and how to evaluate your break-even velocity.",
-    date: "March 22, 2025",
-    updatedDate: "September 04, 2026",
+    date: "October 12, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "9 min read",
     category: "Strategy",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>Transferring your home loan to a new bank sounds tempting whenever you see advertisements for lower interest rates. However, balance transfers are not universally beneficial. Because every transfer involves upfront fees, documentation hassle, and administrative coordination, executing a balance transfer at the wrong time can actually leave you with net financial losses.</p>
 
@@ -156,14 +159,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "home-loan-transfer-charges-modt": {
     title: "Understanding Home Loan Transfer Charges: MODT, Processing Fees & Stamp Duty Explained",
     description: "A comprehensive line-by-line guide to every switching fee charged during an Indian home loan balance transfer: state-wise MODT stamp duty, processing fee caps, and hidden bank charges.",
-    date: "May 10, 2025",
-    updatedDate: "July 18, 2026",
+    date: "October 14, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "10 min read",
     category: "Cost Analysis",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>When planning a home loan balance transfer, borrowers frequently ask: <em>"How much money do I actually need to pay upfront to switch banks?"</em></p>
 
@@ -207,14 +210,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "rllr-vs-mclr-home-loan-interest-rates": {
     title: "RLLR vs. MCLR vs. Base Rate: How Indian Home Loan Interest Rates Are Fixed",
     description: "Demystifying Indian home loan benchmark mechanisms: why RBI mandated Repo Linked Lending Rates (RLLR), how bank spreads work, and why legacy MCLR borrowers must switch.",
-    date: "June 18, 2025",
-    updatedDate: "October 02, 2026",
+    date: "October 16, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "10 min read",
     category: "Rates & RBI",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>In October 2019, the Reserve Bank of India introduced a transformative regulatory mandate: all commercial banks were required to link all new floating-rate personal and retail loans to an <strong>External Benchmark Lending Rate (EBLR)</strong>, with the vast majority adopting the RBI Repo Rate (RLLR).</p>
 
@@ -249,14 +252,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "home-loan-prepayment-strategies": {
     title: "Home Loan Prepayment Strategies: Reduce EMI vs. Reduce Tenure (The ₹15 Lakh Difference)",
     description: "A mathematical analysis of home loan prepayment in India. Compare shortening tenure versus reducing monthly EMI, and learn how to save lakhs with annual part-payments.",
-    date: "July 29, 2025",
-    updatedDate: "August 25, 2026",
+    date: "October 18, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "11 min read",
     category: "Strategy",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>Whenever you make a lump-sum prepayment toward your home loan (such as an annual bonus, tax refund, or matured fixed deposit), your bank will ask you a critical question: <em>"Would you like us to reduce your monthly EMI or reduce your remaining loan tenure?"</em></p>
 
@@ -304,14 +307,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "home-loan-top-up-vs-personal-loan": {
     title: "Home Loan Top-Up vs. Personal Loan: Why Top-Up Loans Beat Personal Loans Every Time",
     description: "Need funds for home renovation, weddings, or medical liquidity? Compare low-interest Home Loan Top-Ups (8.75%) against expensive Personal Loans (14%), and explore tax rules.",
-    date: "September 15, 2025",
-    updatedDate: "September 28, 2026",
+    date: "October 20, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "9 min read",
     category: "Equity",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>When Indian homeowners need ₹5 Lakhs to ₹25 Lakhs for home renovations, children's higher education, or medical obligations, they frequently turn to unsecured Personal Loans. However, for anyone with an active, clean home loan, a <strong>Home Loan Top-Up</strong> is vastly superior in almost every financial dimension.</p>
 
@@ -359,14 +362,14 @@ export const existingArticles: Record<string, ArticleData> = {
   "transfer-sbi-hdfc-icici-home-loan": {
     title: "How to Transfer an SBI, HDFC, or ICICI Home Loan: Step-by-Step Bank Checklist",
     description: "The complete tactical procedure for transferring home loans between India's top lenders: State Bank of India, HDFC Bank, ICICI Bank, and Axis Bank. Document list and LOD handling.",
-    date: "November 04, 2025",
-    updatedDate: "October 10, 2026",
+    date: "October 22, 2026",
+    updatedDate: "October 24, 2026",
     readTime: "11 min read",
     category: "Master Guide",
-    author: "Vikramaditya Sharma, CFP®",
-    authorRole: "Lead Financial Analyst & Banking Specialist",
-    reviewer: "Priya Nair, CFA",
-    reviewerRole: "Quantitative Modeler & Software Engineer",
+    author: "Anshul",
+    authorRole: "Lead Software Engineer & Creator",
+    reviewer: "DevsPoint Research Desk",
+    reviewerRole: "Banking & Regulatory Research",
     content: `
 <p>State Bank of India (SBI), HDFC Bank, ICICI Bank, and Axis Bank account for the overwhelming majority of India's retail home loan market. If you are servicing your loan with one of these institutions and planning a balance transfer to another, this tactical guide provides the exact document checklist and transition timeline.</p>
 

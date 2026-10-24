@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Home Loan Top-Up vs Personal Loan Calculator (India) – DevsPoint",
   description:
     "Compare taking a low-cost Home Loan Top-Up (8.75%–9.5%) vs an expensive Unsecured Personal Loan (13%–16%) in India. Calculate monthly EMI differences and Section 24(b) tax savings.",
-  alternates: { canonical: "https://devspoint.in/calculator/cash-out" },
+  alternates: { canonical: "https://www.devspoint.in/calculator/cash-out" },
   openGraph: {
     title: "Home Loan Top-Up vs Personal Loan Calculator – DevsPoint",
     description: "Model home loan top-up eligibility under RBI 75% LTV caps and compare against personal loans.",

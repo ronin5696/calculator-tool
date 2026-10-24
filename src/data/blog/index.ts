@@ -11,18 +11,6 @@ export const articles: Record<string, ArticleData> = {
   ...newArticlesPart2,
 };
 
-// Backwards-compatible aliases so legacy routes and bookmarks resolve seamlessly
-articles["refinancing-guide"] = articles["home-loan-balance-transfer-guide"];
-articles["when-to-refinance"] = articles["when-to-transfer-home-loan"];
-articles["refinancing-costs"] = articles["home-loan-transfer-charges-modt"];
-articles["refinance-costs"] = articles["home-loan-transfer-charges-modt"];
-articles["fixed-vs-arm"] = articles["rllr-vs-mclr-home-loan-interest-rates"];
-articles["heloc-vs-cash-out-refinance"] = articles["home-loan-top-up-vs-personal-loan"];
-articles["cash-out-refinance-guide"] = articles["home-loan-top-up-vs-personal-loan"];
-articles["break-even-analysis"] = articles["when-to-transfer-home-loan"];
-articles["improve-credit-score"] = articles["cibil-score-home-loan-balance-transfer"];
-articles["refinance-with-bad-credit"] = articles["cibil-score-home-loan-balance-transfer"];
-
 export const blogCategories = [
   "All",
   "Master Guide",
@@ -43,7 +31,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "Everything you need to know about switching your home loan in India: lender spreads, break-even recovery, MODT stamp duty, and executing document handover.",
     category: "Master Guide",
     readTime: "12 min read",
-    date: "February 14, 2025",
+    date: "October 10, 2026",
     updatedDate: "August 12, 2026",
     emoji: "🧭",
     featured: true,
@@ -54,7 +42,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "The exact quantitative criteria for balance transfers: 0.35% rate deltas, remaining tenure thresholds, and how to evaluate break-even velocity.",
     category: "Strategy",
     readTime: "9 min read",
-    date: "March 22, 2025",
+    date: "October 12, 2026",
     updatedDate: "September 04, 2026",
     emoji: "📅",
     featured: true,
@@ -65,7 +53,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "A state-by-state look at MODT charges, bank processing fees, valuation costs, and the RBI circular that bans foreclosure penalties.",
     category: "Cost Analysis",
     readTime: "10 min read",
-    date: "May 10, 2025",
+    date: "October 14, 2026",
     updatedDate: "July 18, 2026",
     emoji: "💸",
     featured: true,
@@ -76,7 +64,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "Understand how the RBI repo rate influences your EMI, how bank spreads work, and why older MCLR/Base Rate loans should switch immediately.",
     category: "Rates & RBI",
     readTime: "10 min read",
-    date: "June 18, 2025",
+    date: "October 16, 2026",
     updatedDate: "October 02, 2026",
     emoji: "⚖️",
     featured: true,
@@ -87,7 +75,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "Compare shortening tenure versus reducing monthly EMI. See how paying 1 extra EMI per year slashes 4 to 5 years off your loan.",
     category: "Strategy",
     readTime: "11 min read",
-    date: "July 29, 2025",
+    date: "October 18, 2026",
     updatedDate: "August 25, 2026",
     emoji: "⚡",
     featured: true,
@@ -98,7 +86,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "Need funds for renovation or liquidity? Compare low-interest Home Loan Top-Ups (8.75%) against expensive Personal Loans (14%), and explore tax rules.",
     category: "Equity",
     readTime: "9 min read",
-    date: "September 15, 2025",
+    date: "October 20, 2026",
     updatedDate: "September 28, 2026",
     emoji: "💰",
     featured: true,
@@ -109,7 +97,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "The exact tactical procedure for transferring home loans between India's top lenders: State Bank of India, HDFC Bank, ICICI Bank, and Axis Bank.",
     category: "Master Guide",
     readTime: "11 min read",
-    date: "November 04, 2025",
+    date: "October 22, 2026",
     updatedDate: "October 10, 2026",
     emoji: "🏦",
     featured: false,
@@ -120,7 +108,7 @@ export const articlesList: ArticleCard[] = [
     excerpt: "Maximize tax savings on home loans: Old vs. New Tax Regime, Section 24(b) ₹2 Lakh cap, Section 80C principal deductions, and co-borrower doubling rules.",
     category: "Tax & Legal",
     readTime: "11 min read",
-    date: "December 12, 2025",
+    date: "October 24, 2026",
     updatedDate: "July 14, 2026",
     emoji: "📜",
     featured: false,

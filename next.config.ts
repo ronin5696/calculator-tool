@@ -34,6 +34,57 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      // Old duplicate blog slugs permanently redirecting to canonical versions
+      {
+        source: "/blog/refinancing-guide",
+        destination: "/blog/home-loan-balance-transfer-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/when-to-refinance",
+        destination: "/blog/when-to-transfer-home-loan",
+        permanent: true,
+      },
+      {
+        source: "/blog/refinancing-costs",
+        destination: "/blog/home-loan-transfer-charges-modt",
+        permanent: true,
+      },
+      {
+        source: "/blog/refinance-costs",
+        destination: "/blog/home-loan-transfer-charges-modt",
+        permanent: true,
+      },
+      {
+        source: "/blog/fixed-vs-arm",
+        destination: "/blog/rllr-vs-mclr-home-loan-interest-rates",
+        permanent: true,
+      },
+      {
+        source: "/blog/heloc-vs-cash-out-refinance",
+        destination: "/blog/home-loan-top-up-vs-personal-loan",
+        permanent: true,
+      },
+      {
+        source: "/blog/cash-out-refinance-guide",
+        destination: "/blog/home-loan-top-up-vs-personal-loan",
+        permanent: true,
+      },
+      {
+        source: "/blog/break-even-analysis",
+        destination: "/blog/when-to-transfer-home-loan",
+        permanent: true,
+      },
+      {
+        source: "/blog/improve-credit-score",
+        destination: "/blog/cibil-score-home-loan-balance-transfer",
+        permanent: true,
+      },
+      {
+        source: "/blog/refinance-with-bad-credit",
+        destination: "/blog/cibil-score-home-loan-balance-transfer",
+        permanent: true,
+      },
       // Legacy routes
       {
         source: "/amortization-schedule",

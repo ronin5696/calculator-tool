@@ -5,25 +5,25 @@ export const metadata: Metadata = {
   title: "About Us & Editorial Standards – DevsPoint Home Loan Engine",
   description:
     "Learn about DevsPoint Home Loan Engine: our editorial team, banking credentials, mathematical methodology, and open-source financial algorithms for Indian home loan borrowers.",
-  alternates: { canonical: "https://devspoint.in/about" },
-  openGraph: { title: "About DevsPoint Home Loan Engine", url: "https://devspoint.in/about" },
+  alternates: { canonical: "https://www.devspoint.in/about" },
+  openGraph: { title: "About DevsPoint Home Loan Engine", url: "https://www.devspoint.in/about" },
 };
 
 const team = [
   {
-    initials: "VS",
-    name: "Vikramaditya Sharma, CFP®",
-    role: "Lead Financial Analyst & Banking Editor",
-    bio: "Former Senior Retail Lending and Mortgage Underwriting Manager with over 14 years of experience across Indian banking institutions. Certified Financial Planner (CFP) under FPSB India. Specializes in RBI Repo-Linked Lending Rate (RLLR) policy transmission, retail debt balance transfers, and homeowner interest mitigation.",
-    credentials: "CFP® · Ex-Retail Credit Head · 14+ Yrs Banking",
+    initials: "A",
+    name: "Anshul",
+    role: "Lead Software Engineer & Creator",
+    bio: "Software engineer and open-source developer. Created the DevsPoint Indian Home Loan Calculator engine to bring mathematical transparency and client-side privacy to home loan balance transfer decisions, helping Indian borrowers understand EMI schedules and RBI lending rate transmission without commercial bias.",
+    credentials: "Open-Source Developer · Creator · GitHub: @ronin5696",
     color: "#1a56db",
   },
   {
-    initials: "PN",
-    name: "Priya Nair, CFA",
-    role: "Lead Quantitative Modeler & Software Architect",
-    bio: "M.Tech in Computer Science and CFA Charterholder. Specializes in client-side quantitative financial modeling, discrete amortization algorithms, and IEEE 754 precision safeguards. Leads the open-source engineering of DevsPoint's calculation algorithms.",
-    credentials: "CFA · M.Tech (CS) · Financial Software Engineer",
+    initials: "DP",
+    name: "DevsPoint Financial Research Desk",
+    role: "Banking & Regulatory Research",
+    bio: "Editorial and research desk tracking Reserve Bank of India (RBI) notifications, Master Directions on Advances, bank tariff schedules (SBI, HDFC Bank, ICICI Bank, BoB, PNB), and Indian Income Tax provisions (Section 24b/80C). Every calculation and guide is verified against statutory guidelines and published lender benchmarks.",
+    credentials: "RBI Policy & Banking Research · Independent Desk",
     color: "#059669",
   },
 ];
@@ -232,12 +232,12 @@ export default function AboutPage() {
             </p>
             <p>
               <a
-                href="https://github.com/devspoint/devspoint-financial-engine"
+                href="https://github.com/ronin5696/calculator-tool"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "var(--primary)", fontWeight: 600, textDecoration: "underline" }}
               >
-                https://github.com/devspoint/devspoint-financial-engine
+                https://github.com/ronin5696/calculator-tool
               </a>
             </p>
           </div>

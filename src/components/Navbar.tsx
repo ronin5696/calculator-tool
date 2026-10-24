@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/", label: "Engine" },
-  { href: "/calculator", label: "Calculator" },
-  { href: "/resources", label: "Resources" },
-  { href: "/blog", label: "Docs & Guides" },
-  { href: "/about", label: "About Labs" },
+  { href: "/", label: "Home" },
+  { href: "/calculator", label: "Balance Transfer" },
+  { href: "/calculator/amortization", label: "Amortization" },
+  { href: "/calculator/break-even", label: "Break-Even" },
+  { href: "/calculator/cash-out", label: "Top-Up vs Personal" },
+  { href: "/blog", label: "Guides & Advice" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -18,14 +20,37 @@ export default function Navbar() {
   return (
     <nav className="nav-wrapper" role="navigation" aria-label="Main navigation">
       <div className="nav-container">
-        <Link href="/" className="nav-logo" aria-label="DevsPoint Financial Engine">
-          <div className="nav-logo-icon" style={{ background: "linear-gradient(135deg, #10b981, #1a56db)", fontFamily: "monospace", fontWeight: 800, fontSize: "16px" }} aria-hidden="true">
-            &lt;/&gt;
+        <Link href="/" className="nav-logo" aria-label="DevsPoint Home Loan Engine">
+          <div
+            className="nav-logo-icon"
+            style={{
+              background: "linear-gradient(135deg, #10b981, #1a56db)",
+              fontWeight: 800,
+              fontSize: "18px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#ffffff",
+            }}
+            aria-hidden="true"
+          >
+            ₹
           </div>
           <div>
-            <span className="nav-logo-text" style={{ fontSize: "20px" }}>DevsPoint</span>
-            <span style={{ display: "block", fontSize: "10px", color: "#93c5fd", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700 }}>
-              Financial Engine
+            <span className="nav-logo-text" style={{ fontSize: "19px" }}>
+              DevsPoint
+            </span>
+            <span
+              style={{
+                display: "block",
+                fontSize: "10px",
+                color: "#93c5fd",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                fontWeight: 700,
+              }}
+            >
+              Home Loan Engine · India
             </span>
           </div>
         </Link>
@@ -86,11 +111,11 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   style={{
                     display: "block",
-                    color: "rgba(255,255,255,0.8)",
+                    color: "rgba(255,255,255,0.85)",
                     textDecoration: "none",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    fontSize: "16px",
+                    fontSize: "15px",
                     fontWeight: 500,
                     transition: "background 0.2s",
                   }}

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Disclaimer – DevsPoint Calc",
-  description: "Financial and technical disclaimer for DevsPoint Financial Engine (devspoint.in). Our computational calculators are for informational and educational purposes only.",
+  title: "Disclaimer – DevsPoint Home Loan Engine",
+  description:
+    "Financial and regulatory disclaimer for DevsPoint Home Loan Engine (devspoint.in). Our computational tools and guides are for informational and educational purposes only.",
   alternates: { canonical: "https://devspoint.in/disclaimer" },
 };
 
@@ -15,12 +16,20 @@ export default function DisclaimerPage() {
         <div className="page-hero-container">
           <nav aria-label="Breadcrumb">
             <ol className="breadcrumb" style={{ listStyle: "none", padding: 0 }}>
-              <li><Link href="/">Home</Link></li>
-              <li><span className="breadcrumb-sep" aria-hidden="true">›</span></li>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <span className="breadcrumb-sep" aria-hidden="true">
+                  ›
+                </span>
+              </li>
               <li aria-current="page">Disclaimer</li>
             </ol>
           </nav>
-          <h1 id="disclaimer-title" className="page-hero-title">Disclaimer</h1>
+          <h1 id="disclaimer-title" className="page-hero-title">
+            Financial &amp; Regulatory Disclaimer
+          </h1>
           <p className="page-hero-sub">Last updated: October 24, 2026</p>
         </div>
       </div>
@@ -28,107 +37,89 @@ export default function DisclaimerPage() {
       <section className="section" aria-labelledby="disclaimer-content">
         <div className="section-container">
           <div className="prose">
-            <div className="info-box" style={{ background: "linear-gradient(135deg, #fef2f2, #fee2e2)", borderColor: "#ef4444", marginBottom: 32, padding: "24px" }}>
-              <span className="info-box-icon" style={{ fontSize: "28px" }}>⚠️</span>
+            <div
+              className="info-box"
+              style={{
+                background: "linear-gradient(135deg, #fef2f2, #fee2e2)",
+                borderColor: "#ef4444",
+                marginBottom: 32,
+                padding: "24px",
+              }}
+            >
+              <span className="info-box-icon" style={{ fontSize: "28px" }}>
+                ⚠️
+              </span>
               <div>
-                <h3 style={{ margin: "0 0 6px", color: "#991b1b", fontSize: "18px" }}>Software Engineering Notice: We Are Developers, Not Financial Planners</h3>
+                <h3 style={{ margin: "0 0 6px", color: "#991b1b", fontSize: "18px" }}>
+                  Important Notice: Educational Tool, Not a Depository or Lending Entity
+                </h3>
                 <p style={{ margin: 0, color: "#7f1d1d", fontSize: "14px", lineHeight: 1.6 }}>
-                  <strong>We are software developers, not certified financial planners (CFP), mortgage brokers, or licensed mortgage lenders.</strong> DevsPoint Financial Engine is an independent, open-source software engineering utility designed for educational modeling and algorithm verification. Nothing published here constitutes professional financial, tax, or legal advice.
+                  <strong>DevsPoint Home Loan Engine is an independent educational and analytical platform.</strong> We are
+                  not a bank, Non-Banking Financial Company (NBFC), Housing Finance Company (HFC), or Direct Selling Agent
+                  (DSA). Nothing published on this site constitutes a credit sanction, loan offer, or financial advice.
                 </p>
               </div>
             </div>
 
-            <h2>1. Expanded Technical &amp; Financial Disclaimer</h2>
-            <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "20px 24px", margin: "20px 0", fontStyle: "italic", color: "#334155", lineHeight: 1.7 }}>
-              &quot;DevsPoint Financial Engine is an independent software tool and educational utility hosted on devspoint.in. Numerical computations are calculated client-side according to standard continuous/discrete annuity and amortization mathematics. DevsPoint is not a licensed mortgage lender, broker, or financial depository institution. Outputs do not constitute binding credit offers or financial advice.&quot;
-            </div>
-
-            <h2>2. Educational &amp; Informational Purpose Only</h2>
+            <h2>1. Informational &amp; Computational Purposes Only</h2>
             <p>
-              The information, calculators, tools, content, and results provided on DevsPoint Financial Engine
-              (<a href="https://devspoint.in">https://devspoint.in</a>) are for general informational,
-              computational, and educational purposes only. Nothing on this Site constitutes, and should not be construed as,
-              financial advice, investment advice, legal advice, tax advice, or a loan recommendation.
+              The calculators, amortization tables, interest rate models, and educational guides provided on DevsPoint (
+              <a href="https://devspoint.in">https://devspoint.in</a>) are designed strictly for general informational
+              and mathematical simulation purposes.
             </p>
             <p>
-              The results generated by our mortgage refinance engine are mathematical estimates based on the
-              parameters you input and standard annuity formulas (M = P · [r(1+r)ⁿ] / [(1+r)ⁿ - 1]). These results are not a guarantee of any
-              specific loan terms, rates, savings, or credit approval. Your actual mortgage terms will depend on factors
-              including credit score, debt-to-income ratio, loan-to-value ratio, property
-              type, location, lender underwriting criteria, and prevailing economic conditions.
+              Calculations are generated client-side using standard compound annuity formulas and prevailing Reserve Bank
+              of India (RBI) benchmark rate conventions. They are estimates and do not guarantee that any specific bank or
+              housing finance company will sanction a loan or approve a balance transfer at the computed rates.
             </p>
 
-            <h2>3. Not a Lender or Mortgage Broker</h2>
-            <p>
-              DevsPoint is not a mortgage lender, mortgage broker, bank, credit union, or depository
-              financial institution. We do not:
-            </p>
+            <h2>2. Not a Lender or Direct Selling Agent (DSA)</h2>
+            <p>DevsPoint does not participate in the lending process. Specifically, we do not:</p>
             <ul>
-              <li>Originate, fund, or underwrite mortgage loans</li>
-              <li>Offer specific interest rate quotes or binding loan estimates</li>
-              <li>Process loan applications or credit inquiries</li>
-              <li>Provide pre-qualification or pre-approval certificates</li>
-              <li>Earn referral fees from lenders or depository institutions</li>
-              <li>Guarantee that you will qualify for any loan or refinance</li>
+              <li>Originate, underwrite, or disburse home loans</li>
+              <li>Issue formal in-principle sanction letters or legally binding credit agreements</li>
+              <li>Collect loan documentation (LODs, title deeds, KYC documents) for submission to banks</li>
+              <li>Earn referral fees or sales commissions from banks or HFCs for recommending specific lenders</li>
+              <li>Influence credit underwriting decisions or credit score assessments</li>
             </ul>
 
-            <h2>4. Accuracy of Calculations</h2>
+            <h2>3. Accuracy &amp; Lender Discretion</h2>
             <p>
-              While we take care to ensure our calculation formulas are mathematically accurate and adhere to closed-form annuity solutions, we cannot guarantee
-              that results will match figures provided by your actual lender. Lenders may use different rounding
-              methods, include different fee line items, or apply alternative escrow assumptions in their calculations. Our engine:
+              While our computational algorithms are designed with high precision, actual loan terms offered by Indian
+              lenders will depend on multiple individual credit factors, including:
             </p>
             <ul>
-              <li>Does not account for local property taxes or homeowner&apos;s insurance (PITI)</li>
-              <li>Does not account for private mortgage insurance (PMI) premiums</li>
-              <li>Does not account for HOA fees, municipal assessments, or other escrow items</li>
-              <li>Assumes fixed-rate continuous or discrete monthly compounding</li>
-              <li>Provides estimated closing costs — actual costs will vary by lender, jurisdiction, and title company</li>
+              <li>Your credit score (CIBIL / Experian score of 750+ typically qualifies for the lowest rates)</li>
+              <li>Fixed Obligation to Income Ratio (FOIR) and net monthly disposable income</li>
+              <li>Loan-to-Value (LTV) ratio based on an independent technical property valuation</li>
+              <li>Title clearance report provided by the bank&apos;s empaneled legal advocates</li>
+              <li>State-specific MODT (Memorandum of Deposit of Title Deeds) stamp duty and registration rules</li>
             </ul>
 
-            <h2>5. Past Performance and Market Conditions</h2>
+            <h2>4. Tax Information Disclaimer</h2>
             <p>
-              Interest rates, housing markets, and economic conditions fluctuate. Information on this
-              Site regarding average rates, market trends, or historical data is for illustrative purposes only and
-              may not reflect current market conditions. Past savings examples do not guarantee similar results.
+              Any discussion of home loan tax benefits (including Section 24(b) interest deduction, Section 80C principal
+              repayment, or Section 80EEA) is for educational reference under the Indian Income Tax Act 1961. Tax laws are
+              subject to annual budget amendments, and eligibility depends on your choice of tax regime (Old vs. New Tax
+              Regime). Always consult a qualified <strong>Chartered Accountant (CA)</strong> regarding your specific tax
+              filings.
             </p>
 
-            <h2>6. Third-Party Links and Resources</h2>
+            <h2>5. Advertising Transparency</h2>
             <p>
-              This Site may link to third-party websites, lenders, or regulatory resources for informational purposes.
-              DevsPoint does not endorse, recommend, or guarantee the products, services, or information offered
-              by third parties. We have no control over, and assume no responsibility for, the content or practices
-              of third-party sites.
+              DevsPoint is supported by transparent advertising, including Google AdSense, which allows us to keep our
+              calculators and guides free for all Indian homeowners. Advertisements are clearly designated and do not
+              affect our calculation algorithms or editorial ratings.
             </p>
 
-            <h2>7. Consult a Professional</h2>
+            <h2>6. Contact Legal &amp; Editorial Desk</h2>
             <p>
-              Before making any mortgage or refinancing decision, we strongly recommend you:
+              If you have any questions or require clarification regarding this disclaimer, please reach out to us at{" "}
+              <a href="mailto:legal@devspoint.in" style={{ color: "var(--primary)" }}>
+                legal@devspoint.in
+              </a>{" "}
+              or through our <Link href="/contact">Contact Form</Link>.
             </p>
-            <ul>
-              <li>Consult with a <strong>licensed mortgage lender or broker</strong> to get personalized rate quotes</li>
-              <li>Work with a <strong>certified financial planner (CFP)</strong> if you have complex financial needs</li>
-              <li>Consult a <strong>tax advisor</strong> regarding any tax implications of refinancing</li>
-              <li>Speak with a <strong>HUD-approved housing counselor</strong> if you need free, independent advice</li>
-            </ul>
-
-            <h2>8. Advertising Disclaimer</h2>
-            <p>
-              DevsPoint is supported by advertising, including Google AdSense. Advertisements are clearly labeled
-              on the Site. DevsPoint does not receive referral commissions from mortgage lenders,
-              and advertisements do not influence our editorial content or calculator formulas.
-            </p>
-
-            <h2>9. Limitation of Liability</h2>
-            <p>
-              To the maximum extent permitted by applicable law, DevsPoint, its developers, operators, employees,
-              and affiliates shall not be liable for any losses, damages, or costs, whether direct, indirect,
-              incidental, consequential, or otherwise, arising from your use of or reliance on the software,
-              tools, or results provided on this Site.
-            </p>
-
-            <h2>10. Contact</h2>
-            <p>If you have questions about this disclaimer, please <Link href="/contact" style={{ color: "var(--primary)" }}>contact us</Link> or email <a href="mailto:legal@devspoint.in" style={{ color: "var(--primary)" }}>legal@devspoint.in</a>.</p>
           </div>
         </div>
       </section>

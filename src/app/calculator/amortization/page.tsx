@@ -4,13 +4,13 @@ import AmortizationCalculator from "@/components/AmortizationCalculator";
 import CalculatorNav from "@/components/CalculatorNav";
 
 export const metadata: Metadata = {
-  title: "Mortgage Amortization Schedule Calculator – DevsPoint",
+  title: "Home Loan EMI & Amortization Schedule Calculator (India) – DevsPoint",
   description:
-    "Generate complete month-by-month and annual mortgage amortization schedules. Model extra principal prepayments, analyze balance decay curves, and export CSV/JSON data.",
+    "Generate complete month-by-month and annual home loan EMI amortization schedules in Indian Rupees (₹). Model part-prepayments, calculate interest savings, and export CSV data.",
   alternates: { canonical: "https://devspoint.in/calculator/amortization" },
   openGraph: {
-    title: "Mortgage Amortization Schedule Calculator – DevsPoint",
-    description: "Interactive loan amortization schedule with prepayment acceleration simulation and balance decay visualizer.",
+    title: "Home Loan EMI & Amortization Schedule Calculator – DevsPoint",
+    description: "Interactive Indian home loan EMI schedule with RBI zero-penalty prepayment simulation.",
     url: "https://devspoint.in/calculator/amortization",
   },
 };
@@ -24,12 +24,12 @@ export default function AmortizationPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            name: "DevsPoint Amortization Schedule Calculator",
+            name: "DevsPoint Home Loan Amortization Schedule Calculator",
             url: "https://devspoint.in/calculator/amortization",
             applicationCategory: "FinanceApplication",
             operatingSystem: "Web",
-            description: "Interactive client-side amortization table generator with extra payment acceleration and exportable CSV/JSON schedules.",
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+            description: "Interactive client-side Indian home loan amortization schedule with prepayment acceleration and CSV export.",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
           }),
         }}
       />
@@ -43,52 +43,45 @@ export default function AmortizationPage() {
               <li><span className="breadcrumb-sep" aria-hidden="true">›</span></li>
               <li><Link href="/calculator">Calculators</Link></li>
               <li><span className="breadcrumb-sep" aria-hidden="true">›</span></li>
-              <li aria-current="page">Amortization Schedule</li>
+              <li aria-current="page">EMI Amortization</li>
             </ol>
           </nav>
           <div style={{ display: "inline-block", background: "rgba(59,130,246,0.2)", color: "#93c5fd", padding: "4px 12px", borderRadius: "100px", fontSize: "12px", fontWeight: 700, marginBottom: "12px" }}>
-            SCHEDULE ENGINE · DISCRETE COMPOUNDING
+            🇮🇳 INDIAN HOME LOANS · AMORTIZATION ENGINE
           </div>
           <h1 id="amort-hero-title" className="page-hero-title">
-            Mortgage Amortization Schedule Calculator
+            Home Loan EMI &amp; Amortization Schedule Calculator
           </h1>
           <p className="page-hero-sub">
-            Inspect every monthly installment over the lifetime of your loan. See how much goes to principal versus interest, and model how extra payments slash your debt-free timeline.
+            Inspect every monthly installment across your 10 to 30 year loan. See how each payment divides between principal and interest, and model how part-prepayments cut years off your tenure.
           </p>
         </div>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: 1200, margin: "24px auto 0", padding: "0 24px" }}>
         <CalculatorNav active="amortization" />
-        <AmortizationCalculator />
       </div>
 
-      {/* Educational Section */}
-      <section className="section section-surface" style={{ marginTop: 60, padding: "60px 24px" }}>
+      <AmortizationCalculator />
+
+      {/* Guide section */}
+      <section className="section section-surface" aria-labelledby="amort-guide-title" style={{ paddingTop: "32px", paddingBottom: "48px" }}>
         <div className="section-container" style={{ maxWidth: 960 }}>
-          <div className="prose">
-            <h2>How Mortgage Amortization Works in Practice</h2>
+          <div className="prose" style={{ maxWidth: "100%", margin: "0 auto", fontSize: "15px", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+            <h2 id="amort-guide-title" style={{ fontSize: 22, color: "var(--dark)", marginBottom: 12 }}>
+              Understanding Home Loan Amortization in India
+            </h2>
             <p>
-              When you take out a fixed-rate mortgage, your total monthly payment remains constant for the entire duration of the loan. However, the internal distribution between <strong>principal reduction</strong> and <strong>interest charge</strong> changes with every passing month.
+              In India, retail home loans issued by scheduled commercial banks (SBI, HDFC, ICICI, Axis, PNB) and Housing Finance Companies (LIC HFL, PNB Housing) follow a reducing balance method with discrete monthly compounding.
             </p>
-
-            <h3>Why Interest Is Front-Loaded</h3>
+            <h3>Why the First 5 to 7 Years Are Crucial</h3>
             <p>
-              Because monthly interest is calculated against the remaining unpaid principal balance (Interest = Prior Balance · [r / 12]), interest charges are at their peak during the earliest years of repayment. In Year 1 of a 30-year 6.5% mortgage, roughly <strong>75% to 80%</strong> of every dollar you pay goes directly to bank interest, with only a small portion chipping away at your debt balance.
+              Due to the nature of compound amortization, up to 70% to 80% of your initial monthly EMI goes solely toward paying accrued interest. Making part-prepayments during the first 3 to 7 years yields the highest interest savings because it directly reduces the compounding principal base.
             </p>
-            <p>
-              As your balance slowly declines, the monthly interest charge shrinks, allowing a larger percentage of your fixed payment to attack the principal. By Year 20, the dynamic flips: the majority of your payment builds home equity.
-            </p>
-
-            <h3>The Compounding Multiplier of Extra Monthly Payments</h3>
-            <p>
-              When you send an extra $100 or $200 per month labeled as &quot;Principal Only,&quot; that cash bypasses the interest formula completely. It immediately reduces the baseline upon which all future interest payments are calculated. As our calculator above illustrates, adding just $150 per month on a $400,000 mortgage at 6.5% knocks <strong>over 4.5 years</strong> off your mortgage and eliminates <strong>more than $80,000 in lifetime bank interest</strong>.
-            </p>
-
-            <div className="info-box" style={{ marginTop: 28 }}>
-              <span className="info-box-icon">💡</span>
+            <div className="info-box" style={{ marginTop: 16 }}>
+              <span className="info-box-icon">📜</span>
               <p>
-                <strong>Refinancing Tip:</strong> Thinking about refinancing into a lower rate or shorter term? Compare your options side-by-side using our <Link href="/calculator" style={{ color: "var(--primary)", fontWeight: 600 }}>Mortgage Refinance Calculator</Link> or calculate your exact break-even velocity on the <Link href="/calculator/break-even" style={{ color: "var(--primary)", fontWeight: 600 }}>Break-Even Calculator</Link>.
+                <strong>Statutory Exemption on Foreclosure Charges:</strong> Reserve Bank of India circulars mandate that banks shall not charge any prepayment penalties on floating rate home loans taken by individual borrowers. You are entitled to prepay any amount, anytime, without fee penalties.
               </p>
             </div>
           </div>

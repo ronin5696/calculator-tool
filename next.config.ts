@@ -21,9 +21,33 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Redirects
+  // Permanent 301 Redirects: Normalize www to non-www and resolve duplicate resources URLs
   async redirects() {
     return [
+      // www to non-www redirect
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.devspoint.in",
+          },
+        ],
+        destination: "https://devspoint.in/:path*",
+        permanent: true,
+      },
+      // Duplicate URL resolution: /resources/:slug permanently redirects to canonical /blog/:slug
+      {
+        source: "/resources/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
+      {
+        source: "/resources",
+        destination: "/blog",
+        permanent: true,
+      },
+      // Legacy routes
       {
         source: "/amortization-schedule",
         destination: "/calculator/amortization",

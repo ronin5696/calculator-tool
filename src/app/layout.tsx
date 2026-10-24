@@ -14,23 +14,27 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://devspoint.in"),
   title: {
-    default: "DevsPoint Financial Engine: Open-Source Mortgage & Amortization Calculator",
-    template: "%s | DevsPoint Financial Engine",
+    default: "DevsPoint Home Loan Engine: Smart Balance Transfer & EMI Calculator (India)",
+    template: "%s | DevsPoint Home Loan Engine",
   },
   description:
-    "DevsPoint Financial Engine (dp-calc-engine) — An open-source, client-side mortgage refinance & amortization engine. Computes monthly payment deltas, break-even velocity, and complete amortized schedules using IEEE 754 precision math. Features interactive JSON export and raw API views.",
+    "Free, client-side Indian Home Loan Balance Transfer & EMI Calculator. Calculate monthly EMI savings, switching break-even period, and interest saved across SBI, HDFC, ICICI, Axis and other Indian banks.",
   keywords: [
-    "DevsPoint financial engine",
-    "open source mortgage calculator",
-    "mortgage amortization calculator",
-    "mortgage formula M = P[r(1+r)^n]/[(1+r)^n - 1]",
-    "refinance break even calculator",
-    "developer mortgage tools",
-    "client-side amortization engine",
-    "export mortgage json",
-    "financial software engineering",
+    "home loan balance transfer calculator",
+    "home loan emi calculator india",
+    "home loan prepayment calculator",
+    "home loan balance transfer process",
+    "rbi repo linked lending rate rllr",
+    "sbi home loan balance transfer",
+    "hdfc home loan balance transfer",
+    "modt charges home loan",
+    "reduce home loan tenure vs emi",
+    "home loan tax benefits section 24b 80c",
   ],
-  authors: [{ name: "DevsPoint Engineering Labs", url: "https://devspoint.in/about" }],
+  authors: [
+    { name: "Vikramaditya Sharma, CFP®", url: "https://devspoint.in/about" },
+    { name: "Priya Nair, CFA", url: "https://devspoint.in/about" },
+  ],
   creator: "DevsPoint",
   publisher: "DevsPoint",
   robots: {
@@ -46,36 +50,33 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: "https://devspoint.in",
-    siteName: "DevsPoint Financial Engine",
-    title: "DevsPoint Financial Engine: Open-Source Mortgage & Amortization Calculator",
+    siteName: "DevsPoint Home Loan Engine",
+    title: "DevsPoint Home Loan Engine: Smart Balance Transfer & EMI Calculator",
     description:
-      "Open-source computational finance module for client-side mortgage refinance analysis, loan amortization, and break-even simulation. High precision, zero tracking.",
+      "Client-side computational engine for Indian home loan balance transfers, EMI amortization, and interest savings simulation. 100% private in-browser computation.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "DevsPoint Financial Engine – Mortgage & Amortization Calculator",
+        alt: "DevsPoint Home Loan Engine – Balance Transfer & EMI Calculator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevsPoint Financial Engine: Open-Source Mortgage & Amortization Calculator",
+    title: "DevsPoint Home Loan Engine: Smart Balance Transfer & EMI Calculator",
     description:
-      "Open-source client-side mortgage refinance and amortization software engine. Includes raw JSON export & formula analysis.",
+      "Calculate your home loan balance transfer savings, break-even period, and EMI amortization in Indian Rupees.",
     images: ["/og-image.png"],
     creator: "@devspoint",
   },
   alternates: {
     canonical: "https://devspoint.in",
   },
-  verification: {
-    google: "REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE",
-  },
-  category: "technology",
+  category: "finance",
 };
 
 export default function RootLayout({
@@ -94,13 +95,6 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* Google AdSense — replace with your publisher ID */}
-        {/* <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-          crossOrigin="anonymous"
-        ></script> */}
-
         {/* Structured Data – WebSite */}
         <script
           type="application/ld+json"
@@ -108,9 +102,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "DevsPoint Financial Engine",
+              name: "DevsPoint Home Loan Engine",
               url: "https://devspoint.in",
-              description: "Open-source computational finance engine and mortgage amortization software developed by DevsPoint.",
+              description: "Free, client-side Indian Home Loan Balance Transfer & EMI Calculator developed by DevsPoint.",
               potentialAction: {
                 "@type": "SearchAction",
                 target: {
@@ -123,26 +117,32 @@ export default function RootLayout({
           }}
         />
 
-        {/* Structured Data – SoftwareApplication */}
+        {/* Structured Data – FinancialService */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              name: "DevsPoint Financial Engine (dp-calc-engine)",
-              applicationCategory: "BusinessApplication",
-              operatingSystem: "Web",
+              "@type": "FinancialService",
+              name: "DevsPoint Home Loan Engine",
               url: "https://devspoint.in",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
+              description: "Independent educational home loan analytics and balance transfer calculation platform for Indian borrowers.",
+              areaServed: {
+                "@type": "Country",
+                name: "India",
               },
+              knowsAbout: [
+                "Home Loan Balance Transfer",
+                "Equated Monthly Installments (EMI)",
+                "RBI Repo Linked Lending Rate (RLLR)",
+                "Home Loan Prepayment",
+                "Section 24(b) Tax Deductions",
+              ],
               author: {
-                "@type": "Organization",
-                name: "DevsPoint",
-                url: "https://devspoint.in",
+                "@type": "Person",
+                name: "Vikramaditya Sharma, CFP®",
+                jobTitle: "Lead Financial Analyst & Banking Specialist",
+                url: "https://devspoint.in/about",
               },
             }),
           }}

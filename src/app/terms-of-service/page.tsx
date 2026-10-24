@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service – DevsPoint Calc",
-  description: "Terms of Service for DevsPoint Financial Engine (devspoint.in) — the open-source mortgage and amortization calculator. Understand the terms governing your use of our software.",
+  title: "Terms of Service – DevsPoint Home Loan Engine",
+  description: "Terms of Service for DevsPoint Home Loan Engine (devspoint.in) — understand the terms governing your use of our financial calculation tools and guides.",
   alternates: { canonical: "https://devspoint.in/terms-of-service" },
 };
 

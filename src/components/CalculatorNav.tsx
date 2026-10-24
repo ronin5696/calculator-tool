@@ -5,10 +5,10 @@ interface CalculatorNavProps {
 }
 
 const navItems = [
-  { id: "refinance", label: "Refinance Calculator", href: "/calculator", icon: "🧮", badge: "Core" },
-  { id: "amortization", label: "Amortization Schedule", href: "/calculator/amortization", icon: "📋", badge: "Table" },
-  { id: "break-even", label: "Break-Even Calculator", href: "/calculator/break-even", icon: "⏱️", badge: "Timeline" },
-  { id: "cash-out", label: "Cash-Out Refinance", href: "/calculator/cash-out", icon: "💰", badge: "Equity" },
+  { id: "refinance", label: "Balance Transfer", href: "/calculator", icon: "🧮", badge: "Core" },
+  { id: "amortization", label: "EMI Amortization", href: "/calculator/amortization", icon: "📋", badge: "Schedule" },
+  { id: "break-even", label: "Switching Break-Even", href: "/calculator/break-even", icon: "⏱️", badge: "ROI" },
+  { id: "cash-out", label: "Top-Up vs Personal Loan", href: "/calculator/cash-out", icon: "💰", badge: "Compare" },
 ];
 
 export default function CalculatorNav({ active }: CalculatorNavProps) {

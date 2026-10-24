@@ -7,6 +7,8 @@ export interface ArticleData {
   category: string;
   author: string;
   authorRole: string;
+  reviewer?: string;
+  reviewerRole?: string;
   content: string;
 }
 

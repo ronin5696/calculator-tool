@@ -12,20 +12,23 @@ import {
   Legend,
 } from "recharts";
 
-function fmt(n: number): string {
-  return new Intl.NumberFormat("en-US", {
+function fmtINR(n: number): string {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     maximumFractionDigits: 0,
   }).format(n);
 }
 
-function fmtFull(n: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 2,
-  }).format(n);
+function fmtINRLakh(n: number): string {
+  const abs = Math.abs(n);
+  if (abs >= 10000000) {
+    return `${n < 0 ? "-" : ""}₹${(abs / 10000000).toFixed(2)} Cr`;
+  }
+  if (abs >= 100000) {
+    return `${n < 0 ? "-" : ""}₹${(abs / 100000).toFixed(2)} Lakh`;
+  }
+  return fmtINR(n);
 }
 
 interface AmortRow {
@@ -48,12 +51,13 @@ interface YearSummary {
 }
 
 export default function AmortizationCalculator() {
-  const [loanAmount, setLoanAmount] = useState(400000);
-  const [interestRate, setInterestRate] = useState(6.5);
-  const [loanTermYears, setLoanTermYears] = useState(30);
-  const [extraMonthly, setExtraMonthly] = useState(150);
-  const [startYear, setStartYear] = useState(new Date().getFullYear());
-  const [startMonth, setStartMonth] = useState(new Date().getMonth() + 1);
+  // Indian home loan defaults: ₹45 Lakhs, 8.5% p.a., 20 years, ₹5,000 extra prepayment
+  const [loanAmount, setLoanAmount] = useState(4500000);
+  const [interestRate, setInterestRate] = useState(8.5);
+  const [loanTermYears, setLoanTermYears] = useState(20);
+  const [extraMonthly, setExtraMonthly] = useState(5000);
+  const [startYear] = useState(new Date().getFullYear());
+  const [startMonth] = useState(new Date().getMonth() + 1);
 
   const [scheduleView, setScheduleView] = useState<"annual" | "monthly">("annual");
   const [page, setPage] = useState(1);
@@ -64,7 +68,6 @@ export default function AmortizationCalculator() {
     const totalMonths = loanTermYears * 12;
     const r = interestRate / 100 / 12;
 
-    // Base monthly payment without extra payment
     const baseMonthly =
       r === 0
         ? loanAmount / totalMonths
@@ -102,7 +105,6 @@ export default function AmortizationCalculator() {
       }
     }
 
-    // Reset baseline for chart tracking
     baselineBalance = loanAmount;
 
     let period = 0;
@@ -129,14 +131,13 @@ export default function AmortizationCalculator() {
       yearInterest += interestPmt;
       yearExtra += actualExtra;
 
-      // Baseline comparison for the chart
       if (baselineBalance > 0) {
         const bInt = baselineBalance * r;
         const bPrin = Math.min(baselineBalance, baseMonthly - bInt);
         baselineBalance = Math.max(0, baselineBalance - bPrin);
       }
 
-      const monthName = new Date(curYear, curMonth - 1, 1).toLocaleString("en-US", { month: "short" });
+      const monthName = new Date(curYear, curMonth - 1, 1).toLocaleString("en-IN", { month: "short" });
       const dateStr = `${monthName} ${curYear}`;
 
       monthlyRows.push({
@@ -150,7 +151,6 @@ export default function AmortizationCalculator() {
         totalInterestPaid: accumulatedInterest,
       });
 
-      // End of calendar year or loan completion
       if (curMonth === 12 || currentBalance === 0) {
         annualRows.push({
           year: curYear,
@@ -198,109 +198,77 @@ export default function AmortizationCalculator() {
     };
   }, [loanAmount, interestRate, loanTermYears, extraMonthly, startYear, startMonth]);
 
-  // Export CSV
-  const exportCSV = useCallback(() => {
-    const headers = ["Period", "Date", "Total Payment", "Principal", "Interest", "Extra Payment", "Ending Balance", "Total Interest Paid"];
-    const csvContent = [
-      headers.join(","),
-      ...calculation.monthlyRows.map((r) =>
-        [r.period, `"${r.dateStr}"`, r.payment.toFixed(2), r.principal.toFixed(2), r.interest.toFixed(2), r.extraPayment.toFixed(2), r.balance.toFixed(2), r.totalInterestPaid.toFixed(2)].join(",")
-      ),
-    ].join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `amortization-schedule-${loanAmount}-${loanTermYears}yr.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }, [calculation, loanAmount, loanTermYears]);
-
-  // Export JSON
-  const exportJSON = useCallback(() => {
-    const payload = {
-      calculator: "DevsPoint Amortization Engine (dp-amort-v2)",
-      generatedAt: new Date().toISOString(),
-      parameters: {
-        principalUSD: loanAmount,
-        nominalAnnualRatePct: interestRate,
-        termYears: loanTermYears,
-        extraMonthlyPaymentUSD: extraMonthly,
-        startPeriod: `${startMonth}/${startYear}`,
-      },
-      summary: {
-        regularMonthlyPayment: Number(calculation.baseMonthly.toFixed(2)),
-        totalInterestPaid: Number(calculation.totalInterest.toFixed(2)),
-        totalInterestSavedWithExtra: Number(calculation.interestSaved.toFixed(2)),
-        monthsAccelerated: calculation.monthsSaved,
-        payoffDate: calculation.payoffDate,
-      },
-      annualSchedule: calculation.annualRows,
-    };
-
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `amortization-data-${loanAmount}.json`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }, [calculation, loanAmount, interestRate, loanTermYears, extraMonthly, startMonth, startYear]);
-
-  // Pagination for monthly view
-  const paginatedMonthly = useMemo(() => {
-    const start = (page - 1) * pageSize;
-    return calculation.monthlyRows.slice(start, start + pageSize);
-  }, [calculation.monthlyRows, page]);
-
   const totalPages = Math.ceil(calculation.monthlyRows.length / pageSize);
+  const paginatedMonthly = calculation.monthlyRows.slice((page - 1) * pageSize, page * pageSize);
+
+  const exportCSV = useCallback(() => {
+    let csv = "Period,Date,EMI Payment,Principal,Interest,Extra Prepayment,Ending Balance,Total Interest Paid\n";
+    calculation.monthlyRows.forEach((r) => {
+      csv += `${r.period},"${r.dateStr}",${r.payment.toFixed(2)},${r.principal.toFixed(2)},${r.interest.toFixed(2)},${r.extraPayment.toFixed(2)},${r.balance.toFixed(2)},${r.totalInterestPaid.toFixed(2)}\n`;
+    });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `home-loan-amortization-${loanAmount}-inr.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [calculation, loanAmount]);
 
   return (
-    <div className="calc-section-wrapper" id="amortization">
-      {/* Inputs Grid */}
-      <div className="calc-inputs-grid">
+    <div className="calc-section-wrapper">
+      <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <span className="section-tag">📋 Indian Home Loan Amortization</span>
+        <h1 style={{ fontSize: "clamp(24px, 4vw, 38px)", color: "var(--dark)", margin: "12px 0 8px" }}>
+          Home Loan EMI &amp; Prepayment Amortization Calculator
+        </h1>
+        <p style={{ color: "var(--text-secondary)", maxWidth: 640, margin: "0 auto", fontSize: 16, lineHeight: 1.6 }}>
+          Visualize your monthly principal vs. interest breakdown, and see how small monthly part-prepayments can save lakhs in interest under RBI guidelines.
+        </p>
+      </div>
+
+      {/* Inputs */}
+      <div className="calc-inputs-grid" style={{ marginBottom: 32 }}>
         <div className="calc-card">
           <div className="calc-title">
-            <div className="calc-title-icon">📐</div>
-            Loan Parameters
+            <span className="calc-title-icon">💰</span> Home Loan Details
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="amort-principal">
-              <span>Loan Amount / Principal</span>
-              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{fmt(loanAmount)}</span>
+            <label className="form-label" htmlFor="amort-loan-amount">
+              <span>Home Loan Principal</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>
+                {fmtINR(loanAmount)} <span style={{ fontSize: 12, color: "var(--text-muted)" }}>({fmtINRLakh(loanAmount)})</span>
+              </span>
             </label>
             <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
+              <span className="form-prefix">₹</span>
               <input
-                id="amort-principal"
+                id="amort-loan-amount"
                 type="number"
                 className="form-input"
                 value={loanAmount}
-                onChange={(e) => setLoanAmount(Math.max(1000, Number(e.target.value)))}
-                min={5000}
-                max={5000000}
-                step={5000}
+                onChange={(e) => setLoanAmount(Number(e.target.value))}
+                min={500000}
+                max={50000000}
+                step={50000}
               />
             </div>
             <input
               type="range"
               className="range-slider"
-              min={50000}
-              max={1500000}
-              step={5000}
+              min={500000}
+              max={20000000}
+              step={50000}
               value={loanAmount}
               onChange={(e) => setLoanAmount(Number(e.target.value))}
-              style={{ "--val": `${((loanAmount - 50000) / (1500000 - 50000)) * 100}%` } as React.CSSProperties}
+              style={{ "--val": `${((loanAmount - 500000) / (20000000 - 500000)) * 100}%` } as React.CSSProperties}
             />
           </div>
 
           <div className="form-group">
             <label className="form-label" htmlFor="amort-rate">
-              <span>Annual Interest Rate (%)</span>
+              <span>Interest Rate (% p.a.)</span>
               <span style={{ color: "var(--primary)", fontWeight: 700 }}>{interestRate}%</span>
             </label>
             <div className="form-input-wrapper">
@@ -310,327 +278,285 @@ export default function AmortizationCalculator() {
                 className="form-input no-prefix has-suffix"
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                min={0.1}
-                max={20}
-                step={0.1}
+                min={6.5}
+                max={16}
+                step={0.05}
               />
               <span className="form-suffix">%</span>
             </div>
             <input
               type="range"
               className="range-slider"
-              min={1}
+              min={6.5}
               max={15}
-              step={0.1}
+              step={0.05}
               value={interestRate}
               onChange={(e) => setInterestRate(Number(e.target.value))}
-              style={{ "--val": `${((interestRate - 1) / (15 - 1)) * 100}%` } as React.CSSProperties}
+              style={{ "--val": `${((interestRate - 6.5) / (15 - 6.5)) * 100}%` } as React.CSSProperties}
             />
           </div>
 
           <div className="form-group">
             <label className="form-label" htmlFor="amort-term">
-              <span>Loan Term</span>
-              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{loanTermYears} Years</span>
+              <span>Loan Tenure (Years)</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{loanTermYears} Years ({loanTermYears * 12} EMIs)</span>
             </label>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, marginTop: 8 }}>
-              {[15, 20, 30].map((t) => (
-                <button
-                  key={t}
-                  type="button"
-                  onClick={() => setLoanTermYears(t)}
-                  style={{
-                    padding: "10px",
-                    borderRadius: 10,
-                    border: loanTermYears === t ? "2px solid var(--primary)" : "1px solid var(--border)",
-                    background: loanTermYears === t ? "var(--primary-light)" : "white",
-                    color: loanTermYears === t ? "var(--primary)" : "var(--dark)",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                  }}
-                >
-                  {t} Years
-                </button>
-              ))}
+            <div className="form-input-wrapper">
+              <input
+                id="amort-term"
+                type="number"
+                className="form-input no-prefix has-suffix"
+                value={loanTermYears}
+                onChange={(e) => setLoanTermYears(Number(e.target.value))}
+                min={1}
+                max={30}
+                step={1}
+              />
+              <span className="form-suffix">yrs</span>
             </div>
+            <input
+              type="range"
+              className="range-slider"
+              min={1}
+              max={30}
+              step={1}
+              value={loanTermYears}
+              onChange={(e) => setLoanTermYears(Number(e.target.value))}
+              style={{ "--val": `${((loanTermYears - 1) / (30 - 1)) * 100}%` } as React.CSSProperties}
+            />
           </div>
         </div>
 
-        {/* Extra Payment & Acceleration */}
         <div className="calc-card">
           <div className="calc-title">
-            <div className="calc-title-icon">⚡</div>
-            Prepayment &amp; Acceleration
+            <span className="calc-title-icon">⚡</span> Prepayment Accelerator (RBI Zero Penalty)
           </div>
 
           <div className="form-group">
             <label className="form-label" htmlFor="amort-extra">
-              <span>Extra Payment Per Month</span>
-              <span style={{ color: "var(--success)", fontWeight: 700 }}>+{fmt(extraMonthly)}/mo</span>
+              <span>Extra Monthly Principal Prepayment</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{fmtINR(extraMonthly)}/mo</span>
             </label>
             <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
+              <span className="form-prefix">₹</span>
               <input
                 id="amort-extra"
                 type="number"
                 className="form-input"
                 value={extraMonthly}
-                onChange={(e) => setExtraMonthly(Math.max(0, Number(e.target.value)))}
+                onChange={(e) => setExtraMonthly(Number(e.target.value))}
                 min={0}
-                max={10000}
-                step={25}
+                max={100000}
+                step={1000}
               />
             </div>
             <input
               type="range"
               className="range-slider"
               min={0}
-              max={2000}
-              step={25}
+              max={50000}
+              step={1000}
               value={extraMonthly}
               onChange={(e) => setExtraMonthly(Number(e.target.value))}
-              style={{ "--val": `${(extraMonthly / 2000) * 100}%` } as React.CSSProperties}
+              style={{ "--val": `${(extraMonthly / 50000) * 100}%` } as React.CSSProperties}
             />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            <div className="form-group">
-              <label className="form-label" htmlFor="start-month">
-                <span>Start Month</span>
-              </label>
-              <select
-                id="start-month"
-                className="form-input no-prefix"
-                value={startMonth}
-                onChange={(e) => setStartMonth(Number(e.target.value))}
-                style={{ height: 48 }}
-              >
-                {Array.from({ length: 12 }, (_, i) => (
-                  <option key={i + 1} value={i + 1}>
-                    {new Date(2024, i, 1).toLocaleString("en-US", { month: "long" })}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="start-year">
-                <span>Start Year</span>
-              </label>
-              <input
-                id="start-year"
-                type="number"
-                className="form-input no-prefix"
-                value={startYear}
-                onChange={(e) => setStartYear(Number(e.target.value))}
-                min={2000}
-                max={2050}
-                style={{ height: 48 }}
-              />
-            </div>
-          </div>
-
-          {/* Quick Stat Pill */}
-          <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 14, padding: "16px 20px", marginTop: 24 }}>
-            <div style={{ fontSize: 13, color: "#166534", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              Payoff Acceleration Impact
-            </div>
-            <div style={{ fontSize: 20, color: "#15803d", fontWeight: 800, marginTop: 4 }}>
-              Save {fmt(calculation.interestSaved)} in Interest
-            </div>
-            <div style={{ fontSize: 13, color: "#166534", marginTop: 4 }}>
-              Eliminate {Math.floor(calculation.monthsSaved / 12)} years {calculation.monthsSaved % 12} months of payments.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Primary KPI Results */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, margin: "32px 0" }}>
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)", boxShadow: "var(--shadow-sm)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Monthly Principal &amp; Interest</span>
-          <div style={{ fontSize: 28, fontWeight: 800, color: "var(--dark)", marginTop: 6 }}>
-            {fmtFull(calculation.baseMonthly)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>Base required payment</span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)", boxShadow: "var(--shadow-sm)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Total With Extra Payment</span>
-          <div style={{ fontSize: 28, fontWeight: 800, color: "var(--primary)", marginTop: 6 }}>
-            {fmtFull(calculation.baseMonthly + extraMonthly)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>Total monthly out-of-pocket</span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)", boxShadow: "var(--shadow-sm)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Total Lifetime Interest</span>
-          <div style={{ fontSize: 28, fontWeight: 800, color: "#9333ea", marginTop: 6 }}>
-            {fmt(calculation.totalInterest)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>Cumulative financing cost</span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)", boxShadow: "var(--shadow-sm)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Projected Debt-Free Date</span>
-          <div style={{ fontSize: 28, fontWeight: 800, color: "var(--success)", marginTop: 6 }}>
-            {calculation.payoffDate}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>Final payoff milestone</span>
-        </div>
-      </div>
-
-      {/* Visual Chart */}
-      <div className="calc-card" style={{ margin: "32px 0" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
-          <div>
-            <h3 style={{ fontSize: 18, color: "var(--dark)", margin: 0 }}>Loan Balance Amortization Trajectory</h3>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0" }}>
-              Visualizing principal decay curve with extra payments (solid blue) vs standard schedule (purple).
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8, lineHeight: 1.5 }}>
+              💡 <strong>RBI Rule:</strong> All floating-rate home loans issued by Indian banks &amp; HFCs to individual borrowers have <strong>zero prepayment charges</strong>. Prepaying directly reduces your principal!
             </p>
           </div>
-          <div style={{ display: "flex", gap: 10 }}>
-            <button type="button" onClick={exportCSV} className="tab-btn" style={{ fontSize: 12, padding: "6px 14px" }}>
-              📥 Export CSV
-            </button>
-            <button type="button" onClick={exportJSON} className="tab-btn" style={{ fontSize: 12, padding: "6px 14px" }}>
-              💻 Export JSON
-            </button>
-          </div>
+
+          {extraMonthly > 0 && calculation.interestSaved > 0 && (
+            <div style={{ background: "linear-gradient(135deg, #ecfdf5, #d1fae5)", border: "1px solid #10b981", borderRadius: 12, padding: "16px 20px", marginTop: 20 }}>
+              <div style={{ fontWeight: 700, color: "#065f46", fontSize: 15, marginBottom: 4 }}>
+                Prepayment Impact Summary:
+              </div>
+              <div style={{ fontSize: 14, color: "#047857", lineHeight: 1.6 }}>
+                Paying an extra <strong>{fmtINR(extraMonthly)}/mo</strong> will save you{" "}
+                <strong>{fmtINR(Math.round(calculation.interestSaved))}</strong> ({fmtINRLakh(calculation.interestSaved)}) in interest and close your loan{" "}
+                <strong>{Math.floor(calculation.monthsSaved / 12)} years {calculation.monthsSaved % 12} months earlier</strong>!
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Summary KPI Cards */}
+      <div className="results-metrics-grid" style={{ marginBottom: 32 }}>
+        <div className="metric-card">
+          <div className="metric-label">Base Monthly EMI</div>
+          <div className="metric-value">{fmtINR(Math.round(calculation.baseMonthly))}</div>
+          <div className="metric-sub">Standard monthly payment</div>
         </div>
 
-        <div style={{ width: "100%", height: 320 }}>
-          <ResponsiveContainer>
-            <AreaChart data={calculation.chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#1a56db" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#1a56db" stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="colorBaseline" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#9333ea" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#9333ea" stopOpacity={0} />
-                </linearGradient>
-              </defs>
+        <div className="metric-card highlight">
+          <div className="metric-label">Total Interest (with Prepayment)</div>
+          <div className="metric-value" style={{ color: "var(--primary)" }}>
+            {fmtINR(Math.round(calculation.totalInterest))}
+          </div>
+          <div className="metric-sub">{fmtINRLakh(calculation.totalInterest)}</div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-label">Interest Saved by Prepaying</div>
+          <div className="metric-value" style={{ color: "#10b981" }}>
+            {fmtINR(Math.round(calculation.interestSaved))}
+          </div>
+          <div className="metric-sub">{fmtINRLakh(calculation.interestSaved)} in net savings</div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-label">Loan Freedom Date</div>
+          <div className="metric-value" style={{ color: "#7c3aed" }}>
+            {calculation.payoffDate || "N/A"}
+          </div>
+          <div className="metric-sub">{calculation.monthsSaved} months saved</div>
+        </div>
+      </div>
+
+      {/* Amortization Chart */}
+      <div className="calc-card" style={{ marginBottom: 32 }}>
+        <h3 style={{ fontSize: 18, color: "var(--dark)", marginBottom: 12 }}>
+          Principal Decay: Standard vs. Accelerated Prepayment (₹)
+        </h3>
+        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginBottom: 20 }}>
+          Visual comparison showing how monthly prepayments crush the remaining principal balance years ahead of schedule.
+        </p>
+        <div style={{ height: 320, width: "100%" }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={calculation.chartData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="year" stroke="#94a3b8" />
-              <YAxis tickFormatter={(val) => `$${Math.round(val / 1000)}k`} stroke="#94a3b8" />
-              <Tooltip formatter={(value: any) => fmt(Number(value))} />
+              <XAxis dataKey="year" />
+              <YAxis tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`} />
+              <Tooltip formatter={(v: any) => fmtINR(Number(v))} />
               <Legend />
-              <Area type="monotone" dataKey="actualBalance" name="With Extra Payment" stroke="#1a56db" strokeWidth={2.5} fillOpacity={1} fill="url(#colorActual)" />
-              <Area type="monotone" dataKey="baselineBalance" name="Standard Schedule" stroke="#9333ea" strokeWidth={1.5} strokeDasharray="4 4" fillOpacity={1} fill="url(#colorBaseline)" />
+              <Area type="monotone" dataKey="baselineBalance" name="Standard Schedule" stroke="#94a3b8" fill="#f1f5f9" />
+              <Area type="monotone" dataKey="actualBalance" name="With Prepayment" stroke="#1a56db" fill="#93c5fd" fillOpacity={0.6} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Amortization Schedule Table */}
-      <div className="calc-card" style={{ marginTop: 32 }}>
+      {/* Amortization Table */}
+      <div className="calc-card">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
-          <div className="calc-title" style={{ margin: 0 }}>
-            <div className="calc-title-icon">📋</div>
-            Comprehensive Amortization Schedule
+          <div>
+            <h3 style={{ fontSize: 18, color: "var(--dark)", margin: "0 0 4px" }}>
+              Amortization Schedule Breakdown
+            </h3>
+            <span style={{ fontSize: 14, color: "var(--text-secondary)" }}>
+              Inspect annual totals or dive into individual monthly EMI installments
+            </span>
           </div>
-          <div className="tabs" style={{ margin: 0 }}>
+
+          <div style={{ display: "flex", gap: 10 }}>
+            <div className="tabs" style={{ marginBottom: 0 }}>
+              <button
+                className={`tab-btn ${scheduleView === "annual" ? "active" : ""}`}
+                onClick={() => setScheduleView("annual")}
+              >
+                Annual Summary
+              </button>
+              <button
+                className={`tab-btn ${scheduleView === "monthly" ? "active" : ""}`}
+                onClick={() => setScheduleView("monthly")}
+              >
+                Monthly Breakdown
+              </button>
+            </div>
             <button
-              type="button"
-              className={`tab-btn ${scheduleView === "annual" ? "active" : ""}`}
-              onClick={() => { setScheduleView("annual"); setPage(1); }}
+              onClick={exportCSV}
+              className="export-btn"
+              style={{ display: "flex", alignItems: "center", gap: 6 }}
             >
-              Annual Summary
-            </button>
-            <button
-              type="button"
-              className={`tab-btn ${scheduleView === "monthly" ? "active" : ""}`}
-              onClick={() => { setScheduleView("monthly"); setPage(1); }}
-            >
-              Monthly Breakdown
+              📥 Export CSV
             </button>
           </div>
         </div>
 
-        <div className="table-responsive" style={{ overflowX: "auto" }}>
-          {scheduleView === "annual" ? (
-            <table className="amort-table" style={{ width: "100%", textAlign: "right" }}>
+        {scheduleView === "annual" ? (
+          <div className="table-wrapper">
+            <table className="amort-table">
               <thead>
                 <tr>
-                  <th style={{ textAlign: "left" }}>Year</th>
+                  <th>Year</th>
                   <th>Principal Paid</th>
                   <th>Interest Paid</th>
-                  <th>Extra Paid</th>
+                  <th>Prepayment</th>
                   <th>Ending Balance</th>
                 </tr>
               </thead>
               <tbody>
                 {calculation.annualRows.map((row) => (
                   <tr key={row.year}>
-                    <td style={{ textAlign: "left", fontWeight: 700 }}>{row.year}</td>
-                    <td style={{ color: "var(--primary)" }}>{fmt(row.principalPaid)}</td>
-                    <td style={{ color: "#ef4444" }}>{fmt(row.interestPaid)}</td>
-                    <td style={{ color: "var(--success)" }}>{row.extraPaid > 0 ? `+${fmt(row.extraPaid)}` : "—"}</td>
-                    <td style={{ fontWeight: 600 }}>{fmt(row.endingBalance)}</td>
+                    <td>Year {row.year}</td>
+                    <td style={{ fontWeight: 600 }}>{fmtINR(Math.round(row.principalPaid))}</td>
+                    <td style={{ color: "#dc2626" }}>{fmtINR(Math.round(row.interestPaid))}</td>
+                    <td style={{ color: "#059669" }}>{row.extraPaid > 0 ? fmtINR(Math.round(row.extraPaid)) : "-"}</td>
+                    <td style={{ fontWeight: 700, color: "var(--primary)" }}>{fmtINR(Math.round(row.endingBalance))}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          ) : (
-            <>
-              <table className="amort-table" style={{ width: "100%", textAlign: "right" }}>
+          </div>
+        ) : (
+          <div>
+            <div className="table-wrapper">
+              <table className="amort-table">
                 <thead>
                   <tr>
-                    <th style={{ textAlign: "left" }}>#</th>
-                    <th style={{ textAlign: "left" }}>Date</th>
-                    <th>Payment</th>
+                    <th>#</th>
+                    <th>Month</th>
+                    <th>Total EMI</th>
                     <th>Principal</th>
                     <th>Interest</th>
-                    <th>Extra</th>
-                    <th>Ending Balance</th>
+                    <th>Prepayment</th>
+                    <th>Remaining Balance</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {paginatedMonthly.map((row) => (
-                    <tr key={row.period}>
-                      <td style={{ textAlign: "left", color: "var(--text-muted)" }}>{row.period}</td>
-                      <td style={{ textAlign: "left", fontWeight: 600 }}>{row.dateStr}</td>
-                      <td>{fmtFull(row.payment)}</td>
-                      <td style={{ color: "var(--primary)" }}>{fmtFull(row.principal)}</td>
-                      <td style={{ color: "#ef4444" }}>{fmtFull(row.interest)}</td>
-                      <td style={{ color: "var(--success)" }}>{row.extraPayment > 0 ? `+${fmtFull(row.extraPayment)}` : "—"}</td>
-                      <td style={{ fontWeight: 600 }}>{fmt(row.balance)}</td>
+                  {paginatedMonthly.map((m) => (
+                    <tr key={m.period}>
+                      <td>{m.period}</td>
+                      <td>{m.dateStr}</td>
+                      <td>{fmtINR(Math.round(m.payment))}</td>
+                      <td>{fmtINR(Math.round(m.principal))}</td>
+                      <td style={{ color: "#dc2626" }}>{fmtINR(Math.round(m.interest))}</td>
+                      <td style={{ color: "#059669" }}>{m.extraPayment > 0 ? fmtINR(Math.round(m.extraPayment)) : "-"}</td>
+                      <td style={{ fontWeight: 600 }}>{fmtINR(Math.round(m.balance))}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
 
-              {/* Pagination controls */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 20 }}>
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16 }}>
                 <span style={{ fontSize: 13, color: "var(--text-muted)" }}>
-                  Showing {(page - 1) * pageSize + 1} to {Math.min(page * pageSize, calculation.monthlyRows.length)} of {calculation.monthlyRows.length} months
+                  Showing page {page} of {totalPages} ({calculation.monthlyRows.length} total payments)
                 </span>
                 <div style={{ display: "flex", gap: 8 }}>
                   <button
-                    type="button"
-                    className="tab-btn"
-                    disabled={page === 1}
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    style={{ opacity: page === 1 ? 0.5 : 1 }}
+                    disabled={page === 1}
+                    className="tab-btn"
+                    style={{ padding: "6px 14px" }}
                   >
-                    ← Previous
+                    ← Prev
                   </button>
                   <button
-                    type="button"
-                    className="tab-btn"
-                    disabled={page === totalPages}
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    style={{ opacity: page === totalPages ? 0.5 : 1 }}
+                    disabled={page === totalPages}
+                    className="tab-btn"
+                    style={{ padding: "6px 14px" }}
                   >
                     Next →
                   </button>
                 </div>
               </div>
-            </>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

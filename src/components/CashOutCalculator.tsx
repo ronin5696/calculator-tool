@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo } from "react";
 import {
   PieChart,
   Pie,
@@ -10,437 +10,350 @@ import {
   Legend,
 } from "recharts";
 
-function fmt(n: number): string {
-  return new Intl.NumberFormat("en-US", {
+function fmtINR(n: number): string {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     maximumFractionDigits: 0,
   }).format(n);
 }
 
-function fmtFull(n: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 2,
-  }).format(n);
+function fmtINRLakh(n: number): string {
+  const abs = Math.abs(n);
+  if (abs >= 10000000) {
+    return `${n < 0 ? "-" : ""}₹${(abs / 10000000).toFixed(2)} Cr`;
+  }
+  if (abs >= 100000) {
+    return `${n < 0 ? "-" : ""}₹${(abs / 100000).toFixed(2)} Lakh`;
+  }
+  return fmtINR(n);
 }
 
-function monthlyPayment(principal: number, annualRate: number, months: number): number {
+function monthlyEMI(principal: number, annualRate: number, months: number): number {
   if (annualRate === 0) return principal / months;
   const r = annualRate / 100 / 12;
   return (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
 }
 
 export default function CashOutCalculator() {
-  const [homeValue, setHomeValue] = useState(550000);
-  const [currentBalance, setCurrentBalance] = useState(280000);
-  const [desiredCashOut, setDesiredCashOut] = useState(60000);
-  const [newRate, setNewRate] = useState(6.25);
-  const [newTermYears, setNewTermYears] = useState(30);
-  const [closingCosts, setClosingCosts] = useState(5000);
-  const [rollCostsIntoLoan, setRollCostsIntoLoan] = useState(true);
-  const [currentMonthlyPmt, setCurrentMonthlyPmt] = useState(1950);
+  // Indian home loan defaults: ₹90 Lakhs property, ₹45 Lakhs current balance, ₹10 Lakhs top-up needed
+  const [propertyValue, setPropertyValue] = useState(9000000);
+  const [currentBalance, setCurrentBalance] = useState(4500000);
+  const [desiredTopUp, setDesiredTopUp] = useState(1000000);
 
-  // Cash-out calculations with 80% LTV guardrail
+  // Top-Up Loan terms
+  const [topUpRate, setTopUpRate] = useState(8.85);
+  const [topUpTermYears, setTopUpTermYears] = useState(12);
+
+  // Alternative Personal Loan terms
+  const [personalLoanRate, setPersonalLoanRate] = useState(13.5);
+  const [personalLoanTermYears, setPersonalLoanTermYears] = useState(5);
+
   const calculation = useMemo(() => {
-    const maxLTV = 0.8;
-    const maxAllowedBalance = homeValue * maxLTV;
-    const currentEquity = Math.max(0, homeValue - currentBalance);
-    const currentLtvPct = (currentBalance / homeValue) * 100;
+    const maxLTV = 0.75; // 75% RBI cap for general residential loans
+    const maxAllowedTotalLoan = propertyValue * maxLTV;
+    const currentLtvPct = (currentBalance / propertyValue) * 100;
 
-    // Maximum cash you can theoretically extract while staying under 80% LTV
-    const maxExtractableCash = Math.max(
-      0,
-      maxAllowedBalance - currentBalance - (rollCostsIntoLoan ? closingCosts : 0)
-    );
+    // Maximum eligible top-up without breaching 75% LTV
+    const maxEligibleTopUp = Math.max(0, maxAllowedTotalLoan - currentBalance);
+    const actualTopUp = Math.min(desiredTopUp, maxEligibleTopUp);
+    const isExceedingLtv = desiredTopUp > maxEligibleTopUp;
 
-    const actualFinancedCosts = rollCostsIntoLoan ? closingCosts : 0;
-    const newTotalLoanAmount = currentBalance + desiredCashOut + actualFinancedCosts;
-    const newLtvPct = (newTotalLoanAmount / homeValue) * 100;
-    const exceedsMaxLTV = newTotalLoanAmount > maxAllowedBalance;
+    // Top-up loan EMI and total interest
+    const topUpEMI = monthlyEMI(actualTopUp, topUpRate, topUpTermYears * 12);
+    const topUpTotalInterest = topUpEMI * topUpTermYears * 12 - actualTopUp;
 
-    // Cash received in borrower's bank account
-    const netCashInHand = rollCostsIntoLoan
-      ? desiredCashOut
-      : Math.max(0, desiredCashOut - closingCosts);
+    // Personal loan EMI and total interest (for the same desired amount)
+    const personalEMI = monthlyEMI(actualTopUp, personalLoanRate, personalLoanTermYears * 12);
+    const personalTotalInterest = personalEMI * personalLoanTermYears * 12 - actualTopUp;
 
-    // Remaining home equity after transaction
-    const remainingEquity = Math.max(0, homeValue - newTotalLoanAmount);
-    const remainingEquityPct = (remainingEquity / homeValue) * 100;
+    const monthlyCashflowSavings = personalEMI - topUpEMI;
+    const lifetimeInterestDelta = personalTotalInterest - topUpTotalInterest;
 
-    // New monthly payment
-    const newMonthlyPayment = monthlyPayment(newTotalLoanAmount, newRate, newTermYears * 12);
-    const monthlyPaymentChange = newMonthlyPayment - currentMonthlyPmt;
-    const totalNewInterest = newMonthlyPayment * (newTermYears * 12) - newTotalLoanAmount;
-
-    // Pie chart distribution of property value
     const pieData = [
-      { name: "Existing Debt", value: currentBalance, color: "#1a56db" },
-      { name: "Cash Extracted", value: desiredCashOut + actualFinancedCosts, color: "#10b981" },
-      { name: "Remaining Equity", value: remainingEquity, color: "#8b5cf6" },
+      { name: "Current Loan Balance", value: currentBalance },
+      { name: "Top-Up Principal", value: actualTopUp },
+      { name: "Remaining Property Equity", value: Math.max(0, propertyValue - currentBalance - actualTopUp) },
     ];
 
     return {
-      currentEquity,
+      maxEligibleTopUp,
+      actualTopUp,
+      isExceedingLtv,
       currentLtvPct,
-      maxAllowedBalance,
-      maxExtractableCash,
-      newTotalLoanAmount,
-      newLtvPct,
-      exceedsMaxLTV,
-      netCashInHand,
-      remainingEquity,
-      remainingEquityPct,
-      newMonthlyPayment,
-      monthlyPaymentChange,
-      totalNewInterest,
+      newCombinedLtvPct: ((currentBalance + actualTopUp) / propertyValue) * 100,
+      topUpEMI,
+      topUpTotalInterest,
+      personalEMI,
+      personalTotalInterest,
+      monthlyCashflowSavings,
+      lifetimeInterestDelta,
       pieData,
     };
-  }, [
-    homeValue,
-    currentBalance,
-    desiredCashOut,
-    newRate,
-    newTermYears,
-    closingCosts,
-    rollCostsIntoLoan,
-    currentMonthlyPmt,
-  ]);
+  }, [propertyValue, currentBalance, desiredTopUp, topUpRate, topUpTermYears, personalLoanRate, personalLoanTermYears]);
 
-  // Export JSON
-  const exportJSON = useCallback(() => {
-    const payload = {
-      calculator: "DevsPoint Cash-Out Engine (dp-cashout-v2)",
-      generatedAt: new Date().toISOString(),
-      property: {
-        homeMarketValueUSD: homeValue,
-        currentMortgageBalanceUSD: currentBalance,
-        currentHomeEquityUSD: calculation.currentEquity,
-        currentLTVPercent: Number(calculation.currentLtvPct.toFixed(1)),
-      },
-      transaction: {
-        cashOutAmountUSD: desiredCashOut,
-        closingCostsUSD: closingCosts,
-        financedCostsIntoLoan: rollCostsIntoLoan,
-        netCashToBorrowerUSD: calculation.netCashInHand,
-        newMortgageBalanceUSD: calculation.newTotalLoanAmount,
-        newLTVPercent: Number(calculation.newLtvPct.toFixed(1)),
-        conventional80LTVLimitPassed: !calculation.exceedsMaxLTV,
-      },
-      paymentMetrics: {
-        currentMonthlyPayment: currentMonthlyPmt,
-        newMonthlyPayment: Number(calculation.newMonthlyPayment.toFixed(2)),
-        monthlyPaymentChangeDelta: Number(calculation.monthlyPaymentChange.toFixed(2)),
-        remainingHomeEquityUSD: calculation.remainingEquity,
-        remainingEquityPercent: Number(calculation.remainingEquityPct.toFixed(1)),
-      },
-    };
-
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `cash-out-analysis-${desiredCashOut}.json`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }, [calculation, homeValue, currentBalance, desiredCashOut, closingCosts, rollCostsIntoLoan, currentMonthlyPmt]);
+  const PIE_COLORS = ["#1a56db", "#10b981", "#cbd5e1"];
 
   return (
-    <div className="calc-section-wrapper" id="cash-out">
-      {/* Inputs Grid */}
-      <div className="calc-inputs-grid">
-        {/* Card 1: Home Value & Current Debt */}
+    <div className="calc-section-wrapper">
+      <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <span className="section-tag">💰 Indian Home Equity &amp; Top-Up</span>
+        <h1 style={{ fontSize: "clamp(24px, 4vw, 38px)", color: "var(--dark)", margin: "12px 0 8px" }}>
+          Home Loan Top-Up vs. Personal Loan Calculator
+        </h1>
+        <p style={{ color: "var(--text-secondary)", maxWidth: 640, margin: "0 auto", fontSize: 16, lineHeight: 1.6 }}>
+          Tap your home equity at 8.75%–9.5% interest instead of paying 13%–16% on expensive personal loans. Compare EMI affordability and RBI LTV eligibility.
+        </p>
+      </div>
+
+      <div className="calc-inputs-grid" style={{ marginBottom: 32 }}>
+        {/* Property & Equity Card */}
         <div className="calc-card">
           <div className="calc-title">
-            <div className="calc-title-icon">🏡</div>
-            Property &amp; Current Mortgage
+            <span className="calc-title-icon">🏠</span> Property Value &amp; Loan Balance
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="co-home-value">
-              <span>Estimated Home Market Value</span>
-              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{fmt(homeValue)}</span>
+            <label className="form-label" htmlFor="prop-value">
+              <span>Current Property Market Value</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>
+                {fmtINR(propertyValue)} <span style={{ fontSize: 12, color: "var(--text-muted)" }}>({fmtINRLakh(propertyValue)})</span>
+              </span>
             </label>
             <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
+              <span className="form-prefix">₹</span>
               <input
-                id="co-home-value"
+                id="prop-value"
                 type="number"
                 className="form-input"
-                value={homeValue}
-                onChange={(e) => setHomeValue(Math.max(10000, Number(e.target.value)))}
-                step={5000}
+                value={propertyValue}
+                onChange={(e) => setPropertyValue(Number(e.target.value))}
+                min={1000000}
+                max={100000000}
+                step={100000}
               />
             </div>
             <input
               type="range"
               className="range-slider"
-              min={100000}
-              max={2000000}
-              step={10000}
-              value={homeValue}
-              onChange={(e) => setHomeValue(Number(e.target.value))}
-              style={{ "--val": `${((homeValue - 100000) / (2000000 - 100000)) * 100}%` } as React.CSSProperties}
+              min={1500000}
+              max={30000000}
+              step={100000}
+              value={propertyValue}
+              onChange={(e) => setPropertyValue(Number(e.target.value))}
+              style={{ "--val": `${((propertyValue - 1500000) / (30000000 - 1500000)) * 100}%` } as React.CSSProperties}
             />
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="co-current-bal">
-              <span>Current Unpaid Mortgage Balance</span>
-              <span style={{ color: "var(--primary)", fontWeight: 700 }}>{fmt(currentBalance)}</span>
+            <label className="form-label" htmlFor="curr-loan-balance">
+              <span>Existing Home Loan Balance</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>
+                {fmtINR(currentBalance)} <span style={{ fontSize: 12, color: "var(--text-muted)" }}>({fmtINRLakh(currentBalance)})</span>
+              </span>
             </label>
             <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
+              <span className="form-prefix">₹</span>
               <input
-                id="co-current-bal"
+                id="curr-loan-balance"
                 type="number"
                 className="form-input"
                 value={currentBalance}
                 onChange={(e) => setCurrentBalance(Number(e.target.value))}
-                step={5000}
+                min={0}
+                max={propertyValue}
+                step={50000}
               />
             </div>
             <input
               type="range"
               className="range-slider"
               min={0}
-              max={homeValue}
-              step={5000}
+              max={propertyValue * 0.75}
+              step={50000}
               value={currentBalance}
               onChange={(e) => setCurrentBalance(Number(e.target.value))}
-              style={{ "--val": `${(currentBalance / homeValue) * 100}%` } as React.CSSProperties}
+              style={{ "--val": `${(currentBalance / (propertyValue * 0.75)) * 100}%` } as React.CSSProperties}
             />
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="co-cur-pmt">
-              <span>Current Monthly Payment</span>
-              <span style={{ color: "var(--text-secondary)", fontWeight: 600 }}>{fmt(currentMonthlyPmt)}/mo</span>
+            <label className="form-label" htmlFor="desired-topup">
+              <span>Additional Cash / Top-Up Needed</span>
+              <span style={{ color: "var(--primary)", fontWeight: 700 }}>
+                {fmtINR(desiredTopUp)} <span style={{ fontSize: 12, color: "var(--text-muted)" }}>({fmtINRLakh(desiredTopUp)})</span>
+              </span>
             </label>
             <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
+              <span className="form-prefix">₹</span>
               <input
-                id="co-cur-pmt"
+                id="desired-topup"
                 type="number"
                 className="form-input"
-                value={currentMonthlyPmt}
-                onChange={(e) => setCurrentMonthlyPmt(Number(e.target.value))}
-                step={50}
+                value={desiredTopUp}
+                onChange={(e) => setDesiredTopUp(Number(e.target.value))}
+                min={50000}
+                max={20000000}
+                step={50000}
               />
             </div>
+            <span style={{ fontSize: 12, color: "var(--text-muted)", display: "block", marginTop: 4 }}>
+              Max eligible under 75% LTV cap: <strong>{fmtINR(calculation.maxEligibleTopUp)}</strong>
+            </span>
           </div>
         </div>
 
-        {/* Card 2: Cash Extraction & New Terms */}
+        {/* Top-Up vs Personal Loan Rates */}
         <div className="calc-card">
           <div className="calc-title">
-            <div className="calc-title-icon">💵</div>
-            Cash-Out Request &amp; Terms
+            <span className="calc-title-icon">⚖️</span> Top-Up vs. Personal Loan Rates
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="co-desired-cash">
-              <span>Desired Cash-Out Amount</span>
-              <span style={{ color: "var(--success)", fontWeight: 700 }}>{fmt(desiredCashOut)}</span>
-            </label>
-            <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
-              <input
-                id="co-desired-cash"
-                type="number"
-                className="form-input"
-                value={desiredCashOut}
-                onChange={(e) => setDesiredCashOut(Math.max(0, Number(e.target.value)))}
-                step={2500}
-              />
+          <div style={{ background: "#f8fafc", padding: "14px 16px", borderRadius: 10, border: "1px solid #e2e8f0", marginBottom: 16 }}>
+            <div style={{ fontWeight: 700, fontSize: 14, color: "#1e293b", marginBottom: 8 }}>
+              🏦 Home Loan Top-Up Parameters
             </div>
-            <input
-              type="range"
-              className="range-slider"
-              min={5000}
-              max={Math.max(50000, calculation.maxExtractableCash * 1.2)}
-              step={2500}
-              value={desiredCashOut}
-              onChange={(e) => setDesiredCashOut(Number(e.target.value))}
-              style={{ "--val": `${(desiredCashOut / Math.max(50000, calculation.maxExtractableCash * 1.2)) * 100}%` } as React.CSSProperties}
-            />
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>
-              <span>Max at 80% LTV:</span>
-              <strong style={{ color: "var(--primary)" }}>{fmt(calculation.maxExtractableCash)}</strong>
-            </div>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            <div className="form-group">
-              <label className="form-label" htmlFor="co-new-rate">
-                <span>New Interest Rate</span>
-              </label>
-              <input
-                id="co-new-rate"
-                type="number"
-                className="form-input no-prefix has-suffix"
-                value={newRate}
-                onChange={(e) => setNewRate(Number(e.target.value))}
-                step={0.125}
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="co-new-term">
-                <span>New Term (Years)</span>
-              </label>
-              <select
-                id="co-new-term"
-                className="form-input no-prefix"
-                value={newTermYears}
-                onChange={(e) => setNewTermYears(Number(e.target.value))}
-                style={{ height: 48 }}
-              >
-                <option value={15}>15 Years</option>
-                <option value={20}>20 Years</option>
-                <option value={30}>30 Years</option>
-              </select>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div>
+                <label style={{ fontSize: 12, color: "var(--text-secondary)", display: "block" }}>Interest Rate (% p.a.)</label>
+                <input
+                  type="number"
+                  className="form-input no-prefix"
+                  value={topUpRate}
+                  onChange={(e) => setTopUpRate(Number(e.target.value))}
+                  min={7}
+                  max={15}
+                  step={0.05}
+                  style={{ marginTop: 4 }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: "var(--text-secondary)", display: "block" }}>Tenure (Years)</label>
+                <input
+                  type="number"
+                  className="form-input no-prefix"
+                  value={topUpTermYears}
+                  onChange={(e) => setTopUpTermYears(Number(e.target.value))}
+                  min={1}
+                  max={20}
+                  step={1}
+                  style={{ marginTop: 4 }}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="co-closing-costs">
-              <span>Estimated Closing Costs</span>
-              <span style={{ color: "#ef4444", fontWeight: 600 }}>{fmt(closingCosts)}</span>
-            </label>
-            <div className="form-input-wrapper">
-              <span className="form-prefix">$</span>
-              <input
-                id="co-closing-costs"
-                type="number"
-                className="form-input"
-                value={closingCosts}
-                onChange={(e) => setClosingCosts(Number(e.target.value))}
-                step={250}
-              />
+          <div style={{ background: "#f8fafc", padding: "14px 16px", borderRadius: 10, border: "1px solid #e2e8f0" }}>
+            <div style={{ fontWeight: 700, fontSize: 14, color: "#1e293b", marginBottom: 8 }}>
+              💳 Unsecured Personal Loan Alternative
             </div>
-          </div>
-
-          {/* Roll costs toggle */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", background: "var(--surface)", borderRadius: 12, border: "1px solid var(--border)", marginTop: 12 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--dark)" }}>Roll Closing Costs into New Loan?</span>
-            <input
-              type="checkbox"
-              id="co-roll-costs"
-              checked={rollCostsIntoLoan}
-              onChange={(e) => setRollCostsIntoLoan(e.target.checked)}
-              style={{ width: 18, height: 18, cursor: "pointer" }}
-            />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div>
+                <label style={{ fontSize: 12, color: "var(--text-secondary)", display: "block" }}>Interest Rate (% p.a.)</label>
+                <input
+                  type="number"
+                  className="form-input no-prefix"
+                  value={personalLoanRate}
+                  onChange={(e) => setPersonalLoanRate(Number(e.target.value))}
+                  min={10}
+                  max={24}
+                  step={0.25}
+                  style={{ marginTop: 4 }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: "var(--text-secondary)", display: "block" }}>Max Tenure (Years)</label>
+                <input
+                  type="number"
+                  className="form-input no-prefix"
+                  value={personalLoanTermYears}
+                  onChange={(e) => setPersonalLoanTermYears(Number(e.target.value))}
+                  min={1}
+                  max={7}
+                  step={1}
+                  style={{ marginTop: 4 }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* LTV Safety Guardrail Callout */}
-      {calculation.exceedsMaxLTV ? (
-        <div style={{ background: "#fef2f2", border: "1.5px solid #fca5a5", borderRadius: 16, padding: "20px 24px", margin: "28px 0", display: "flex", alignItems: "center", gap: 16 }}>
-          <span style={{ fontSize: 28 }}>⚠️</span>
+      {/* Comparison KPI Cards */}
+      <div className="results-metrics-grid" style={{ marginBottom: 32 }}>
+        <div className="metric-card highlight">
+          <div className="metric-label">Home Loan Top-Up EMI</div>
+          <div className="metric-value" style={{ color: "var(--primary)" }}>
+            {fmtINR(Math.round(calculation.topUpEMI))}
+            <span style={{ fontSize: 14, color: "var(--text-muted)" }}>/mo</span>
+          </div>
+          <div className="metric-sub">{topUpRate}% p.a. for {topUpTermYears} yrs</div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-label">Personal Loan EMI</div>
+          <div className="metric-value" style={{ color: "#dc2626" }}>
+            {fmtINR(Math.round(calculation.personalEMI))}
+            <span style={{ fontSize: 14, color: "var(--text-muted)" }}>/mo</span>
+          </div>
+          <div className="metric-sub">{personalLoanRate}% p.a. for {personalLoanTermYears} yrs</div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-label">Monthly EMI Relief</div>
+          <div className="metric-value" style={{ color: "#10b981" }}>
+            {fmtINR(Math.round(calculation.monthlyCashflowSavings))}
+            <span style={{ fontSize: 14, color: "#10b981" }}>/mo</span>
+          </div>
+          <div className="metric-sub">Lower cash-flow burden vs. personal loan</div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-label">Combined LTV Ratio</div>
+          <div className="metric-value" style={{ color: calculation.newCombinedLtvPct <= 75 ? "#10b981" : "#dc2626" }}>
+            {calculation.newCombinedLtvPct.toFixed(1)}%
+          </div>
+          <div className="metric-sub">RBI 75% guideline cap</div>
+        </div>
+      </div>
+
+      {/* Breakdown Visualization */}
+      <div className="calc-card">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, alignItems: "center" }}>
           <div>
-            <h4 style={{ color: "#991b1b", margin: "0 0 4px", fontSize: 16, fontWeight: 700 }}>
-              Requested Loan Exceeds Conventional 80% LTV Limit ({calculation.newLtvPct.toFixed(1)}% LTV)
-            </h4>
-            <p style={{ color: "#7f1d1d", fontSize: 14, margin: 0, lineHeight: 1.5 }}>
-              Most conventional mortgage lenders cap cash-out refinances at 80% of your property&apos;s appraised value ({fmt(calculation.maxAllowedBalance)}). Reduce your requested cash-out to <strong>{fmt(calculation.maxExtractableCash)}</strong> or below to qualify for conventional guidelines.
+            <h3 style={{ fontSize: 18, color: "var(--dark)", marginBottom: 8 }}>
+              Home Equity &amp; Top-Up Verdict
+            </h3>
+            <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6 }}>
+              Taking a <strong>Home Loan Top-Up of {fmtINR(calculation.actualTopUp)}</strong> reduces your monthly EMI burden by{" "}
+              <strong style={{ color: "#059669" }}>{fmtINR(Math.round(calculation.monthlyCashflowSavings))} per month</strong> compared to an unsecured personal loan.
+            </p>
+            <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>
+              💡 <strong>Tax Tip:</strong> Under Section 24(b) of the Indian Income Tax Act, if you use home loan top-up funds for home repair, renovation, or expansion, you can claim an additional tax deduction on interest of up to ₹30,000 per financial year for a self-occupied house property!
             </p>
           </div>
-        </div>
-      ) : (
-        <div style={{ background: "#f0fdf4", border: "1.5px solid #bbf7d0", borderRadius: 16, padding: "18px 24px", margin: "28px 0", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ fontSize: 24 }}>🛡️</span>
-            <div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "#15803d" }}>
-                Within Conventional 80% LTV Threshold ({calculation.newLtvPct.toFixed(1)}% LTV)
-              </div>
-              <div style={{ fontSize: 13, color: "#166534" }}>
-                You have {fmt(calculation.remainingEquity)} ({calculation.remainingEquityPct.toFixed(1)}%) in safe home equity cushion remaining.
-              </div>
-            </div>
+
+          <div style={{ height: 220 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={calculation.pieData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={80}
+                  paddingAngle={3}
+                  dataKey="value"
+                >
+                  {calculation.pieData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value: any) => fmtINR(Number(value))} />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
-          <button type="button" onClick={exportJSON} className="tab-btn" style={{ background: "white", borderColor: "#86efac", color: "#15803d", fontWeight: 700 }}>
-            💻 Export Cash-Out JSON
-          </button>
-        </div>
-      )}
-
-      {/* Key Metric Highlights */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginBottom: 32 }}>
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Net Cash in Hand</span>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "var(--success)", marginTop: 6 }}>
-            {fmt(calculation.netCashInHand)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>
-            Cash deposited in your bank
-          </span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>New Total Mortgage</span>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "var(--primary)", marginTop: 6 }}>
-            {fmt(calculation.newTotalLoanAmount)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>
-            New debt balance ({calculation.newLtvPct.toFixed(1)}% LTV)
-          </span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>New Monthly Payment</span>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "var(--dark)", marginTop: 6 }}>
-            {fmtFull(calculation.newMonthlyPayment)}
-          </div>
-          <span style={{ fontSize: 12, color: calculation.monthlyPaymentChange >= 0 ? "#ef4444" : "var(--success)" }}>
-            {calculation.monthlyPaymentChange >= 0 ? `+${fmtFull(calculation.monthlyPaymentChange)}/mo` : `${fmtFull(calculation.monthlyPaymentChange)}/mo`}
-          </span>
-        </div>
-
-        <div className="result-metric-card" style={{ background: "white", padding: 24, borderRadius: 18, border: "1px solid var(--border)" }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase" }}>Remaining Home Equity</span>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#8b5cf6", marginTop: 6 }}>
-            {fmt(calculation.remainingEquity)}
-          </div>
-          <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>
-            {calculation.remainingEquityPct.toFixed(1)}% retained ownership
-          </span>
-        </div>
-      </div>
-
-      {/* Visual Property Equity Distribution Chart */}
-      <div className="calc-card" style={{ marginBottom: 32 }}>
-        <h3 style={{ fontSize: 18, color: "var(--dark)", marginBottom: 8 }}>
-          Post-Refinance Property Equity Distribution
-        </h3>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 20 }}>
-          Visualizing how your {fmt(homeValue)} property is divided across existing debt, new cash extracted, and remaining retained equity.
-        </p>
-
-        <div style={{ width: "100%", height: 280 }}>
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={calculation.pieData}
-                cx="50%"
-                cy="50%"
-                innerRadius={65}
-                outerRadius={105}
-                paddingAngle={4}
-                dataKey="value"
-              >
-                {calculation.pieData.map((entry) => (
-                  <Cell key={entry.name} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(val: any) => fmt(Number(val))} />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </div>

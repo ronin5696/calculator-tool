@@ -3,48 +3,40 @@ import { articlesList } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://devspoint.in";
-  const now = new Date().toISOString();
 
   const staticPages = [
-    { url: base, priority: 1.0, changeFrequency: "weekly" as const },
-    { url: `${base}/calculator`, priority: 0.95, changeFrequency: "weekly" as const },
-    { url: `${base}/calculator/amortization`, priority: 0.95, changeFrequency: "weekly" as const },
-    { url: `${base}/calculator/break-even`, priority: 0.95, changeFrequency: "weekly" as const },
-    { url: `${base}/calculator/cash-out`, priority: 0.95, changeFrequency: "weekly" as const },
-    { url: `${base}/blog`, priority: 0.85, changeFrequency: "weekly" as const },
-    { url: `${base}/resources`, priority: 0.85, changeFrequency: "weekly" as const },
-    { url: `${base}/about`, priority: 0.7, changeFrequency: "monthly" as const },
-    { url: `${base}/contact`, priority: 0.7, changeFrequency: "monthly" as const },
-    { url: `${base}/privacy-policy`, priority: 0.4, changeFrequency: "yearly" as const },
-    { url: `${base}/terms-of-service`, priority: 0.4, changeFrequency: "yearly" as const },
-    { url: `${base}/disclaimer`, priority: 0.4, changeFrequency: "yearly" as const },
+    { url: base, priority: 1.0, changeFrequency: "weekly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/calculator`, priority: 0.95, changeFrequency: "weekly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/calculator/amortization`, priority: 0.95, changeFrequency: "weekly" as const, lastModified: "2026-10-22T00:00:00.000Z" },
+    { url: `${base}/calculator/break-even`, priority: 0.95, changeFrequency: "weekly" as const, lastModified: "2026-10-22T00:00:00.000Z" },
+    { url: `${base}/calculator/cash-out`, priority: 0.95, changeFrequency: "weekly" as const, lastModified: "2026-10-22T00:00:00.000Z" },
+    { url: `${base}/blog`, priority: 0.90, changeFrequency: "weekly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/about`, priority: 0.75, changeFrequency: "monthly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/contact`, priority: 0.70, changeFrequency: "monthly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/privacy-policy`, priority: 0.50, changeFrequency: "monthly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/terms-of-service`, priority: 0.40, changeFrequency: "yearly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
+    { url: `${base}/disclaimer`, priority: 0.40, changeFrequency: "yearly" as const, lastModified: "2026-10-24T00:00:00.000Z" },
   ];
 
-  // All 20+ blog articles
-  const blogPages = articlesList.map((article) => ({
-    url: `${base}/blog/${article.slug}`,
-    priority: article.featured ? 0.85 : 0.8,
-    changeFrequency: "monthly" as const,
-    lastModified: now,
-  }));
+  // Canonical blog articles with natural staggered lastModified dates
+  const blogPages = articlesList.map((article) => {
+    let dateObj: Date;
+    try {
+      dateObj = new Date(article.updatedDate || article.date);
+      if (isNaN(dateObj.getTime())) {
+        dateObj = new Date("2026-10-01");
+      }
+    } catch {
+      dateObj = new Date("2026-10-01");
+    }
 
-  const resourceSlugs = [
-    "refinancing-guide",
-    "when-to-refinance",
-    "refinancing-costs",
-    "fixed-vs-arm",
-  ];
+    return {
+      url: `${base}/blog/${article.slug}`,
+      priority: article.featured ? 0.85 : 0.80,
+      changeFrequency: "monthly" as const,
+      lastModified: dateObj.toISOString(),
+    };
+  });
 
-  const resourcePages = resourceSlugs.map((slug) => ({
-    url: `${base}/resources/${slug}`,
-    priority: 0.85,
-    changeFrequency: "monthly" as const,
-    lastModified: now,
-  }));
-
-  return [
-    ...staticPages.map((p) => ({ ...p, lastModified: now })),
-    ...blogPages,
-    ...resourcePages,
-  ];
+  return [...staticPages, ...blogPages];
 }

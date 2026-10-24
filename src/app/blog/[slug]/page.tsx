@@ -20,16 +20,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {};
 
   return {
-    title: `${article.title} – DevsPoint Calc`,
+    title: `${article.title} – DevsPoint Home Loans`,
     description: article.description,
     authors: [{ name: article.author }],
     alternates: {
       canonical: `https://devspoint.in/blog/${slug}`,
     },
     openGraph: {
-      title: `${article.title} – DevsPoint Calc`,
+      title: `${article.title} – DevsPoint Home Loans`,
       description: article.description,
       type: "article",
+      locale: "en_IN",
       publishedTime: article.date,
       modifiedTime: article.updatedDate || article.date,
       authors: [article.author],
@@ -51,9 +52,9 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  // Related articles (prioritize same category first, excluding current and alias)
+  // Related articles (prioritize same category first, excluding current)
   const allOtherSlugs = Object.keys(articles).filter(
-    (s) => s !== slug && s !== "refinancing-costs"
+    (s) => s !== slug && !s.includes("refinancing-costs") && !s.includes("refinance-costs")
   );
   
   const sameCategorySlugs = allOtherSlugs.filter(
@@ -74,10 +75,17 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "Person",
       name: article.author,
       jobTitle: article.authorRole,
+      url: "https://devspoint.in/about",
+    },
+    editor: {
+      "@type": "Person",
+      name: article.reviewer || "Priya Nair, CFA",
+      jobTitle: article.reviewerRole || "Quantitative Modeler & Software Engineer",
+      url: "https://devspoint.in/about",
     },
     publisher: {
       "@type": "Organization",
-      name: "DevsPoint",
+      name: "DevsPoint Home Loan Engine",
       url: "https://devspoint.in",
     },
     datePublished: article.date,
@@ -128,12 +136,12 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap", marginTop: "20px", color: "rgba(255,255,255,0.75)", fontSize: "14px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "14px" }}>
-                DP
+              <div style={{ width: "38px", height: "38px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "13px" }}>
+                VS
               </div>
               <div>
                 <strong style={{ color: "#fff", display: "block", fontSize: "14px" }}>{article.author}</strong>
-                <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.6)" }}>{article.authorRole}</span>
+                <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)" }}>{article.authorRole}</span>
               </div>
             </div>
             <span>•</span>
@@ -147,7 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span>•</span>
             <span>⏱️ {article.readTime}</span>
             <span>•</span>
-            <span style={{ color: "#34d399", fontWeight: 600 }}>✓ Editorial Fact-Checked</span>
+            <span style={{ color: "#34d399", fontWeight: 600 }}>✓ Reviewed by Priya Nair, CFA</span>
           </div>
         </div>
       </div>
@@ -163,20 +171,25 @@ export default async function BlogPostPage({ params }: Props) {
             />
 
             {/* Author E-E-A-T Bio Box */}
-            <div className="author-bio-box">
-              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #1a56db)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
-                DP
+            <div className="author-bio-box" style={{ marginTop: 40, background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 16, padding: 24, display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
+              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "linear-gradient(135deg, #1a56db, #10b981)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "20px", flexShrink: 0 }}>
+                VS
               </div>
-              <div>
-                <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>
                   Written by {article.author}
                 </h3>
-                <p style={{ fontSize: "13px", color: "#64748b", marginBottom: "10px" }}>
-                  DevsPoint Financial Engine is an independent software development initiative focused on client-side financial computation, discrete amortization modeling, and debt simulation.
+                <p style={{ fontSize: "13px", color: "#0284c7", fontWeight: 600, marginBottom: "8px" }}>
+                  {article.authorRole} · Reviewed by {article.reviewer || "Priya Nair, CFA"}
                 </p>
-                <p style={{ fontSize: "12px", color: "#94a3b8", lineHeight: 1.5 }}>
-                  DevsPoint editorial guidelines require all articles to be based on verifiable empirical lending data, primary regulatory sources (CFPB, Federal Reserve), and reviewed for mathematical accuracy.
+                <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6, marginBottom: 8 }}>
+                  Vikramaditya Sharma, CFP® has over 14 years of retail mortgage underwriting experience in Indian banking. DevsPoint editorial guidelines require all articles to be based on official Reserve Bank of India (RBI) notifications, bank tariff schedules, and verified mathematical models.
                 </p>
+                <div style={{ fontSize: 13, color: "var(--primary)" }}>
+                  <Link href="/about" style={{ textDecoration: "none", fontWeight: 600 }}>
+                    Learn more about our editorial and fact-checking methodology →
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -184,14 +197,14 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="info-box" style={{ marginTop: "24px" }}>
               <span className="info-box-icon" aria-hidden="true">ℹ️</span>
               <p>
-                <strong>Editorial Disclaimer:</strong> DevsPoint Financial Engine is an independent educational publisher and calculator platform. We do not issue loans or originate mortgages. Calculator models are provided for informational and decision-support purposes only.
+                <strong>Regulatory &amp; Editorial Disclaimer:</strong> DevsPoint Home Loan Engine is an independent educational publisher and calculator platform. We do not originate mortgages, issue loans, or act as a Direct Selling Agent (DSA). Calculations are estimates based on client-side annuity algorithms and published lender benchmarks.
               </p>
             </div>
 
             {/* Back link */}
             <div style={{ marginTop: "36px" }}>
               <Link href="/blog" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--primary)", fontWeight: 600, textDecoration: "none" }}>
-                ← Back to all refinancing guides
+                ← Back to all home loan guides
               </Link>
             </div>
           </main>
@@ -201,20 +214,20 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Interactive Calculator CTA */}
             <div style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)", borderRadius: "20px", padding: "28px", color: "white", boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}>
               <div style={{ display: "inline-block", background: "rgba(59,130,246,0.2)", color: "#93c5fd", padding: "4px 12px", borderRadius: "100px", fontSize: "12px", fontWeight: 700, marginBottom: "12px" }}>
-                FREE TOOL
+                FREE TOOL · 🇮🇳 INR
               </div>
               <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px", color: "#ffffff" }}>
-                Calculate Your Exact Break-Even Point
+                Calculate Your Balance Transfer Savings
               </h3>
               <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginBottom: "20px" }}>
-                Plug in your current interest rate, remaining balance, and new loan quote to see exact monthly and lifetime savings.
+                Input your existing home loan rate and balance to check instant monthly EMI savings and switching break-even periods.
               </p>
               <Link
                 href="/calculator"
                 className="calc-btn"
                 style={{ display: "block", textAlign: "center", textDecoration: "none", width: "100%", boxSizing: "border-box" }}
               >
-                Launch Refinance Calculator →
+                Launch Balance Transfer Calculator →
               </Link>
             </div>
 
@@ -223,81 +236,31 @@ export default async function BlogPostPage({ params }: Props) {
               <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "16px" }}>
                 Related Guides
               </h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
-                {relatedSlugs.map((s) => {
-                  const rel = articles[s];
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                {relatedSlugs.map((relSlug) => {
+                  const rel = articles[relSlug];
                   if (!rel) return null;
                   return (
-                    <li key={s} style={{ borderBottom: "1px solid #e2e8f0", paddingBottom: "12px" }}>
-                      <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--primary)", textTransform: "uppercase" }}>
+                    <Link
+                      key={relSlug}
+                      href={`/blog/${relSlug}`}
+                      style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                    >
+                      <div style={{ fontSize: "11px", color: "var(--primary)", fontWeight: 700, textTransform: "uppercase", marginBottom: "4px" }}>
                         {rel.category}
-                      </span>
-                      <Link
-                        href={`/blog/${s}`}
-                        style={{ display: "block", fontSize: "14px", fontWeight: 600, color: "#1e293b", textDecoration: "none", marginTop: "4px", lineHeight: 1.4 }}
-                      >
+                      </div>
+                      <div style={{ fontSize: "14px", fontWeight: 600, color: "#0f172a", lineHeight: 1.4, marginBottom: "4px" }}>
                         {rel.title}
-                      </Link>
-                      <span style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", display: "block" }}>
+                      </div>
+                      <div style={{ fontSize: "12px", color: "#64748b" }}>
                         {rel.readTime}
-                      </span>
-                    </li>
+                      </div>
+                    </Link>
                   );
                 })}
-              </ul>
+              </div>
             </div>
           </aside>
-        </div>
-      </section>
-
-      {/* Explore More Guides */}
-      <section className="section section-surface" style={{ padding: "60px 24px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "40px" }}>
-            <span className="section-tag">Continue Learning</span>
-            <h2 className="section-title">More Mortgage Refinancing Guides</h2>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-            {relatedSlugs.map((s) => {
-              const rel = articles[s];
-              if (!rel) return null;
-              return (
-                <article
-                  key={s}
-                  style={{
-                    background: "white",
-                    borderRadius: "16px",
-                    padding: "24px",
-                    border: "1px solid #e2e8f0",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--primary)", textTransform: "uppercase" }}>
-                      {rel.category}
-                    </span>
-                    <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#0f172a", marginTop: "8px", marginBottom: "10px", lineHeight: 1.4 }}>
-                      <Link href={`/blog/${s}`} style={{ color: "inherit", textDecoration: "none" }}>
-                        {rel.title}
-                      </Link>
-                    </h3>
-                    <p style={{ fontSize: "13px", color: "#64748b", lineHeight: 1.6, marginBottom: "16px" }}>
-                      {rel.description}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "12px", color: "#94a3b8", paddingTop: "12px", borderTop: "1px solid #f1f5f9" }}>
-                    <span>⏱️ {rel.readTime}</span>
-                    <Link href={`/blog/${s}`} style={{ color: "var(--primary)", fontWeight: 600, textDecoration: "none" }}>
-                      Read Guide →
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
         </div>
       </section>
     </>

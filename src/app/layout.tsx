@@ -104,6 +104,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2326721628992125"
+          crossOrigin="anonymous"
+        />
+
         {/* Structured Data – WebSite */}
         <script
           type="application/ld+json"

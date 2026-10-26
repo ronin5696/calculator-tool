@@ -112,13 +112,13 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "DevsPoint Home Loan Engine",
-              url: "https://devspoint.in",
+              url: "https://www.devspoint.in",
               description: "Free, client-side Indian Home Loan Balance Transfer & EMI Calculator developed by DevsPoint.",
               potentialAction: {
                 "@type": "SearchAction",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://devspoint.in/calculator?q={search_term_string}",
+                  urlTemplate: "https://www.devspoint.in/calculator?q={search_term_string}",
                 },
                 "query-input": "required name=search_term_string",
               },
@@ -134,7 +134,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "FinancialService",
               name: "DevsPoint Home Loan Engine",
-              url: "https://devspoint.in",
+              url: "https://www.devspoint.in",
               description: "Independent educational home loan analytics and balance transfer calculation platform for Indian borrowers.",
               areaServed: {
                 "@type": "Country",

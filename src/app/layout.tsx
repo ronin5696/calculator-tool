@@ -111,6 +111,25 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
+        {/* Google Analytics 4 (GA4) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-G9L4NZR27N"
+        />
+        <script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-G9L4NZR27N', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+
         {/* Structured Data – WebSite */}
         <script
           type="application/ld+json"

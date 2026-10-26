@@ -21,14 +21,23 @@ export const metadata: Metadata = {
     "Free, client-side Indian Home Loan Balance Transfer & EMI Calculator. Calculate monthly EMI savings, switching break-even period, and interest saved across SBI, HDFC, ICICI, Axis and other Indian banks.",
   keywords: [
     "home loan balance transfer calculator",
+    "home loan transfer charges",
+    "modt charges in home loan",
+    "modt in home loan",
+    "modt charges calculator",
+    "pmay clss",
+    "clss subsidy",
+    "pmay clss subsidy calculator",
     "home loan emi calculator india",
     "home loan prepayment calculator",
-    "home loan balance transfer process",
-    "rbi repo linked lending rate rllr",
     "sbi home loan balance transfer",
     "hdfc home loan balance transfer",
-    "modt charges home loan",
+    "icici bank home loan transfer",
+    "bank of baroda home loan takeover",
+    "rbi guidelines home loan foreclosure charges",
+    "memorandum of deposit of title deeds charges",
     "reduce home loan tenure vs emi",
+    "home loan top up vs personal loan",
     "home loan tax benefits section 24b 80c",
   ],
   authors: [
@@ -51,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://devspoint.in",
+    url: "https://www.devspoint.in",
     siteName: "DevsPoint Home Loan Engine",
     title: "DevsPoint Home Loan Engine: Smart Balance Transfer & EMI Calculator",
     description:
@@ -74,7 +83,7 @@ export const metadata: Metadata = {
     creator: "@devspoint",
   },
   alternates: {
-    canonical: "https://devspoint.in",
+    canonical: "https://www.devspoint.in",
   },
   category: "finance",
 };

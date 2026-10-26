@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "Person",
       name: article.author,
       jobTitle: article.authorRole,
-      url: "https://devspoint.in/about",
+      url: "https://www.devspoint.in/about",
     },
     editor: {
       "@type": "Organization",

@@ -3,10 +3,30 @@ import Link from "next/link";
 import RefinanceCalculator from "@/components/RefinanceCalculator";
 
 export const metadata: Metadata = {
-  title: "DevsPoint: Smart Home Loan Balance Transfer & EMI Calculator (India)",
+  title: "Home Loan Balance Transfer Calculator (2026) – Compare EMI & Charges | DevsPoint",
   description:
-    "Save lakhs on your existing home loan in India. Calculate monthly EMI savings, total interest saved, and switching break-even periods across SBI, HDFC, ICICI, and Axis Bank.",
+    "Free Home Loan Balance Transfer Calculator India: compare current interest rates with SBI, HDFC, ICICI & Axis. Calculate monthly EMI savings, MODT charges, and break-even periods.",
+  keywords: [
+    "home loan balance transfer calculator",
+    "home loan transfer charges",
+    "modt charges in home loan",
+    "modt in home loan",
+    "pmay clss",
+    "clss subsidy",
+    "pmay clss subsidy calculator",
+    "home loan balance transfer process",
+    "sbi home loan balance transfer",
+    "hdfc home loan balance transfer",
+    "rbi repo linked lending rate rllr",
+    "home loan emi calculator india",
+  ],
   alternates: { canonical: "https://www.devspoint.in" },
+  openGraph: {
+    title: "Home Loan Balance Transfer Calculator (2026) – DevsPoint",
+    description:
+      "Compare your current home loan against top Indian lenders. Compute monthly EMI savings, MODT stamp duty, and break-even periods in Indian Rupees.",
+    url: "https://www.devspoint.in",
+  },
 };
 
 const features = [
@@ -77,6 +97,22 @@ const faqs = [
 
 const featuredGuides = [
   {
+    slug: "modt-charges-in-home-loan",
+    title: "MODT Charges in Home Loan: Meaning, State Rates & Calculation",
+    excerpt: "Understand Memorandum of Deposit of Title Deeds (MODT) stamp duty rates across Maharashtra, Karnataka, Tamil Nadu, and step-by-step cancellation.",
+    category: "Cost Analysis",
+    readTime: "11 min read",
+    emoji: "📜",
+  },
+  {
+    slug: "pmay-clss-subsidy-guide-eligibility-calculator-status",
+    title: "PMAY CLSS Subsidy: Eligibility, Slabs & Online Status Tracking",
+    excerpt: "Complete guide to PMAY Credit Linked Subsidy Scheme (CLSS) & PMAY-U 2.0: income categories, NPV subsidy formulas, and CLAP portal tracking.",
+    category: "Government Schemes",
+    readTime: "12 min read",
+    emoji: "🏛️",
+  },
+  {
     slug: "home-loan-balance-transfer-guide",
     title: "The Master Guide to Home Loan Balance Transfers in India",
     excerpt: "Everything you need to know about switching your home loan: RBI rules, NOC checklists, MODT stamp duty, and negotiating with your current bank.",
@@ -92,27 +128,42 @@ const featuredGuides = [
     readTime: "9 min read",
     emoji: "⏱️",
   },
-  {
-    slug: "home-loan-transfer-charges-modt",
-    title: "Home Loan Transfer Charges: MODT, Stamp Duty & Fees Breakdown",
-    excerpt: "A state-by-state look at MODT charges, bank processing fees, valuation costs, and the RBI circular that bans foreclosure penalties.",
-    category: "Cost Analysis",
-    readTime: "10 min read",
-    emoji: "💸",
-  },
-  {
-    slug: "rllr-vs-mclr-home-loan-interest-rates",
-    title: "RLLR vs. MCLR: How Indian Home Loan Interest Rates Are Fixed",
-    excerpt: "Understand how the RBI repo rate influences your EMI, how bank spreads work, and why older MCLR/Base Rate loans should switch immediately.",
-    category: "Rates & RBI",
-    readTime: "10 min read",
-    emoji: "⚖️",
-  },
 ];
 
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        name: "DevsPoint Home Loan Balance Transfer Calculator",
+        url: "https://www.devspoint.in",
+        applicationCategory: "FinanceApplication",
+        operatingSystem: "Web",
+        description:
+          "Free Indian Home Loan Balance Transfer & EMI Calculator. Calculate monthly EMI savings, MODT charges, and switching break-even periods.",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ─── Hero ─── */}
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />

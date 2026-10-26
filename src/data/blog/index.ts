@@ -2,6 +2,7 @@ import { ArticleData, ArticleCard } from "./types";
 import { existingArticles } from "./existingArticles";
 import { newArticlesPart1 } from "./newArticlesPart1";
 import { newArticlesPart2 } from "./newArticlesPart2";
+import { newArticlesPart3 } from "./newArticlesPart3";
 
 export * from "./types";
 
@@ -9,6 +10,7 @@ export const articles: Record<string, ArticleData> = {
   ...existingArticles,
   ...newArticlesPart1,
   ...newArticlesPart2,
+  ...newArticlesPart3,
 };
 
 export const blogCategories = [
@@ -244,6 +246,28 @@ export const articlesList: ArticleCard[] = [
     updatedDate: "October 22, 2026",
     emoji: "🧮",
     featured: false,
+  },
+  {
+    slug: "modt-charges-in-home-loan",
+    title: "MODT Charges in Home Loan: Meaning, State-Wise Stamp Duty Rates, Calculation & Cancellation (2026)",
+    excerpt: "Complete guide to Memorandum of Deposit of Title Deeds (MODT): understand full form, state-wise stamp duty rates (0.1% to 0.5%), calculation on ₹30L to ₹1Cr, and discharge process.",
+    category: "Cost Analysis",
+    readTime: "11 min read",
+    date: "October 26, 2026",
+    updatedDate: "October 26, 2026",
+    emoji: "📜",
+    featured: true,
+  },
+  {
+    slug: "pmay-clss-subsidy-guide-eligibility-calculator-status",
+    title: "PMAY CLSS Subsidy: Eligibility, Slabs, Calculation & How to Check Status Online (2026)",
+    excerpt: "A complete guide to Pradhan Mantri Awas Yojana (PMAY) Credit Linked Subsidy Scheme (CLSS) & PMAY-U 2.0: income slabs (EWS, LIG, MIG), subsidy calculation formula (up to ₹2.67 Lakhs), and CLAP portal status tracking.",
+    category: "Government Schemes",
+    readTime: "12 min read",
+    date: "October 26, 2026",
+    updatedDate: "October 26, 2026",
+    emoji: "🏛️",
+    featured: true,
   },
 ];
 

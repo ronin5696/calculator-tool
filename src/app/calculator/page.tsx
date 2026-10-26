@@ -4,23 +4,28 @@ import RefinanceCalculator from "@/components/RefinanceCalculator";
 import CalculatorNav from "@/components/CalculatorNav";
 
 export const metadata: Metadata = {
-  title: "Home Loan Balance Transfer Calculator (India) – Compare SBI, HDFC, ICICI Rates",
+  title: "Home Loan Balance Transfer Calculator (India 2026) – Compare SBI, HDFC, ICICI Rates",
   description:
-    "Free Indian Home Loan Balance Transfer & EMI Calculator. Calculate monthly EMI savings, total interest saved, and switching break-even period across Indian banks and HFCs.",
+    "Free Indian Home Loan Balance Transfer & EMI Calculator. Calculate monthly EMI savings, total interest saved, and switching break-even period including MODT charges across Indian banks.",
   keywords: [
     "home loan balance transfer calculator india",
+    "home loan transfer charges calculator",
+    "modt charges in home loan",
     "home loan emi calculator",
     "sbi home loan balance transfer",
     "hdfc home loan balance transfer",
+    "icici bank home loan transfer",
+    "bank of baroda home loan takeover",
     "modt charges home loan transfer",
     "rbi repo linked lending rate calculator",
     "reduce home loan interest rate",
+    "break even period home loan transfer",
   ],
   alternates: { canonical: "https://www.devspoint.in/calculator" },
   openGraph: {
     title: "Home Loan Balance Transfer Calculator – DevsPoint",
     description: "Compare your current home loan with new bank interest rates in Indian Rupees. Instant EMI savings and break-even math.",
-    url: "https://devspoint.in/calculator",
+    url: "https://www.devspoint.in/calculator",
   },
 };
 
@@ -35,7 +40,7 @@ export default function CalculatorPage() {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "DevsPoint Home Loan Balance Transfer Calculator",
-            url: "https://devspoint.in/calculator",
+            url: "https://www.devspoint.in/calculator",
             applicationCategory: "FinanceApplication",
             operatingSystem: "Web",
             description: "Free, client-side Indian home loan balance transfer and EMI calculation engine.",
@@ -123,7 +128,7 @@ export default function CalculatorPage() {
 
                 <h3>4. The Formula for Monthly EMI in Indian Rupees</h3>
                 <div style={{ background: "#0f172a", color: "#f8fafc", padding: "18px 22px", borderRadius: "14px", fontFamily: "monospace", margin: "20px 0", border: "1px solid #334155" }}>
-                  <div style={{ color: "#93c5fd", fontSize: "12px", marginBottom: "6px" }}>// Standard Amortization Formula:</div>
+                  <div style={{ color: "#93c5fd", fontSize: "12px", marginBottom: "6px" }}>{"// Standard Amortization Formula:"}</div>
                   <div style={{ fontSize: "clamp(18px, 4vw, 22px)", fontWeight: "bold", color: "#38bdf8", textAlign: "center", padding: "10px 0" }}>
                     EMI = P · [ r(1 + r)ⁿ ] / [ (1 + r)ⁿ - 1 ]
                   </div>

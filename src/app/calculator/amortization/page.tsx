@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home Loan EMI & Amortization Schedule Calculator – DevsPoint",
     description: "Interactive Indian home loan EMI schedule with RBI zero-penalty prepayment simulation.",
-    url: "https://devspoint.in/calculator/amortization",
+    url: "https://www.devspoint.in/calculator/amortization",
   },
 };
 
@@ -25,7 +25,7 @@ export default function AmortizationPage() {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "DevsPoint Home Loan Amortization Schedule Calculator",
-            url: "https://devspoint.in/calculator/amortization",
+            url: "https://www.devspoint.in/calculator/amortization",
             applicationCategory: "FinanceApplication",
             operatingSystem: "Web",
             description: "Interactive client-side Indian home loan amortization schedule with prepayment acceleration and CSV export.",

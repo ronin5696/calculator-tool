@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home Loan Top-Up vs Personal Loan Calculator – DevsPoint",
     description: "Model home loan top-up eligibility under RBI 75% LTV caps and compare against personal loans.",
-    url: "https://devspoint.in/calculator/cash-out",
+    url: "https://www.devspoint.in/calculator/cash-out",
   },
 };
 
@@ -25,7 +25,7 @@ export default function CashOutPage() {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "DevsPoint Home Loan Top-Up vs Personal Loan Calculator",
-            url: "https://devspoint.in/calculator/cash-out",
+            url: "https://www.devspoint.in/calculator/cash-out",
             applicationCategory: "FinanceApplication",
             operatingSystem: "Web",
             description: "Interactive client-side Indian home loan top-up vs personal loan calculator with RBI LTV ceiling validation.",

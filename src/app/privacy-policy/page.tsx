@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
             <p>
               Welcome to DevsPoint Home Loan Engine (&quot;DevsPoint,&quot; &quot;we,&quot; &quot;our,&quot; or
               &quot;us&quot;), hosted at{" "}
-              <a href="https://devspoint.in">https://devspoint.in</a> (the &quot;Site&quot;). We are committed to
+              <a href="https://www.devspoint.in">https://www.devspoint.in</a> (the &quot;Site&quot;). We are committed to
               protecting your personal privacy and providing complete transparency regarding how our tools operate and how
               standard website cookies are utilized.
             </p>
@@ -291,10 +291,10 @@ export default function PrivacyPolicyPage() {
                 <strong>Editorial Desk:</strong> <a href="mailto:editor@devspoint.in">editor@devspoint.in</a>
               </li>
               <li>
-                <strong>Contact Form:</strong> <Link href="/contact">https://devspoint.in/contact</Link>
+                <strong>Contact Form:</strong> <Link href="/contact">https://www.devspoint.in/contact</Link>
               </li>
               <li>
-                <strong>Platform:</strong> DevsPoint Home Loan Engine (<a href="https://devspoint.in">devspoint.in</a>)
+                <strong>Platform:</strong> DevsPoint Home Loan Engine (<a href="https://www.devspoint.in">devspoint.in</a>)
               </li>
             </ul>
           </div>

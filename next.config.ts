@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  // Security headers
+  // Security headers & crawler restrictions
   async headers() {
     return [
       {
@@ -16,6 +16,18 @@ const nextConfig: NextConfig = {
           { key: "X-XSS-Protection", value: "1; mode=block" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
+      },
+      {
+        source: "/(.*)",
+        has: [
+          {
+            type: "host",
+            value: "(?<host>.*\\.amplifyapp\\.com)",
+          },
+        ],
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
     ];

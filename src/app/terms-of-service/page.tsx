@@ -158,8 +158,8 @@ export default function TermsOfServicePage() {
             <p>If you have any questions about these Terms, please contact us:</p>
             <ul>
               <li><strong>Email:</strong> <a href="mailto:legal@devspoint.in">legal@devspoint.in</a></li>
-              <li><strong>Contact form:</strong> <Link href="/contact">https://devspoint.in/contact</Link></li>
-              <li><strong>Organization:</strong> DevsPoint Engineering Labs (<a href="https://devspoint.in">devspoint.in</a>)</li>
+              <li><strong>Contact form:</strong> <Link href="/contact">https://www.devspoint.in/contact</Link></li>
+              <li><strong>Organization:</strong> DevsPoint Engineering Labs (<a href="https://www.devspoint.in">devspoint.in</a>)</li>
             </ul>
           </div>
         </div>

@@ -89,7 +89,7 @@ export default function AboutPage() {
           </h1>
           <p className="page-hero-sub">
             An independent, open-source financial analytics initiative under DevsPoint (
-            <a href="https://devspoint.in" style={{ color: "#93c5fd" }}>
+            <a href="https://www.devspoint.in" style={{ color: "#93c5fd" }}>
               devspoint.in
             </a>
             ) dedicated to empowering Indian homeowners with transparent loan balance transfer calculations, verified

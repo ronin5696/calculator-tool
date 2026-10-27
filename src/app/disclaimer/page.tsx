@@ -64,7 +64,7 @@ export default function DisclaimerPage() {
             <h2>1. Informational &amp; Computational Purposes Only</h2>
             <p>
               The calculators, amortization tables, interest rate models, and educational guides provided on DevsPoint (
-              <a href="https://devspoint.in">https://devspoint.in</a>) are designed strictly for general informational
+              <a href="https://www.devspoint.in">https://www.devspoint.in</a>) are designed strictly for general informational
               and mathematical simulation purposes.
             </p>
             <p>

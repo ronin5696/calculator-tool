@@ -72,7 +72,7 @@ export default function Footer() {
           </Link>
           <p>
             An independent, client-side financial analytics portal developed under DevsPoint (
-            <a href="https://devspoint.in" style={{ color: "#60a5fa" }}>
+            <a href="https://www.devspoint.in" style={{ color: "#60a5fa" }}>
               devspoint.in
             </a>
             ). Helping Indian homeowners evaluate home loan balance transfers, EMI amortization, and interest reduction
@@ -162,7 +162,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <span>
           © {currentYear} DevsPoint (
-          <a href="https://devspoint.in" style={{ color: "inherit", textDecoration: "underline" }}>
+          <a href="https://www.devspoint.in" style={{ color: "inherit", textDecoration: "underline" }}>
             devspoint.in
           </a>
           ). Educational financial technology. All rights reserved.

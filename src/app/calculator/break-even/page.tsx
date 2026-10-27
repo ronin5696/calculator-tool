@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home Loan Balance Transfer Break-Even Calculator – DevsPoint",
     description: "Determine the exact break-even velocity when switching banks for a lower interest rate in India.",
-    url: "https://devspoint.in/calculator/break-even",
+    url: "https://www.devspoint.in/calculator/break-even",
   },
 };
 
@@ -25,7 +25,7 @@ export default function BreakEvenPage() {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "DevsPoint Home Loan Break-Even Calculator",
-            url: "https://devspoint.in/calculator/break-even",
+            url: "https://www.devspoint.in/calculator/break-even",
             applicationCategory: "FinanceApplication",
             operatingSystem: "Web",
             description: "Interactive client-side Indian home loan break-even simulator comparing switching fees against monthly EMI reductions.",

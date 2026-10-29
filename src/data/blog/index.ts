@@ -3,6 +3,7 @@ import { existingArticles } from "./existingArticles";
 import { newArticlesPart1 } from "./newArticlesPart1";
 import { newArticlesPart2 } from "./newArticlesPart2";
 import { newArticlesPart3 } from "./newArticlesPart3";
+import { newArticlesPart4 } from "./newArticlesPart4";
 
 export * from "./types";
 
@@ -11,6 +12,7 @@ export const articles: Record<string, ArticleData> = {
   ...newArticlesPart1,
   ...newArticlesPart2,
   ...newArticlesPart3,
+  ...newArticlesPart4,
 };
 
 export const blogCategories = [
@@ -27,6 +29,28 @@ export const blogCategories = [
 ];
 
 export const articlesList: ArticleCard[] = [
+  {
+    slug: "rbi-home-loan-prepayment-penalty-rules-guidelines",
+    title: "RBI Home Loan Rules (2026): Zero Prepayment Penalty, 30-Day Title Deed Return & Bank Switch Rights",
+    excerpt: "A definitive guide to the Reserve Bank of India's mandatory home loan circulars: zero foreclosure penalties on floating rate loans, ₹5,000/day compensation for delayed property documents, and borrower rights during interest rate resets.",
+    category: "Rates & RBI",
+    readTime: "12 min read",
+    date: "October 29, 2026",
+    updatedDate: "October 29, 2026",
+    emoji: "🏛️",
+    featured: true,
+  },
+  {
+    slug: "new-vs-old-tax-regime-for-home-loan",
+    title: "New vs Old Tax Regime for Home Loan Borrowers: 2026 Breakeven Analysis & Section 24(b) Math",
+    excerpt: "Should Indian home loan borrowers switch to the New Tax Regime or stick with the Old Regime? Compare Section 24(b) ₹2 Lakh interest deductions and 80C against new tax slabs, complete with salary-wise breakeven tables.",
+    category: "Tax & Legal",
+    readTime: "13 min read",
+    date: "October 29, 2026",
+    updatedDate: "October 29, 2026",
+    emoji: "⚖️",
+    featured: true,
+  },
   {
     slug: "home-loan-balance-transfer-guide",
     title: "The Master Guide to Home Loan Balance Transfers in India: Process, Charges & RBI Norms",

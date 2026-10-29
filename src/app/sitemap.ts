@@ -3,7 +3,7 @@ import { articles, articlesList } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.devspoint.in";
-  const now = "2026-10-26T00:00:00.000Z";
+  const now = "2026-10-29T00:00:00.000Z";
 
   // Static site routes
   const staticPages: MetadataRoute.Sitemap = [
